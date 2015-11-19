@@ -12,11 +12,11 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
-        android:icon="@drawable/music"
-        android:label="Toms App" >
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
         <activity
             android:name="com.chat.bluetooth.activity.ChatActivity"
-            android:label="Toms App"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
