@@ -17,57 +17,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.chat.bluetooth" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d031df0-6955-4074-ba0b-8b0c9d0e8f61" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\README.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\ant.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\build.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\gen\com\example\myApp\BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\gen\com\example\myApp\Manifest.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\gen\com\example\myApp\R.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\local.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\myApp.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\BluetoothCommandService$ConnectThread.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\BluetoothCommandService$ConnectedThread.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\BluetoothCommandService.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\BuildConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\DeviceListActivity$1.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\DeviceListActivity$2.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\DeviceListActivity$3.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\DeviceListActivity.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\R$attr.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\R$drawable.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\R$id.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\R$layout.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\R$menu.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\R$string.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\R.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\RemoteBluetooth$1.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\com\example\myApp\RemoteBluetooth.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\myApp.apk" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\out\production\myApp\myApp.unaligned.apk" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\drawable-hdpi\icon.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\drawable-ldpi\icon.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\drawable-mdpi\icon.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\drawable\icon.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\layout\custom_title.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\layout\device_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\layout\device_name.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\layout\main.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\res\menu\option_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\src\com\example\myApp\BluetoothCommandService.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\src\com\example\myApp\DeviceListActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\year 5\Git\Android\FYP-Android\src\com\example\myApp\RemoteBluetooth.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proguard-project.txt" afterPath="$PROJECT_DIR$/proguard-project.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="3d031df0-6955-4074-ba0b-8b0c9d0e8f61" name="Default" comment="" />
     <ignored path="Bluetooth.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/bin/classes/" />
@@ -92,8 +42,8 @@
       <file leaf-file-name="ChatActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.54956895">
-              <caret line="62" column="45" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="45" />
+            <state vertical-scroll-proportion="-0.0778032">
+              <caret line="98" column="75" selection-start-line="98" selection-start-column="75" selection-end-line="98" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -270,7 +220,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Music GUI/FYP-GUI" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
@@ -577,16 +527,16 @@
       <workItem from="1447086028752" duration="4339000" />
       <workItem from="1447859587546" duration="1928000" />
       <workItem from="1447936214287" duration="7408000" />
-      <workItem from="1447946799385" duration="70000" />
+      <workItem from="1447946799385" duration="372000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13745000" />
+    <option name="totallyTimeSpent" value="14047000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -599,7 +549,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32822084" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24539877" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24539877" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21558245" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -908,8 +858,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.54956895">
-          <caret line="62" column="45" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="45" />
+        <state vertical-scroll-proportion="-0.0778032">
+          <caret line="98" column="75" selection-start-line="98" selection-start-column="75" selection-end-line="98" selection-end-column="75" />
           <folding />
         </state>
       </provider>
