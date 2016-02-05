@@ -11,10 +11,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.util.MySQLiteHelper;
+
+import java.sql.SQLException;
 
 public class Activity2 extends Activity implements OnClickListener{
 	EditText txtMsg;
@@ -26,6 +30,8 @@ public class Activity2 extends Activity implements OnClickListener{
 	private  String mySdPath;
 	private EditText f1;
 	private EditText f2;
+	private ListView listView2;
+	private ArrayAdapter<String> historic;
 	SQLiteDatabase db;
 	MySQLiteHelper dbs;
 	//private String myDbPath1 = "data/data/cis470.matos.databases/";
@@ -44,10 +50,15 @@ public class Activity2 extends Activity implements OnClickListener{
 		Intent myLocalIntent = getIntent();
 		f1 = (EditText)findViewById(R.id.editText1);
 		f2 = (EditText)findViewById(R.id.editText2);
+		/**************/
+		listView2 = (ListView)findViewById(R.id.listView2);
 
-		dbs = new MySQLiteHelper(this);
+/**************************/
+		//dbs = new MySQLiteHelper(this);
 
-		openDatabase();
+		openDatabase(); // open (create if needed) database
+		dropTable(); // if needed drop table tblAmigos
+		insertSomeDbData();
 		/**********************************************/
 
 		btnReadSDFile = (Button) findViewById(R.id.buttonsd);
@@ -74,7 +85,7 @@ public class Activity2 extends Activity implements OnClickListener{
 			public void onClick(View v) {
 				String tableName = f1.getText().toString();
 				String tableName2 = f2.getText().toString();
-				dbs.helperUseDeleteMethod(tableName);
+			//	dbs.helperUseDeleteMethod(tableName);
 			}// onClick
 		});
 
@@ -84,7 +95,8 @@ public class Activity2 extends Activity implements OnClickListener{
 				//String tableName = f1.getText().toString();
 				//String tableName2 = f2.getText().toString();
 				//addMethod(tableName, tableName2);
-				dbs.helperAddMethod("song1","artist1");
+			//	dbs.helperAddMethod("song1","artist1");
+				useAddMethod("song1", "song2");
 			}// onClick
 		});
 		//openDatabase();
@@ -94,12 +106,49 @@ public class Activity2 extends Activity implements OnClickListener{
 	/*********************************************************************************************/
 	// button methods
 	/*******************************************************************************/
+	private void insertSomeDbData() {
+		// create table: tblAmigo
+		db.beginTransaction();
+		try {
+			// create table
+			db.execSQL("create table tableDB ("
+					+ " ID integer PRIMARY KEY autoincrement, "
+					+ " song  text, " + " artist text , " + " songdata text );  ");
+			// commit your changes
+			db.setTransactionSuccessful();
+
+			txtMsg.append("\n-insertSomeDbData - Table was created");
+
+		} catch (Exception e1) {
+			txtMsg.append("\nError insertSomeDbData: " + e1.getMessage());
+			finish();
+		} finally {
+			db.endTransaction();
+		}
+		// populate table: tblAmigo
+		db.beginTransaction();
+		try {
+			for(int i=0; i <5; i++) {
+				db.execSQL("insert into tableDB(song, artist) "
+						+ " values ('"+ "song" + Integer.toString(i)  + "', '" +"artist" + Integer.toString(i)+"' );");
+			}
+
+			// commit your changes
+			db.setTransactionSuccessful();
+			txtMsg.append("\n-insertSomeDbData - 3 rec. were inserted");
+
+		} catch (SQLiteException e2) {
+			txtMsg.append("\nError insertSomeDbData: " + e2.getMessage());
+		} finally {
+			db.endTransaction();
+		}
+	}// insertSomeData
 
 	private void showTable(String tableName) {
 		try {
 			String sql = "select * from " + tableName ;
-			//Cursor c = db.rawQuery(sql, null);
-			Cursor c = dbs.rawQuery(sql, null);
+			Cursor c = db.rawQuery(sql, null);
+			//Cursor c = dbs.rawQuery(sql, null);
 			txtMsg.append("\n-showTable: " + tableName + showCursor(c));
 		} catch (Exception e) {
 			txtMsg.append("\nError showTable: " + e.getMessage());
@@ -113,12 +162,12 @@ public class Activity2 extends Activity implements OnClickListener{
 			//myDbPath = "data/data/cis470.matos.databases/";
 			//mySdPath = Environment.getExternalStorageDirectory().getPath();
 			String myDbPath = mySdPath  + "/myDB1.db";
-			txtMsg.append("\n-openDatabase - DB Path: " + myDbPath);
+			//txtMsg.append("\n-openDatabase - DB Path: " + myDbPath);
 
 			db = SQLiteDatabase.openDatabase(myDbPath, null,
 					SQLiteDatabase.CREATE_IF_NECESSARY);
 
-			txtMsg.append("\n-openDatabase - DB was opened");
+			//txtMsg.append("\n-openDatabase - DB was opened");
 		} catch (SQLiteException e) {
 			txtMsg.append("\nError openDatabase: " + e.getMessage());
 			finish();
@@ -128,12 +177,36 @@ public class Activity2 extends Activity implements OnClickListener{
 	private void dropTable() {
 		try {
 			db.execSQL("DROP TABLE IF EXISTS tableDB;");
-			txtMsg.append("\n-dropTable - dropped!!");
+		//	txtMsg.append("\n-dropTable - dropped!!");
 		} catch (Exception e) {
 			txtMsg.append("\nError dropTable: " + e.getMessage());
 			finish();
 		}
 	}
+
+	public void useAddMethod(String fn,String ln ) {
+		//SQLiteDatabase db;
+
+		String mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+		String myDbPath = mySdPath  + "/myDB1.db";
+
+		db = SQLiteDatabase.openDatabase(myDbPath, null,
+				SQLiteDatabase.CREATE_IF_NECESSARY);
+
+		db.beginTransaction();
+		try {
+			db.execSQL("insert into tableDB(song, artist) "
+					+ " values ('"+ fn + "', '"+ln+"' );");
+			// commit your changes
+			db.setTransactionSuccessful();
+
+		} catch (SQLiteException e2) {
+
+		} finally {
+			db.endTransaction();
+		}
+	}// insertSomeData
 
 
 

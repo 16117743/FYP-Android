@@ -21,11 +21,15 @@
     <EditText
             android:id="@+id/etDataReceived"
             android:layout_width="match_parent"
-            android:layout_height="108dp"
+            android:layout_height="48dp"
             android:textColor="#ff040404"
             android:text="Data received..."
             android:background="#ffeeeeee"/>
 
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="228dp"
+            android:id="@+id/listView2" android:layout_gravity="center_horizontal"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

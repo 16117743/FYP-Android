@@ -18,22 +18,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d031df0-6955-4074-ba0b-8b0c9d0e8f61" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/chat/bluetooth/util/MySQLiteHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/main2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$1.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$2.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$3.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$4.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/Activity2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/Bluetooth.apk" afterPath="$PROJECT_DIR$/bin/classes/Bluetooth.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/Bluetooth.unaligned.apk" afterPath="$PROJECT_DIR$/bin/classes/Bluetooth.unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$1.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$2.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$3.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$4.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$id.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$layout.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$menu.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$string.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java" afterPath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java" afterPath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main2.xml" afterPath="$PROJECT_DIR$/res/layout/main2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Bluetooth.iws" />
@@ -70,8 +63,8 @@
       <file leaf-file-name="ChatActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.814815">
-              <caret line="138" column="96" selection-start-line="138" selection-start-column="96" selection-end-line="138" selection-end-column="96" />
+            <state vertical-scroll-proportion="-4.6296296">
+              <caret line="34" column="42" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="42" />
               <folding>
                 <element signature="e#2798#2831#0" expanded="true" />
                 <element signature="e#4285#4325#0" expanded="true" />
@@ -87,38 +80,8 @@
       <file leaf-file-name="Activity2.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5275081">
-              <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MySQLiteHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/util/MySQLiteHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8965516">
-              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZygoteInit.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-19/com/android/internal/os/ZygoteInit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="793" column="0" selection-start-line="793" selection-start-column="0" selection-end-line="793" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ToastUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/util/ToastUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.15850145">
+              <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -127,8 +90,21 @@
       <file leaf-file-name="main2.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/main2.xml">
           <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.464286">
+              <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chat_activity.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/chat_activity.xml">
+          <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,9 +132,9 @@
         <option value="$PROJECT_DIR$/res/layout/chat_activity.xml" />
         <option value="$PROJECT_DIR$/src/com/chat/bluetooth/util/ToastUtil.java" />
         <option value="$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java" />
-        <option value="$PROJECT_DIR$/res/layout/main2.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/chat/bluetooth/util/MySQLiteHelper.java" />
+        <option value="$PROJECT_DIR$/res/layout/main2.xml" />
         <option value="$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java" />
       </list>
     </option>
@@ -656,12 +632,12 @@
       <workItem from="1447936214287" duration="7408000" />
       <workItem from="1447946799385" duration="372000" />
       <workItem from="1449738227647" duration="1563000" />
-      <workItem from="1454687241576" duration="6505000" />
+      <workItem from="1454687241576" duration="9161000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22115000" />
+    <option name="totallyTimeSpent" value="24771000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1378" height="744" extended-state="0" />
@@ -679,7 +655,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35784313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29575163" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.215478" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -713,17 +689,30 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java</url>
-          <line>86</line>
+          <line>98</line>
           <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java</url>
+          <line>70</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java</url>
+          <line>151</line>
+          <properties />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java</url>
-          <line>97</line>
+          <line>146</line>
           <properties class="com.chat.bluetooth.activity.Activity2" method="showTable" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1030,17 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/chat_activity.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/util/ToastUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1049,37 +1027,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main2.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-19/com/android/internal/os/ZygoteInit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="793" column="0" selection-start-line="793" selection-start-column="0" selection-end-line="793" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.814815">
-          <caret line="138" column="96" selection-start-line="138" selection-start-column="96" selection-end-line="138" selection-end-column="96" />
-          <folding>
-            <element signature="e#2798#2831#0" expanded="true" />
-            <element signature="e#4285#4325#0" expanded="true" />
-            <element signature="e#4380#4381#0" expanded="true" />
-            <element signature="e#4421#4422#0" expanded="true" />
-            <element signature="e#5205#5255#0" expanded="true" />
-            <element signature="e#5607#5646#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1117,16 +1069,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/util/MySQLiteHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8965516">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.206897">
+          <caret line="89" column="22" selection-start-line="67" selection-start-column="3" selection-end-line="89" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/chat_activity.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main2.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.464286">
+          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.6296296">
+          <caret line="34" column="42" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="42" />
+          <folding>
+            <element signature="e#2798#2831#0" expanded="true" />
+            <element signature="e#4285#4325#0" expanded="true" />
+            <element signature="e#4380#4381#0" expanded="true" />
+            <element signature="e#4421#4422#0" expanded="true" />
+            <element signature="e#5205#5255#0" expanded="true" />
+            <element signature="e#5607#5646#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/Activity2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5275081">
-          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+        <state vertical-scroll-proportion="-0.15850145">
+          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
           <folding />
         </state>
       </provider>
