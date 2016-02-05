@@ -25,6 +25,7 @@ public class ChatActivity extends GenericActivity{
 	
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
+	private final int DB_RETURN = 101;
 
 	private Button buttonDB;
 	private Button buttonClient;
@@ -126,12 +127,16 @@ public class ChatActivity extends GenericActivity{
 
 			@Override
 			public void onClick(View v) {
-				toastUtil.showToast("button works");
+
+				Intent dbIntent = new Intent (ChatActivity.this,
+						Activity2.class);
+
+				startActivityForResult(dbIntent, 101);
 			}
 		});
 	}
 
-	/*************************************************************************/
+	/**************************************************************************************************/
 	
 	public void initializaBluetooth() {
 		if (chatBusinessLogic.getBluetoothManager().verifySuportedBluetooth()) {
@@ -175,6 +180,12 @@ public class ChatActivity extends GenericActivity{
 				if (RESULT_OK != resultCode) {
 					toastUtil.showToast(getString(R.string.activate_bluetooth_to_continue));
 					finish(); 
+				}
+				break;
+			case DB_RETURN:
+				if (RESULT_OK != resultCode) {
+					toastUtil.showToast("returned from DB");
+					finish();
 				}
 				break;
 
