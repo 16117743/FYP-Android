@@ -18,38 +18,12 @@
             android:textColor="#ffffffff"
             android:textSize="30sp" android:id="@+id/Activity2TxtID"/>
 
-    <EditText
-            android:id="@+id/etDataReceived"
-            android:layout_width="match_parent"
-            android:layout_height="292dp"
-            android:textColor="#ff040404"
-            android:text="Data received..."
-            android:background="#ffeeeeee"/>
-
     <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:id="@+id/listView2" android:layout_gravity="center_horizontal"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Field 1"
-            android:id="@+id/F1textView" android:textColor="#ff040404"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText1" android:textColor="#ff070707" android:text="null"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Field 2"
-            android:id="@+id/F2textView" android:textColor="#ff070707"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText2" android:text="null"/>
+            android:layout_width="409dp"
+            android:layout_height="413dp"
+            android:id="@+id/listView2" android:layout_gravity="center_horizontal" android:scrollingCache="true"
+            android:longClickable="false" android:fastScrollEnabled="true" android:clickable="true"
+            android:smoothScrollbar="true" android:background="@drawable/background"/>
     <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="match_parent"

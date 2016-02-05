@@ -131,6 +131,15 @@ public class ChatActivity extends GenericActivity{
 				Intent dbIntent = new Intent (ChatActivity.this,
 						Activity2.class);
 
+				Bundle myDataBundle = new Bundle();
+
+				// add <key,value> data items to the container
+				myDataBundle.putDouble("val1", 2);
+				myDataBundle.putDouble("val2", 3);
+
+				// attach the container to the intent
+				dbIntent.putExtras(myDataBundle);
+
 				startActivityForResult(dbIntent, 101);
 			}
 		});
@@ -183,21 +192,20 @@ public class ChatActivity extends GenericActivity{
 				}
 				break;
 			case DB_RETURN:
-				if (RESULT_OK != resultCode) {
-					toastUtil.showToast("returned from DB");
-					finish();
-				}
+				Bundle myResultBundle = data.getExtras();
+				String myResult = myResultBundle.getString("result");
+				toastUtil.showToast(myResult);
 				break;
 
-			case BT_VISIBLE:
-				if (resultCode == BT_TIMER_VISIBLE) {
-
-					chatBusinessLogic.stopCommucanition();
-					chatBusinessLogic.startServer();
-				} else {
-					toastUtil.showToast(getString(R.string.device_must_visible));
-				}
-				break;
+//			case BT_VISIBLE:
+//				if (resultCode == BT_TIMER_VISIBLE) {
+//
+//					chatBusinessLogic.stopCommucanition();
+//					chatBusinessLogic.startServer();
+//				} else {
+//					toastUtil.showToast(getString(R.string.device_must_visible));
+//				}
+//				break;
 		}
 	}
 	

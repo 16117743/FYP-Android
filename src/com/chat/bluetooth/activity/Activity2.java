@@ -12,10 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.*;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.util.MySQLiteHelper;
 
@@ -33,6 +30,8 @@ public class Activity2 extends Activity implements OnClickListener{
 	private EditText f2;
 	private ListView listView2;
 	private ArrayAdapter<String> historic;
+	private Bundle myBundle;
+	private Intent myLocalIntent;
 	SQLiteDatabase db;
 	MySQLiteHelper dbs;
 	//private String myDbPath1 = "data/data/cis470.matos.databases/";
@@ -41,27 +40,46 @@ public class Activity2 extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main2);
-		txtMsg = (EditText) findViewById(R.id.etDataReceived);
+		//txtMsg = (EditText) findViewById(R.id.etDataReceived);
 		btnDone = (Button) findViewById(R.id.btnDone);
 		btnUpdate = (Button) findViewById(R.id.btnUpdate);
 		btnDelete = (Button) findViewById(R.id.btnDelete);
 		btnAdd = (Button) findViewById(R.id.btnAdd);
 		btnDone.setOnClickListener(this);
 		mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-		Intent myLocalIntent = getIntent();
-		f1 = (EditText)findViewById(R.id.editText1);
-		f2 = (EditText)findViewById(R.id.editText2);
+
+
+		myLocalIntent = getIntent();
+
 		/**************************************************/
 		listView2 = (ListView)findViewById(R.id.listView2);
 		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		listView2.setAdapter(historic);
 /************************************************************/
-		//dbs = new MySQLiteHelper(this);
-
 		openDatabase(); // open (create if needed) database
 		dropTable(); // if needed drop table tblAmigos
 		insertSomeDbData();
-		/**********************************************/
+		/**********************************************//**********************************************/
+
+		listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+									int position, long id) {
+
+				String test = historic.getItem(position);
+				//prestationEco str=(prestationEco)o;//As you are using Default String Adapter
+
+				Toast.makeText(getBaseContext(), historic.getItem(position), Toast.LENGTH_SHORT).show();
+
+				Intent myLocalIntent = getIntent();
+				Bundle myBundle = new Bundle();
+				myBundle =  myLocalIntent.getExtras();
+				myBundle.putString("result", historic.getItem(position));
+				// attach updated bumble to invoking intent
+				myLocalIntent.putExtras(myBundle);
+				setResult(Activity.RESULT_OK, myLocalIntent);
+				finish();
+			}
+		});/**********************************************//**********************************************/
 
 		btnReadSDFile = (Button) findViewById(R.id.buttonsd);
 		btnReadSDFile.setOnClickListener(new OnClickListener() {
@@ -123,6 +141,8 @@ public class Activity2 extends Activity implements OnClickListener{
 	}
 
 	/*********************************************************************************************/
+	/*********************************************************************************************/
+	/*********************************************************************************************/
 	// database methods
 
 	private void useCursor1() {
@@ -135,8 +155,8 @@ public class Activity2 extends Activity implements OnClickListener{
 					"ID");
 
 			int theTotal = c.getCount();
-			txtMsg.append("\n-useCursor1 - Total rec " + theTotal);
-			txtMsg.append("\n");
+		//	txtMsg.append("\n-useCursor1 - Total rec " + theTotal);
+		//	txtMsg.append("\n");
 			int idCol = c.getColumnIndex("ID");
 			int nameCol = c.getColumnIndex("song");
 			int phoneCol = c.getColumnIndex("artist");
@@ -147,12 +167,16 @@ public class Activity2 extends Activity implements OnClickListener{
 				columns[1] = c.getString(nameCol);
 				columns[2] = c.getString(phoneCol);
 
-				txtMsg.append(columns[0] + " " + columns[1] + " " + columns[2]
-						+ "\n");
+			//	txtMsg.append(columns[0] + " " + columns[1] + " " + columns[2]
+			//			+ "\n");
+
+				historic.add("ID:" + columns[0] + " - " + columns[1] + " by " + columns[2] );
+				historic.notifyDataSetChanged();
+				listView2.requestFocus();
 			}
 
 		} catch (Exception e) {
-			txtMsg.append("\nError useCursor1: " + e.getMessage());
+		//	txtMsg.append("\nError useCursor1: " + e.getMessage());
 			finish();
 		}
 	}// useCursor1
@@ -168,10 +192,9 @@ public class Activity2 extends Activity implements OnClickListener{
 			// commit your changes
 			db.setTransactionSuccessful();
 
-			txtMsg.append("\n-insertSomeDbData - Table was created");
+
 
 		} catch (Exception e1) {
-			txtMsg.append("\nError insertSomeDbData: " + e1.getMessage());
 			finish();
 		} finally {
 			db.endTransaction();
@@ -186,10 +209,9 @@ public class Activity2 extends Activity implements OnClickListener{
 
 			// commit your changes
 			db.setTransactionSuccessful();
-			txtMsg.append("\n-insertSomeDbData - 3 rec. were inserted");
 
 		} catch (SQLiteException e2) {
-			txtMsg.append("\nError insertSomeDbData: " + e2.getMessage());
+
 		} finally {
 			db.endTransaction();
 		}
@@ -200,12 +222,12 @@ public class Activity2 extends Activity implements OnClickListener{
 			String sql = "select * from " + tableName ;
 			Cursor c = db.rawQuery(sql, null);
 			//Cursor c = dbs.rawQuery(sql, null);
-			txtMsg.append("\n-showTable: " + tableName + showCursor(c));
+		//	txtMsg.append("\n-showTable: " + tableName + showCursor(c));
 
 			/**********/
 			//historic.add("Me: " + message);
 		} catch (Exception e) {
-			txtMsg.append("\nError showTable: " + e.getMessage());
+		//	txtMsg.append("\nError showTable: " + e.getMessage());
 
 		}
 	}// useCursor1
@@ -216,12 +238,10 @@ public class Activity2 extends Activity implements OnClickListener{
 			//myDbPath = "data/data/cis470.matos.databases/";
 			//mySdPath = Environment.getExternalStorageDirectory().getPath();
 			String myDbPath = mySdPath  + "/myDB1.db";
-			//txtMsg.append("\n-openDatabase - DB Path: " + myDbPath);
 
 			db = SQLiteDatabase.openDatabase(myDbPath, null,
 					SQLiteDatabase.CREATE_IF_NECESSARY);
 
-			//txtMsg.append("\n-openDatabase - DB was opened");
 		} catch (SQLiteException e) {
 			txtMsg.append("\nError openDatabase: " + e.getMessage());
 			finish();
@@ -231,9 +251,9 @@ public class Activity2 extends Activity implements OnClickListener{
 	private void dropTable() {
 		try {
 			db.execSQL("DROP TABLE IF EXISTS tableDB;");
-		//	txtMsg.append("\n-dropTable - dropped!!");
+
 		} catch (Exception e) {
-			txtMsg.append("\nError dropTable: " + e.getMessage());
+
 			finish();
 		}
 	}
@@ -275,11 +295,10 @@ public class Activity2 extends Activity implements OnClickListener{
 			int recAffected = db.update("tableDB", updValues,
 					"recID = ? ", whereArgs);
 
-			txtMsg.append("\n-useUpdateMethod - Rec Affected " + recAffected);
 			showTable("tblAmigo");
 
 		} catch (Exception e) {
-			txtMsg.append("\n-useUpdateMethod - Error: " + e.getMessage());
+
 		}
 	}
 
