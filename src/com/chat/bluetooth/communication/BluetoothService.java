@@ -9,17 +9,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * 01/11/2012 13:05:56 
- */
+
 public class BluetoothService{
 	 
 	 private final String NAME_SERVICE_BT = "bluetooth";
 	 private final UUID ID_CONECTION = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); 
-
+						// UUID uuid = new UUID(80087355); // "04c6093b-0000-1000-8000-00805f9b34fb"
 	 public BluetoothSocket startServer(BluetoothAdapter adaptador) {
 		 BluetoothSocket bluetoothSocket = null;
 		 

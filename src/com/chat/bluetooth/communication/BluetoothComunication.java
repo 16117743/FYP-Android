@@ -12,12 +12,7 @@ import com.chat.bluetooth.R;
 import com.chat.bluetooth.activity.ChatActivity;
 import com.chat.bluetooth.util.LogUtil;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * 01/11/2012 13:06:15 
- */
+
 public class BluetoothComunication extends Thread {
 	 
 	private boolean run;

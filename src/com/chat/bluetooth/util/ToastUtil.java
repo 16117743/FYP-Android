@@ -3,12 +3,6 @@ package com.chat.bluetooth.util;
 import android.content.Context;
 import android.widget.Toast;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com 
- * 04/10/2012 15:19:14
- */
 public class ToastUtil {
 
 	private Toast toast;

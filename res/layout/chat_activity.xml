@@ -46,5 +46,11 @@
             android:text="Search for Music Host" >
         </Button>
     </LinearLayout>
+    <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DB"
+            android:id="@+id/db"/>
 
 </LinearLayout>

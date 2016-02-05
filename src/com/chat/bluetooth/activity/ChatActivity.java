@@ -26,7 +26,7 @@ public class ChatActivity extends GenericActivity{
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
 
-	private Button buttonService;
+	private Button buttonDB;
 	private Button buttonClient;
 	private ImageButton buttonSend;
 	private EditText editTextMessage;
@@ -120,7 +120,18 @@ public class ChatActivity extends GenericActivity{
 				chatBusinessLogic.startFoundDevices();
 			}
 		});
+
+		buttonDB = (Button)findViewById(R.id.db);
+		buttonDB.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				toastUtil.showToast("button works");
+			}
+		});
 	}
+
+	/*************************************************************************/
 	
 	public void initializaBluetooth() {
 		if (chatBusinessLogic.getBluetoothManager().verifySuportedBluetooth()) {
