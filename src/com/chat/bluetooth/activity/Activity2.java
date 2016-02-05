@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -50,10 +51,11 @@ public class Activity2 extends Activity implements OnClickListener{
 		Intent myLocalIntent = getIntent();
 		f1 = (EditText)findViewById(R.id.editText1);
 		f2 = (EditText)findViewById(R.id.editText2);
-		/**************/
+		/**************************************************/
 		listView2 = (ListView)findViewById(R.id.listView2);
-
-/**************************/
+		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+		listView2.setAdapter(historic);
+/************************************************************/
 		//dbs = new MySQLiteHelper(this);
 
 		openDatabase(); // open (create if needed) database
@@ -68,7 +70,8 @@ public class Activity2 extends Activity implements OnClickListener{
 				//Double v1 = Double.parseDouble(txtValue1.getText().toString());
 				//String tableName = f1.getText().toString();
 				//String tableName2 = f2.getText().toString();
-				showTable("tableDB");
+				//showTable("tableDB");
+				useCursor1();
 			}// onClick
 		});
 
@@ -103,8 +106,56 @@ public class Activity2 extends Activity implements OnClickListener{
 		setResult(Activity.RESULT_OK, myLocalIntent);
 	}
 
+
+
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.clean:
+				historic.clear();
+				historic.notifyDataSetChanged();
+				break;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
 	/*********************************************************************************************/
-	// button methods
+	// database methods
+
+	private void useCursor1() {
+		try {
+			// this is similar to showCursor(...)
+			// obtain a list of records[recId, name, phone] from DB
+			String[] columns = { "ID", "song", "artist", "songdata" };
+			// using simple parametric cursor
+			Cursor c = db.query("tableDB", columns, null, null, null, null,
+					"ID");
+
+			int theTotal = c.getCount();
+			txtMsg.append("\n-useCursor1 - Total rec " + theTotal);
+			txtMsg.append("\n");
+			int idCol = c.getColumnIndex("ID");
+			int nameCol = c.getColumnIndex("song");
+			int phoneCol = c.getColumnIndex("artist");
+
+			c.moveToPosition(-1);
+			while (c.moveToNext()) {
+				columns[0] = Integer.toString((c.getInt(idCol)));
+				columns[1] = c.getString(nameCol);
+				columns[2] = c.getString(phoneCol);
+
+				txtMsg.append(columns[0] + " " + columns[1] + " " + columns[2]
+						+ "\n");
+			}
+
+		} catch (Exception e) {
+			txtMsg.append("\nError useCursor1: " + e.getMessage());
+			finish();
+		}
+	}// useCursor1
 	/*******************************************************************************/
 	private void insertSomeDbData() {
 		// create table: tblAmigo
@@ -150,6 +201,9 @@ public class Activity2 extends Activity implements OnClickListener{
 			Cursor c = db.rawQuery(sql, null);
 			//Cursor c = dbs.rawQuery(sql, null);
 			txtMsg.append("\n-showTable: " + tableName + showCursor(c));
+
+			/**********/
+			//historic.add("Me: " + message);
 		} catch (Exception e) {
 			txtMsg.append("\nError showTable: " + e.getMessage());
 
@@ -280,37 +334,6 @@ public class Activity2 extends Activity implements OnClickListener{
 		}
 	}
 
-	private void useCursor1() {
-		try {
-			// this is similar to showCursor(...)
-			// obtain a list of records[recId, name, phone] from DB
-			String[] columns = { "ID", "firstName", "lastName" };
-			// using simple parametric cursor
-			Cursor c = db.query("tblAMIGO", columns, null, null, null, null,
-					"recID");
-
-			int theTotal = c.getCount();
-			txtMsg.append("\n-useCursor1 - Total rec " + theTotal);
-			txtMsg.append("\n");
-			int idCol = c.getColumnIndex("ID");
-			int nameCol = c.getColumnIndex("firstName");
-			int phoneCol = c.getColumnIndex("lastName");
-
-			c.moveToPosition(-1);
-			while (c.moveToNext()) {
-				columns[0] = Integer.toString((c.getInt(idCol)));
-				columns[1] = c.getString(nameCol);
-				columns[2] = c.getString(phoneCol);
-
-				txtMsg.append(columns[0] + " " + columns[1] + " " + columns[2]
-						+ "\n");
-			}
-
-		} catch (Exception e) {
-			txtMsg.append("\nError useCursor1: " + e.getMessage());
-			finish();
-		}
-	}// useCursor1
 
 
 
