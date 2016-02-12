@@ -1,4 +1,3 @@
-
 package com.chat.bluetooth.activity;
 
 import android.bluetooth.BluetoothAdapter;

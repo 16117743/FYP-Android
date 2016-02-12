@@ -19,11 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d031df0-6955-4074-ba0b-8b0c9d0e8f61" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/Bluetooth.apk" afterPath="$PROJECT_DIR$/bin/classes/Bluetooth.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/Bluetooth.unaligned.apk" afterPath="$PROJECT_DIR$/bin/classes/Bluetooth.unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/communication/BluetoothClient.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/communication/BluetoothClient.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/chat/bluetooth/communication/BluetoothClient.java" afterPath="$PROJECT_DIR$/src/com/chat/bluetooth/communication/BluetoothClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java" afterPath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -61,8 +57,8 @@
       <file leaf-file-name="ChatActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.03655914">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -85,7 +81,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -590,12 +588,12 @@
       <workItem from="1449738227647" duration="1563000" />
       <workItem from="1454687241576" duration="18573000" />
       <workItem from="1454851196783" duration="1246000" />
-      <workItem from="1455308856572" duration="69000" />
+      <workItem from="1455308856572" duration="233000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35498000" />
+    <option name="totallyTimeSpent" value="35662000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="1" width="1360" height="726" extended-state="0" />
@@ -665,7 +663,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="92" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="92" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -931,6 +931,7 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer">
@@ -1018,7 +1019,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1039,8 +1042,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03655914">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
