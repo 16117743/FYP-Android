@@ -4,9 +4,10 @@
 /.idea/*.xml
 .idea/*
 .idea/*.xml
-.idea/workspace.xml
 /.idea/workspace.xml
+.idea_modules/
 .settings/*
+out/
 bin/*
 /bin/*
 gen/*
