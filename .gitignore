@@ -1,0 +1,11 @@
+/.idea/*
+.idea/*
+.settings/*
+bin/*
+gen/*
+libs/*
+.classpath
+.project
+Bluetoot.iml
+lint.xml
+project.properties
