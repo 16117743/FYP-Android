@@ -19,13 +19,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d031df0-6955-4074-ba0b-8b0c9d0e8f61" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/Bluetooth.apk" afterPath="$PROJECT_DIR$/bin/classes/Bluetooth.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/Bluetooth.unaligned.apk" afterPath="$PROJECT_DIR$/bin/classes/Bluetooth.unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$1.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$2.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$3.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$4.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity.class" afterPath="$PROJECT_DIR$/bin/classes/com/chat/bluetooth/activity/ChatActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java" afterPath="$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -64,10 +57,10 @@
       <file leaf-file-name="ChatActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6296296">
-              <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+            <state vertical-scroll-proportion="-1.2592592">
+              <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
               <folding>
-                <element signature="e#0#6175#0" expanded="true" />
+                <element signature="e#0#6178#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +69,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6938776">
-              <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.19825073">
+              <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -210,6 +203,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bluetooth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FYP-Android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bluetooth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FYP-Android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -538,12 +559,12 @@
       <workItem from="1449738227647" duration="1563000" />
       <workItem from="1454687241576" duration="18573000" />
       <workItem from="1454851196783" duration="1246000" />
-      <workItem from="1455308856572" duration="1002000" />
+      <workItem from="1455308856572" duration="1552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36431000" />
+    <option name="totallyTimeSpent" value="36981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="1" width="1360" height="726" extended-state="0" />
@@ -637,7 +658,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#6175#0" expanded="true" />
+            <element signature="e#0#6178#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -677,7 +698,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
           <folding>
-            <element signature="e#0#6175#0" expanded="true" />
+            <element signature="e#0#6178#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -701,7 +722,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
           <folding>
-            <element signature="e#0#6175#0" expanded="true" />
+            <element signature="e#0#6178#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -989,18 +1010,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/chat/bluetooth/activity/ChatActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6296296">
-          <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+        <state vertical-scroll-proportion="-1.2592592">
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
           <folding>
-            <element signature="e#0#6175#0" expanded="true" />
+            <element signature="e#0#6178#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6938776">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.19825073">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
           <folding />
         </state>
       </provider>

@@ -1,5 +1,6 @@
 //changed one line
 //changed another line
+//
 package com.chat.bluetooth.activity;
 
 import android.bluetooth.BluetoothAdapter;
