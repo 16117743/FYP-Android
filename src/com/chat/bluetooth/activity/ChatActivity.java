@@ -1,7 +1,4 @@
-//changed one line
-//changed another line
-//
-//
+// git ignore fixed!
 package com.chat.bluetooth.activity;
 
 import android.bluetooth.BluetoothAdapter;

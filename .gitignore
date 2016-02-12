@@ -1,13 +1,8 @@
-.idea/
-.idea/workspace.xml
-/.idea/*
-/.idea/*.xml
-.idea/*
-.idea/*.xml
-/.idea/workspace.xml
-.idea_modules/
-.settings/*
-out/
+/libs
+/gen
+/bin
+/.settings
+/.idea
 bin/*
 /bin/*
 gen/*
@@ -15,7 +10,6 @@ libs/*
 /libs/*
 .classpath
 .project
-Bluetoot.iml
 lint.xml
 project.properties
 bin/classes/Bluetooth.apk
