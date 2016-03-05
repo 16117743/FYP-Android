@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.*;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.util.MySQLiteHelper;
+import com.chat.bluetooth.util.ToastUtil;
 
 import java.sql.SQLException;
 
@@ -26,20 +27,28 @@ public class Activity2 extends Activity implements OnClickListener{
 	private Button btnDelete;
 	private Button btnAdd;
 	private  String mySdPath;
-	private EditText f1;
-	private EditText f2;
 	private ListView listView2;
 	private ArrayAdapter<String> historic;
 	private Bundle myBundle;
 	private Intent myLocalIntent;
 	SQLiteDatabase db;
-	MySQLiteHelper dbs;
+	private ToastUtil toastUtil;
+	//MySQLiteHelper dbs;
 	//private String myDbPath1 = "data/data/cis470.matos.databases/";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main2);
+		myBundle = savedInstanceState;
+		toastUtil = new ToastUtil(this);
+		init();
+
+		//openDatabase();
+		setResult(Activity.RESULT_OK, myLocalIntent);
+	}
+
+	public void init(){
 		//txtMsg = (EditText) findViewById(R.id.etDataReceived);
 		btnDone = (Button) findViewById(R.id.btnDone);
 		btnUpdate = (Button) findViewById(R.id.btnUpdate);
@@ -47,15 +56,12 @@ public class Activity2 extends Activity implements OnClickListener{
 		btnAdd = (Button) findViewById(R.id.btnAdd);
 		btnDone.setOnClickListener(this);
 		mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-
-
 		myLocalIntent = getIntent();
-
 		/**************************************************/
 		listView2 = (ListView)findViewById(R.id.listView2);
 		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		listView2.setAdapter(historic);
-/************************************************************/
+		/************************************************************/
 		openDatabase(); // open (create if needed) database
 		dropTable(); // if needed drop table tblAmigos
 		insertSomeDbData();
@@ -65,15 +71,17 @@ public class Activity2 extends Activity implements OnClickListener{
 			public void onItemClick(AdapterView<?> parent, View view,
 									int position, long id) {
 
-				String test = historic.getItem(position);
+				//String test = historic.getItem(position);
 				//prestationEco str=(prestationEco)o;//As you are using Default String Adapter
 
-				Toast.makeText(getBaseContext(), historic.getItem(position), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getBaseContext(), historic.getItem(position), Toast.LENGTH_SHORT).show();
 
 				Intent myLocalIntent = getIntent();
-				Bundle myBundle = new Bundle();
+			//	Bundle myBundle = new Bundle();
 				myBundle =  myLocalIntent.getExtras();
-				myBundle.putString("result", historic.getItem(position));
+				//historic.getItem(position)
+				myBundle.putString("result", myBundle.getString("str"));
+				toastUtil.showToast(myBundle.getString("str"));
 				// attach updated bumble to invoking intent
 				myLocalIntent.putExtras(myBundle);
 				setResult(Activity.RESULT_OK, myLocalIntent);
@@ -104,24 +112,22 @@ public class Activity2 extends Activity implements OnClickListener{
 		btnDelete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String tableName = f1.getText().toString();
-				String tableName2 = f2.getText().toString();
-			//	dbs.helperUseDeleteMethod(tableName);
+				//String tableName = f1.getText().toString();
+				//	String tableName2 = f2.getText().toString();
+				//	dbs.helperUseDeleteMethod(tableName);
 			}// onClick
 		});
 
 		btnAdd.setOnClickListener(new OnClickListener() {/***************************************************/
-			@Override
-			public void onClick(View v) {
-				//String tableName = f1.getText().toString();
-				//String tableName2 = f2.getText().toString();
-				//addMethod(tableName, tableName2);
+		@Override
+		public void onClick(View v) {
+			//String tableName = f1.getText().toString();
+			//String tableName2 = f2.getText().toString();
+			//addMethod(tableName, tableName2);
 			//	dbs.helperAddMethod("song1","artist1");
-				useAddMethod("song1", "song2");
-			}// onClick
+			useAddMethod("song1", "song2");
+		}// onClick
 		});
-		//openDatabase();
-		setResult(Activity.RESULT_OK, myLocalIntent);
 	}
 
 

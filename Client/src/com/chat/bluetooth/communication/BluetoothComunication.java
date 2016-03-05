@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.Handler;
 
 import com.chat.bluetooth.R;
-import com.chat.bluetooth.activity.ChatActivity;
+import com.chat.bluetooth.activity.MainActivity;
 import com.chat.bluetooth.util.LogUtil;
 
 
@@ -44,22 +44,22 @@ public class BluetoothComunication extends Thread {
 			 dataInputStream = new DataInputStream(bluetoothSocket.getInputStream());
 			 dataOutputStream = new DataOutputStream(bluetoothSocket.getOutputStream());
 			
-			 sendHandler(ChatActivity.MSG_TOAST, context.getString(R.string.connected_sucessfully));
+			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.connected_sucessfully));
 			 
 			 while (run) {
 				 if(dataInputStream.available() > 0){
-					// sendHandler(ChatActivity.MSG_TOAST, context."received something");
+					// sendHandler(MainActivity.MSG_TOAST, context."received something");
 					 byte[] msg = new byte[dataInputStream.available()];
 					 dataInputStream.read(msg, 0, dataInputStream.available());
 					 
-					 sendHandler(ChatActivity.MSG_BLUETOOTH, nameBluetooth + ": " + new String(msg));
+					 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + new String(msg));
 				 }
 			 }
 		 }catch (IOException e) {
 			 LogUtil.e(e.getMessage());
 			 
 			 stopComunication();
-			 sendHandler(ChatActivity.MSG_TOAST, context.getString(R.string.lost_connection));
+			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.lost_connection));
 		 }
 	}
 	
@@ -70,13 +70,13 @@ public class BluetoothComunication extends Thread {
 				dataOutputStream.flush();
 				return true;
 			}else{
-				sendHandler(ChatActivity.MSG_TOAST, context.getString(R.string.no_connection));
+				sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.no_connection));
 				return false;
 			}
 		} catch (IOException e) {
 			LogUtil.e(e.getMessage());
 			
-			sendHandler(ChatActivity.MSG_TOAST, context.getString(R.string.failed_to_send_message));
+			sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.failed_to_send_message));
 			return false;
 		}
 	}

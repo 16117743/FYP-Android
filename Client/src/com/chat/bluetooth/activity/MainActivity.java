@@ -1,4 +1,4 @@
-// git ignore fixed!
+//
 package com.chat.bluetooth.activity;
 
 import android.bluetooth.BluetoothAdapter;
@@ -18,7 +18,8 @@ import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.ChatBusinessLogic;
 import com.chat.bluetooth.util.ToastUtil;
 
-public class ChatActivity extends GenericActivity{
+
+public class MainActivity extends GenericActivity{
 	
 	public static int MSG_TOAST = 1;
 	public static int MSG_BLUETOOTH = 2;
@@ -129,14 +130,15 @@ public class ChatActivity extends GenericActivity{
 			@Override
 			public void onClick(View v) {
 
-				Intent dbIntent = new Intent (ChatActivity.this,
+				Intent dbIntent = new Intent (MainActivity.this,
 						Activity2.class);
 
 				Bundle myDataBundle = new Bundle();
 
 				// add <key,value> data items to the container
-				myDataBundle.putDouble("val1", 2);
-				myDataBundle.putDouble("val2", 3);
+//				myDataBundle.putDouble("val1", 2);
+//				myDataBundle.putDouble("val2", 3);
+				myDataBundle.putString("str", "testing String");
 
 				// attach the container to the intent
 				dbIntent.putExtras(myDataBundle);

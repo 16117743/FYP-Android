@@ -17,8 +17,8 @@
         android:icon="@drawable/music"
         android:label="Toms App" >
         <activity
-            android:name="com.chat.bluetooth.activity.ChatActivity"
-            android:label="Toms App"
+            android:name=".activity.MainActivity"
+            android:label="Music Host Client"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -3,7 +3,7 @@ package com.chat.bluetooth.communication;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.chat.bluetooth.activity.ChatActivity;
+import com.chat.bluetooth.activity.MainActivity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
@@ -20,7 +20,7 @@ public class BluetoothService{
 		 
 		 try {
 			 BluetoothServerSocket serverSocket = adaptador.listenUsingRfcommWithServiceRecord(NAME_SERVICE_BT, ID_CONECTION); 
-			 bluetoothSocket = serverSocket.accept(ChatActivity.BT_TIMER_VISIBLE * 1000); 
+			 bluetoothSocket = serverSocket.accept(MainActivity.BT_TIMER_VISIBLE * 1000);
 			 
 		 } catch (IOException e) { 
 			 e.printStackTrace();
