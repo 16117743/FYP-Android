@@ -10,12 +10,6 @@ import android.content.DialogInterface.OnClickListener;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.IBusinessLogic.OnBluetoothDeviceSelectedListener;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * @date 16:46:04 01/06/2013
- */
 public class AlertDialogDevicesFound extends AlertDialogGeneric implements OnClickListener{
 
 	private List<BluetoothDevice> devicesFound;

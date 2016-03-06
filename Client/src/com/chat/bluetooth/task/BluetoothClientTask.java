@@ -11,12 +11,6 @@ import com.chat.bluetooth.business.IBusinessLogic.OnConnectionBluetoothListener;
 import com.chat.bluetooth.communication.BluetoothClient;
 import com.chat.bluetooth.util.ToastUtil;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * 01/11/2012 13:17:20 
- */
 public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, BluetoothSocket>{
 
 	private Context context;

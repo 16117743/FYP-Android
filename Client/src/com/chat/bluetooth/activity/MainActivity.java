@@ -2,6 +2,7 @@
 package com.chat.bluetooth.activity;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,15 +17,22 @@ import android.widget.ListView;
 
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.ChatBusinessLogic;
+import com.chat.bluetooth.communication.BluetoothComunication;
+import com.chat.bluetooth.manager.BluetoothManager;
+import com.chat.bluetooth.util.SongBean;
 import com.chat.bluetooth.util.ToastUtil;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends GenericActivity{
 	
 	public static int MSG_TOAST = 1;
 	public static int MSG_BLUETOOTH = 2;
+	public static int JSON_BLUETOOTH = 3;
 	public static int BT_TIMER_VISIBLE = 30; 
 	
 	private final int BT_ACTIVATE = 0;
@@ -40,6 +48,12 @@ public class MainActivity extends GenericActivity{
 	
 	private ToastUtil toastUtil;
 	private ChatBusinessLogic chatBusinessLogic;
+	//public BluetoothComunication bc = new BluetoothComunication();
+//	private Context context;
+//	private Handler handler;
+//
+//	private BluetoothManager bluetoothManager;
+//	private BluetoothComunication bluetoothComunication;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +89,7 @@ public class MainActivity extends GenericActivity{
 	@Override
 	public void settingsAttributes() {
 		toastUtil = new ToastUtil(this);
+		//create business logic object for communication
 		chatBusinessLogic = new ChatBusinessLogic(this, handler);
 	}
 
@@ -105,18 +120,7 @@ public class MainActivity extends GenericActivity{
 				}
 			}
 		});
-		
-//		buttonService = (Button)findViewById(R.id.buttonService);
-//		buttonService.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-//				discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, BT_TIMER_VISIBLE);
-//				startActivityForResult(discoverableIntent, BT_VISIBLE);
-//			}
-//		});
-		
+
 		buttonClient = (Button)findViewById(R.id.buttonClient);
 		buttonClient.setOnClickListener(new View.OnClickListener() {
 			
@@ -137,16 +141,11 @@ public class MainActivity extends GenericActivity{
 
 				Bundle myDataBundle = new Bundle();
 
-				//JSONObject json = null;
-//				try {
-//					json = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//				}
-				//String json = "{\"phonetype\":\"N95\",\"cat\":\"WP\"}";
-				String json = "[{\"Song\":\"Song1\",\"Name\":\"ABC\"},{\"Song\":\"Song2\",\"Name\":\"PQR\"},{\"Song\":\"Song3\",\"Name\":\"XYZ\"}]";
-				myDataBundle.putByteArray("package", json.getBytes());
-				myDataBundle.putString("str", "testing String");
+				String jsonArrayString = "[{\"song\":\"song1\",\"artist\":\"artist0\",\"votes\":0},{\"song\":\"song2\",\"artist\":\"artist1\",\"votes\":1},{\"song\":\"song3\",\"artist\":\"artist2\",\"votes\":2},{\"song\":\"song4\",\"artist\":\"artist3\",\"votes\":3},{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
+				//String json = "[{\"Song\":\"Song11\",\"Name\":\"ABC\"},{\"Song\":\"Song22\",\"Name\":\"PQR\"},{\"Song\":\"Song33\",\"Name\":\"XYZ\"}]";
+
+				myDataBundle.putByteArray("package", jsonArrayString.getBytes());
+			//	myDataBundle.putString("str", "testing String");
 
 				// attach the container to the intent
 				dbIntent.putExtras(myDataBundle);
@@ -155,8 +154,6 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 	}
-
-	/**************************************************************************************************/
 	
 	public void initializaBluetooth() {
 		if (chatBusinessLogic.getBluetoothManager().verifySuportedBluetooth()) {
@@ -173,7 +170,8 @@ public class MainActivity extends GenericActivity{
 	public void registerFilters(){
 		chatBusinessLogic.registerFilter();
 	}
-
+	/*****************************************************************************************************/
+	//handles messages received from music host
 	private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             synchronized (msg) {
@@ -184,14 +182,32 @@ public class MainActivity extends GenericActivity{
                 	case 2:
                 		historic.add((String)(msg.obj));
        				 	historic.notifyDataSetChanged();
-       				 	
+					case 3:
+						toastUtil.showToast((String) (msg.obj));
+						historic.add("testing JSON response");
+
+						Intent dbIntent = new Intent (MainActivity.this,
+							Activity2.class);
+
+						Bundle myDataBundle = new Bundle();
+						String packStr = new String ((String)(msg.obj));
+
+						myDataBundle.putByteArray("package", (packStr.getBytes()));
+						//	myDataBundle.putString("str", "testing String");
+
+						// attach the container to the intent
+						dbIntent.putExtras(myDataBundle);
+
+						startActivityForResult(dbIntent, 101);
+
        				 	listVewHistoric.requestFocus();
        				 	break;
                 }
             }
         };
     };
-    
+	/*****************************************************************************************************/
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 

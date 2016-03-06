@@ -15,12 +15,6 @@ import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.IBusinessLogic.OnSearchBluetoothListener;
 import com.chat.bluetooth.util.ToastUtil;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * @date 19:51:50 01/06/2013
- */
 public class EventsBluetoothReceiver extends BroadcastReceiver { 
 	
 	private Context context;

@@ -5,12 +5,6 @@ import android.content.Context;
 
 import com.chat.bluetooth.R;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * @date 14:45:57 10/03/2013
- */
 public abstract class AlertDialogGeneric {
 
 	protected Context context;

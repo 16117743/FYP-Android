@@ -2,12 +2,6 @@ package com.chat.bluetooth.manager;
 
 import android.bluetooth.BluetoothAdapter;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * @date 15:24:12 01/06/2013
- */
 public class BluetoothManager {
 	
 	private BluetoothAdapter bluetoothAdapter;

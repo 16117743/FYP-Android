@@ -15,14 +15,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
 import com.chat.bluetooth.R;
-import com.chat.bluetooth.util.MySQLiteHelper;
 import com.chat.bluetooth.util.ToastUtil;
+import com.google.gson.Gson;
+import net.sf.json.util.JSONUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.sql.SQLException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +38,8 @@ public class Activity2 extends Activity implements OnClickListener{
 	private Intent myLocalIntent;
 	SQLiteDatabase db;
 	private ToastUtil toastUtil;
-	//MySQLiteHelper dbs;
-	//private String myDbPath1 = "data/data/cis470.matos.databases/";
+	//private Gson gson;
+	public com.chat.bluetooth.util.JSONUtils util;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,148 +49,42 @@ public class Activity2 extends Activity implements OnClickListener{
 		toastUtil = new ToastUtil(this);
 		init();
 		myBundle =  myLocalIntent.getExtras();
+		util = new com.chat.bluetooth.util.JSONUtils();
+		//gson = new Gson();
 		/*****************************************************************************/
-		String msg1 = new String (myBundle.getByteArray("package"));
-		//toastUtil.showToast(msg1);
-		final byte[] param = myBundle.getByteArray("package");
-		new LongOperation().execute(param);
-//		List <String> returnList = new ArrayList<>();
+		final String msgFromHost = new String (myBundle.getByteArray("package"));
+
+
+//		if(util.isJSONValid(msgFromHost))
+//			toastUtil.showToast("yep");
+//		else
+//			toastUtil.showToast("nope");
+
+			new parseJSON().execute(msgFromHost);
+//		else
+//			toastUtil.showToast("nope");
+	}
+
+//	public boolean isJSONValid(String JSON_STRING) {
 //		try {
-//
-//			//	obj = new JSONObject(params.toString());
-//			//	JSONObject o = new JSONParser().parse("{\"a\": \"A\"}");
-//			JSONArray array = new JSONArray(msg1);
-//
-//			for(int i=0; i<array.length(); i++){
-//				//JSONObject jsonObj  = result;
-//				returnList.add(array.getJSONObject(i).getString("Song"));
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
+//			gson.fromJson(JSON_STRING, Object.class);
+//			return true;
+//		} catch(com.google.gson.JsonSyntaxException ex) {
+//			return false;
 //		}
-
-		//openDatabase();
-	//	setResult(Activity.RESULT_OK, myLocalIntent);
-	}
-
-	public void init(){
-		//txtMsg = (EditText) findViewById(R.id.etDataReceived);
-		btnDone = (Button) findViewById(R.id.btnDone);
-		btnUpdate = (Button) findViewById(R.id.btnUpdate);
-		btnDelete = (Button) findViewById(R.id.btnDelete);
-		btnAdd = (Button) findViewById(R.id.btnAdd);
-		btnDone.setOnClickListener(this);
-		mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-		myLocalIntent = getIntent();
-		/**************************************************/
-		listView2 = (ListView)findViewById(R.id.listView2);
-		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-		listView2.setAdapter(historic);
-		/************************************************************/
-		openDatabase(); // open (create if needed) database
-		dropTable(); // if needed drop table tblAmigos
-		insertSomeDbData();
-		/**********************************************//**********************************************/
-
-		listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-									int position, long id) {
-
-				//String test = historic.getItem(position);
-				//prestationEco str=(prestationEco)o;//As you are using Default String Adapter
-
-				//Toast.makeText(getBaseContext(), historic.getItem(position), Toast.LENGTH_SHORT).show();
-
-				Intent myLocalIntent = getIntent();
-			//	Bundle myBundle = new Bundle();
-				myBundle =  myLocalIntent.getExtras();
-
-				//String byteToString = new String(myBundle.getByteArray("package"));
-
-//				try {
-//					JSONArray array = new JSONArray(byteToString);
-//					for(int i=0; i<array.length(); i++){
-//                        JSONObject jsonObj  = array.getJSONObject(i);
-//						toastUtil.showToast(jsonObj.getString("No"));
-//						toastUtil.showToast(jsonObj.getString("Name"));
-//                    }
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//				}
-
-				//historic.getItem(position)
-			//	myBundle.putString("result", myBundle.getString("str"));
-		//		toastUtil.showToast(myBundle.getString("str"));
-				// attach updated bumble to invoking intent
-
-				myLocalIntent.putExtras(myBundle);
-				setResult(Activity.RESULT_OK, myLocalIntent);
-			//	finish();
-			}
-		});/**********************************************//**********************************************/
-
-		btnReadSDFile = (Button) findViewById(R.id.buttonsd);
-		btnReadSDFile.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//Double v1 = Double.parseDouble(txtValue1.getText().toString());
-				//String tableName = f1.getText().toString();
-				//String tableName2 = f2.getText().toString();
-				//showTable("tableDB");
-				useCursor1();
-			}// onClick
-		});
-
-		btnUpdate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				useUpdateMethod();
-				//updateDB();
-			}// onClick
-		});
-
-		btnDelete.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//String tableName = f1.getText().toString();
-				//	String tableName2 = f2.getText().toString();
-				//	dbs.helperUseDeleteMethod(tableName);
-			}// onClick
-		});
-
-		btnAdd.setOnClickListener(new OnClickListener() {/***************************************************/
-		@Override
-		public void onClick(View v) {
-			//String tableName = f1.getText().toString();
-			//String tableName2 = f2.getText().toString();
-			//addMethod(tableName, tableName2);
-			//	dbs.helperAddMethod("song1","artist1");
-			useAddMethod("song1", "song2");
-		}// onClick
-		});
-	}
+//	}
 
 	/**** ASYNC TASK *************************/
-	private class LongOperation extends AsyncTask<byte[], Void, List <String>> {
+	private class parseJSON extends AsyncTask<String, Void, List <String>> {
 
 		@Override
-		protected List <String> doInBackground(byte[]... params) {
-			//JSONArray array = null;
-			JSONObject obj = null;
+		protected List <String> doInBackground(String... params) {
 			List <String> returnList = new ArrayList<>();
-			returnList.add(params.toString());
-			//Log.d("parameters size ", params.);
-			final String par = params.toString();
-			Log.d("parameters ", par);
 			try {
-
-			//	obj = new JSONObject(params.toString());
-			//	JSONObject o = new JSONParser().parse("{\"a\": \"A\"}");
-				JSONArray array = new JSONArray(par);
+				JSONArray array = new JSONArray(params[0]);
 				Log.d("msg", "got this far");
 				for(int i=0; i<array.length(); i++){
-					//JSONObject jsonObj  = result;
-					returnList.add(array.getJSONObject(i).getString("Song"));
+					returnList.add(array.getJSONObject(i).getString("song"));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -203,31 +95,11 @@ public class Activity2 extends Activity implements OnClickListener{
 
 		@Override
 		protected void onPostExecute(List<String> result) {
-			Log.d("msg", "got to post exe");
-			//Log.d("msg", "got this far");
-			//	TextView txt = (TextView) findViewById(R.id.output);
-			//	txt.setText("Executed"); // txt.setText(result);
-			// might want to change "executed" for the returned string passed
-			// into onPostExecute() but that is upto you
-//			try {
-//			for(int i=0; i<result.size(); i++){
-//				JSONObject jsonObj  = result;
-//				//toastUtil.showToast(jsonObj.getString("No"));
-//				//toastUtil.showToast(jsonObj.getString("Name"));
-//			}
-//		} catch (JSONException e) {
-//			e.printStackTrace();
-//		}
-			if(result !=null) {
-				toastUtil.showToast(result.get(1));
+			for(int i=0; i<result.size(); i++) {
+				historic.add("      " + result.get(i));
 			}
-//			for(int i=0; i<result.size(); i++) {
-//				historic.add("" + result.get(i));
-//			}
-//			historic.notifyDataSetChanged();
-//			listView2.requestFocus();
-			else if(result == null)
-				toastUtil.showToast("testing done");
+			historic.notifyDataSetChanged();
+			listView2.requestFocus();
 		}
 
 		@Override
@@ -249,7 +121,6 @@ public class Activity2 extends Activity implements OnClickListener{
 				historic.notifyDataSetChanged();
 				break;
 		}
-
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -260,16 +131,10 @@ public class Activity2 extends Activity implements OnClickListener{
 
 	private void useCursor1() {
 		try {
-			// this is similar to showCursor(...)
-			// obtain a list of records[recId, name, phone] from DB
 			String[] columns = { "ID", "song", "artist", "songdata" };
-			// using simple parametric cursor
 			Cursor c = db.query("tableDB", columns, null, null, null, null,
 					"ID");
 
-			int theTotal = c.getCount();
-		//	txtMsg.append("\n-useCursor1 - Total rec " + theTotal);
-		//	txtMsg.append("\n");
 			int idCol = c.getColumnIndex("ID");
 			int nameCol = c.getColumnIndex("song");
 			int phoneCol = c.getColumnIndex("artist");
@@ -280,49 +145,35 @@ public class Activity2 extends Activity implements OnClickListener{
 				columns[1] = c.getString(nameCol);
 				columns[2] = c.getString(phoneCol);
 
-			//	txtMsg.append(columns[0] + " " + columns[1] + " " + columns[2]
-			//			+ "\n");
-
 				historic.add("ID:" + columns[0] + " - " + columns[1] + " by " + columns[2] );
 				historic.notifyDataSetChanged();
 				listView2.requestFocus();
 			}
-
 		} catch (Exception e) {
-		//	txtMsg.append("\nError useCursor1: " + e.getMessage());
 			finish();
 		}
 	}// useCursor1
 	/*******************************************************************************/
 	private void insertSomeDbData() {
-		// create table: tblAmigo
 		db.beginTransaction();
 		try {
 			// create table
 			db.execSQL("create table tableDB ("
 					+ " ID integer PRIMARY KEY autoincrement, "
 					+ " song  text, " + " artist text , " + " songdata text );  ");
-			// commit your changes
-			db.setTransactionSuccessful();
-
-
-
 		} catch (Exception e1) {
 			finish();
 		} finally {
 			db.endTransaction();
 		}
-		// populate table: tblAmigo
 		db.beginTransaction();
 		try {
 			for(int i=0; i <5; i++) {
 				db.execSQL("insert into tableDB(song, artist) "
 						+ " values ('"+ "song" + Integer.toString(i)  + "', '" +"artist" + Integer.toString(i)+"' );");
 			}
-
 			// commit your changes
 			db.setTransactionSuccessful();
-
 		} catch (SQLiteException e2) {
 
 		} finally {
@@ -334,24 +185,13 @@ public class Activity2 extends Activity implements OnClickListener{
 		try {
 			String sql = "select * from " + tableName ;
 			Cursor c = db.rawQuery(sql, null);
-			//Cursor c = dbs.rawQuery(sql, null);
-		//	txtMsg.append("\n-showTable: " + tableName + showCursor(c));
-
-			/**********/
-			//historic.add("Me: " + message);
 		} catch (Exception e) {
-		//	txtMsg.append("\nError showTable: " + e.getMessage());
-
 		}
 	}// useCursor1
 
 	private void openDatabase() {
 		try {
-			// path to private memory:data/data/cis470.matos.databases/myfriendsDB2.db
-			//myDbPath = "data/data/cis470.matos.databases/";
-			//mySdPath = Environment.getExternalStorageDirectory().getPath();
 			String myDbPath = mySdPath  + "/myDB1.db";
-
 			db = SQLiteDatabase.openDatabase(myDbPath, null,
 					SQLiteDatabase.CREATE_IF_NECESSARY);
 
@@ -395,8 +235,6 @@ public class Activity2 extends Activity implements OnClickListener{
 		}
 	}// insertSomeData
 
-
-
 	private void useUpdateMethod() {
 		try {
 			// using the 'update' method to change name of selected friend
@@ -421,6 +259,67 @@ public class Activity2 extends Activity implements OnClickListener{
 		finish();
 	}
 
+	public void init(){
+		btnDone = (Button) findViewById(R.id.btnDone);
+		btnUpdate = (Button) findViewById(R.id.btnUpdate);
+		btnDelete = (Button) findViewById(R.id.btnDelete);
+		btnAdd = (Button) findViewById(R.id.btnAdd);
+		btnDone.setOnClickListener(this);
+		mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+		myLocalIntent = getIntent();
+		/**************************************************/
+		listView2 = (ListView)findViewById(R.id.listView2);
+		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+		listView2.setAdapter(historic);
+		/************************************************************/
+		openDatabase(); // open (create if needed) database
+		dropTable(); // if needed drop table tblAmigos
+		insertSomeDbData();
+		/**********************************************//**********************************************/
 
+		listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+									int position, long id) {
+				Intent myLocalIntent = getIntent();
+				Bundle thisBundle = new Bundle();
+				myBundle =  myLocalIntent.getExtras();
 
+				historic.getItem(position);
+				thisBundle.putString("result", historic.getItem(position));
+
+				myLocalIntent.putExtras(thisBundle);
+				setResult(Activity.RESULT_OK, myLocalIntent);
+
+				finish();
+			}
+		});/**********************************************//**********************************************/
+
+		btnReadSDFile = (Button) findViewById(R.id.buttonsd);
+		btnReadSDFile.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				useCursor1();
+			}// onClick
+		});
+
+		btnUpdate.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				useUpdateMethod();
+			}// onClick
+		});
+
+		btnDelete.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}// onClick
+		});
+
+		btnAdd.setOnClickListener(new OnClickListener() {/***************************************************/
+		@Override
+		public void onClick(View v) {
+			useAddMethod("song1", "song2");
+		}// onClick
+		});
+	}//init
 }

@@ -27,6 +27,7 @@ public class BluetoothComunication extends Thread {
 	public BluetoothComunication(Context context, Handler handler){
 		this.context = context;
 		this.handler = handler;
+	//	sendHandler(MainActivity.MSG_BLUETOOTH, ": testing" );
 		
 		run = true;
 	}
@@ -51,8 +52,26 @@ public class BluetoothComunication extends Thread {
 					// sendHandler(MainActivity.MSG_TOAST, context."received something");
 					 byte[] msg = new byte[dataInputStream.available()];
 					 dataInputStream.read(msg, 0, dataInputStream.available());
-					 
-					 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + new String(msg));
+
+					 String msgStr = new String(msg);
+					 String firstCharStr = String.valueOf(msgStr.charAt(0));
+					 //char c = msgStr.charAt(0);
+					 char c = firstCharStr.charAt(0);
+
+					 switch(c){
+						 case '[':
+							 sendHandler(MainActivity.JSON_BLUETOOTH, msgStr);
+							 break;
+						 default :
+							 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr);
+							 break;
+					 }
+
+//					 if(msgStr.startsWith("["))
+//						 sendHandler2(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr);
+
+					// sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr );
+					 /***********************************************************************************/
 				 }
 			 }
 		 }catch (IOException e) {
@@ -61,6 +80,10 @@ public class BluetoothComunication extends Thread {
 			 stopComunication();
 			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.lost_connection));
 		 }
+	}
+
+	public void sendHandler2(int what, Object object){
+	handler.obtainMessage(what, object).sendToTarget();
 	}
 	
 	public boolean sendMessageByBluetooth(String msg){
@@ -80,10 +103,16 @@ public class BluetoothComunication extends Thread {
 			return false;
 		}
 	}
-	
+
+	// Value to assign to the returned Message.what field.
+	//* @param obj Value to assign to the returned Message.obj field.
+	//	* @return A Message from the global message pool.
 	public void sendHandler(int what, Object object){
 		handler.obtainMessage(what, object).sendToTarget();
 	}
+	//calls sendToTarget()  in Message class
+	//Sends this Message to the Handler specified by {@link #getTarget}.
+	//	* Throws a null pointer exception if this field has not been set.
 
 
 

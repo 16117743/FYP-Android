@@ -4,12 +4,6 @@ import android.util.Log;
 
 import com.chat.bluetooth.activity.GenericActivity;
 
-/**
- * 
- * @author Marcus Pimenta
- * @email mvinicius.pimenta@gmail.com
- * @date 18:05:06 11/03/2013
- */
 public class LogUtil {
 	
 	public static void d(String message) {
