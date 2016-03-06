@@ -17,6 +17,8 @@ import android.widget.ListView;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.ChatBusinessLogic;
 import com.chat.bluetooth.util.ToastUtil;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends GenericActivity{
@@ -135,9 +137,15 @@ public class MainActivity extends GenericActivity{
 
 				Bundle myDataBundle = new Bundle();
 
-				// add <key,value> data items to the container
-//				myDataBundle.putDouble("val1", 2);
-//				myDataBundle.putDouble("val2", 3);
+				//JSONObject json = null;
+//				try {
+//					json = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
+				//String json = "{\"phonetype\":\"N95\",\"cat\":\"WP\"}";
+				String json = "[{\"Song\":\"Song1\",\"Name\":\"ABC\"},{\"Song\":\"Song2\",\"Name\":\"PQR\"},{\"Song\":\"Song3\",\"Name\":\"XYZ\"}]";
+				myDataBundle.putByteArray("package", json.getBytes());
 				myDataBundle.putString("str", "testing String");
 
 				// attach the container to the intent

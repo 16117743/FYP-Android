@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -16,8 +17,14 @@ import android.widget.*;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.util.MySQLiteHelper;
 import com.chat.bluetooth.util.ToastUtil;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Activity2 extends Activity implements OnClickListener{
 	EditText txtMsg;
@@ -43,9 +50,29 @@ public class Activity2 extends Activity implements OnClickListener{
 		myBundle = savedInstanceState;
 		toastUtil = new ToastUtil(this);
 		init();
+		myBundle =  myLocalIntent.getExtras();
+		/*****************************************************************************/
+		String msg1 = new String (myBundle.getByteArray("package"));
+		//toastUtil.showToast(msg1);
+		final byte[] param = myBundle.getByteArray("package");
+		new LongOperation().execute(param);
+//		List <String> returnList = new ArrayList<>();
+//		try {
+//
+//			//	obj = new JSONObject(params.toString());
+//			//	JSONObject o = new JSONParser().parse("{\"a\": \"A\"}");
+//			JSONArray array = new JSONArray(msg1);
+//
+//			for(int i=0; i<array.length(); i++){
+//				//JSONObject jsonObj  = result;
+//				returnList.add(array.getJSONObject(i).getString("Song"));
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		//openDatabase();
-		setResult(Activity.RESULT_OK, myLocalIntent);
+	//	setResult(Activity.RESULT_OK, myLocalIntent);
 	}
 
 	public void init(){
@@ -79,13 +106,28 @@ public class Activity2 extends Activity implements OnClickListener{
 				Intent myLocalIntent = getIntent();
 			//	Bundle myBundle = new Bundle();
 				myBundle =  myLocalIntent.getExtras();
+
+				//String byteToString = new String(myBundle.getByteArray("package"));
+
+//				try {
+//					JSONArray array = new JSONArray(byteToString);
+//					for(int i=0; i<array.length(); i++){
+//                        JSONObject jsonObj  = array.getJSONObject(i);
+//						toastUtil.showToast(jsonObj.getString("No"));
+//						toastUtil.showToast(jsonObj.getString("Name"));
+//                    }
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
+
 				//historic.getItem(position)
-				myBundle.putString("result", myBundle.getString("str"));
-				toastUtil.showToast(myBundle.getString("str"));
+			//	myBundle.putString("result", myBundle.getString("str"));
+		//		toastUtil.showToast(myBundle.getString("str"));
 				// attach updated bumble to invoking intent
+
 				myLocalIntent.putExtras(myBundle);
 				setResult(Activity.RESULT_OK, myLocalIntent);
-				finish();
+			//	finish();
 			}
 		});/**********************************************//**********************************************/
 
@@ -130,6 +172,71 @@ public class Activity2 extends Activity implements OnClickListener{
 		});
 	}
 
+	/**** ASYNC TASK *************************/
+	private class LongOperation extends AsyncTask<byte[], Void, List <String>> {
+
+		@Override
+		protected List <String> doInBackground(byte[]... params) {
+			//JSONArray array = null;
+			JSONObject obj = null;
+			List <String> returnList = new ArrayList<>();
+			returnList.add(params.toString());
+			//Log.d("parameters size ", params.);
+			final String par = params.toString();
+			Log.d("parameters ", par);
+			try {
+
+			//	obj = new JSONObject(params.toString());
+			//	JSONObject o = new JSONParser().parse("{\"a\": \"A\"}");
+				JSONArray array = new JSONArray(par);
+				Log.d("msg", "got this far");
+				for(int i=0; i<array.length(); i++){
+					//JSONObject jsonObj  = result;
+					returnList.add(array.getJSONObject(i).getString("Song"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return returnList;
+		}
+
+		@Override
+		protected void onPostExecute(List<String> result) {
+			Log.d("msg", "got to post exe");
+			//Log.d("msg", "got this far");
+			//	TextView txt = (TextView) findViewById(R.id.output);
+			//	txt.setText("Executed"); // txt.setText(result);
+			// might want to change "executed" for the returned string passed
+			// into onPostExecute() but that is upto you
+//			try {
+//			for(int i=0; i<result.size(); i++){
+//				JSONObject jsonObj  = result;
+//				//toastUtil.showToast(jsonObj.getString("No"));
+//				//toastUtil.showToast(jsonObj.getString("Name"));
+//			}
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+			if(result !=null) {
+				toastUtil.showToast(result.get(1));
+			}
+//			for(int i=0; i<result.size(); i++) {
+//				historic.add("" + result.get(i));
+//			}
+//			historic.notifyDataSetChanged();
+//			listView2.requestFocus();
+			else if(result == null)
+				toastUtil.showToast("testing done");
+		}
+
+		@Override
+		protected void onPreExecute() {}
+
+		@Override
+		protected void onProgressUpdate(Void... values) {}
+	}
+	/**** ASYNC TASK *************************/
 
 
 
@@ -308,64 +415,12 @@ public class Activity2 extends Activity implements OnClickListener{
 		}
 	}
 
-
-
-	private String showCursor( Cursor cursor) {
-		// show SCHEMA (column names & types)
-		cursor.moveToPosition(-1); //reset cursor's top
-		String cursorData = "\nCursor: [";
-
-		try {
-			// get column names
-			String[] colName = cursor.getColumnNames();
-			for(int i=0; i<colName.length; i++){
-				String dataType = getColumnType(cursor, i);
-				cursorData += colName[i] + dataType;
-
-				if (i<colName.length-1){
-					cursorData+= ", ";
-				}
-			}
-		} catch (Exception e) {
-			Log.e("<<SCHEMA>>", e.getMessage());
-		}
-		cursorData += "]";
-
-		// now get the rows
-		cursor.moveToPosition(-1); //reset cursor's top
-		while (cursor.moveToNext()) {
-			String cursorRow = "\n[";
-			for (int i = 0; i < cursor.getColumnCount(); i++) {
-				cursorRow += cursor.getString(i);
-				if (i<cursor.getColumnCount()-1)
-					cursorRow +=  ", ";
-			}
-			cursorData += cursorRow + "]";
-		}
-		return cursorData + "\n";
-	}
-
-	private String getColumnType(Cursor cursor, int i) {
-		try {
-			//peek at a row holding valid data
-			cursor.moveToFirst();
-			int result = cursor.getType(i);
-			String[] types = {":NULL", ":INT", ":FLOAT", ":STR", ":BLOB", ":UNK" };
-			//backtrack - reset cursor's top
-			cursor.moveToPosition(-1);
-			return types[result];
-		} catch (Exception e) {
-			return " ";
-		}
-	}
-
-
-
-
 	@Override
 	public void onClick(View v) {
 		// close current screen - terminate Activity1
 		finish();
 	}
+
+
 
 }
