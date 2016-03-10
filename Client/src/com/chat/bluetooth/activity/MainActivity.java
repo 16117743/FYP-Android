@@ -14,19 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.ChatBusinessLogic;
-import com.chat.bluetooth.communication.BluetoothComunication;
-import com.chat.bluetooth.manager.BluetoothManager;
-import com.chat.bluetooth.util.SongBean;
 import com.chat.bluetooth.util.ToastUtil;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
 
 public class MainActivity extends GenericActivity{
 	
@@ -48,12 +38,6 @@ public class MainActivity extends GenericActivity{
 	
 	private ToastUtil toastUtil;
 	private ChatBusinessLogic chatBusinessLogic;
-	//public BluetoothComunication bc = new BluetoothComunication();
-//	private Context context;
-//	private Handler handler;
-//
-//	private BluetoothManager bluetoothManager;
-//	private BluetoothComunication bluetoothComunication;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -141,10 +125,10 @@ public class MainActivity extends GenericActivity{
 
 				Bundle myDataBundle = new Bundle();
 
-				String jsonArrayString = "[{\"song\":\"song1\",\"artist\":\"artist0\",\"votes\":0},{\"song\":\"song2\",\"artist\":\"artist1\",\"votes\":1},{\"song\":\"song3\",\"artist\":\"artist2\",\"votes\":2},{\"song\":\"song4\",\"artist\":\"artist3\",\"votes\":3},{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
+				//String jsonArrayString = "[{\"song\":\"song1\",\"artist\":\"artist0\",\"votes\":0},{\"song\":\"song2\",\"artist\":\"artist1\",\"votes\":1},{\"song\":\"song3\",\"artist\":\"artist2\",\"votes\":2},{\"song\":\"song4\",\"artist\":\"artist3\",\"votes\":3},{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
 				//String json = "[{\"Song\":\"Song11\",\"Name\":\"ABC\"},{\"Song\":\"Song22\",\"Name\":\"PQR\"},{\"Song\":\"Song33\",\"Name\":\"XYZ\"}]";
 
-				myDataBundle.putByteArray("package", jsonArrayString.getBytes());
+				//myDataBundle.putByteArray("package", jsonArrayString.getBytes());
 			//	myDataBundle.putString("str", "testing String");
 
 				// attach the container to the intent
@@ -219,9 +203,9 @@ public class MainActivity extends GenericActivity{
 				}
 				break;
 			case DB_RETURN:
-				Bundle myResultBundle = data.getExtras();
-				String myResult = myResultBundle.getString("result");
-				toastUtil.showToast(myResult);
+				//Bundle myResultBundle = data.getExtras();
+				//String myResult = myResultBundle.getString("result");
+				//toastUtil.showToast(myResult);
 				break;
 
 //			case BT_VISIBLE:

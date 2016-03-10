@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Handler;
 
+import android.util.Log;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.activity.MainActivity;
 import com.chat.bluetooth.util.LogUtil;
@@ -48,8 +49,32 @@ public class BluetoothComunication extends Thread {
 			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.connected_sucessfully));
 			 
 			 while (run) {
-				 if(dataInputStream.available() > 0){
+				// if(dataInputStream.available() > 0){
+					 try
+					 {
+						 int readtest = 0;
+						 readtest = dataInputStream.readInt();
+						 LogUtil.e("testing read" + Integer.toString(readtest));
+						 if(readtest == 1) {
+							 byte[] msg = new byte[dataInputStream.available()];
+							 dataInputStream.read(msg, 0, dataInputStream.available());
+							 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest));
+						 }
+						 else if(readtest == 2){
+							 byte[] msg = new byte[dataInputStream.available()];
+							 dataInputStream.read(msg, 0, dataInputStream.available());
+							 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest));
+							 }
+							// String msgStr = new String(msg);
+//						 if(readtest!=0){
+//							 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest));
+//						 }
+
+					 } catch (Exception e) {}
+
+
 					// sendHandler(MainActivity.MSG_TOAST, context."received something");
+					 /*
 					 byte[] msg = new byte[dataInputStream.available()];
 					 dataInputStream.read(msg, 0, dataInputStream.available());
 
@@ -70,9 +95,9 @@ public class BluetoothComunication extends Thread {
 //					 if(msgStr.startsWith("["))
 //						 sendHandler2(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr);
 
-					// sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr );
+					// sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr );*/
 					 /***********************************************************************************/
-				 }
+			//	 }
 			 }
 		 }catch (IOException e) {
 			 LogUtil.e(e.getMessage());
