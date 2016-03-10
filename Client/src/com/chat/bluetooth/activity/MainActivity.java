@@ -166,6 +166,7 @@ public class MainActivity extends GenericActivity{
                 	case 2:
                 		historic.add((String)(msg.obj));
        				 	historic.notifyDataSetChanged();
+						break;
 					case 3:
 						toastUtil.showToast((String) (msg.obj));
 						historic.add("testing JSON response");

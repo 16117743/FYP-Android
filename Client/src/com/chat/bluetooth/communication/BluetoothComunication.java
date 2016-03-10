@@ -48,57 +48,49 @@ public class BluetoothComunication extends Thread {
 			
 			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.connected_sucessfully));
 			 
-			 while (run) {
+			 while (run)
+			 {
 				// if(dataInputStream.available() > 0){
 					 try
 					 {
 						 int readtest = 0;
 						 readtest = dataInputStream.readInt();
-						 LogUtil.e("testing read" + Integer.toString(readtest));
-						 if(readtest == 1) {
-							 byte[] msg = new byte[dataInputStream.available()];
-							 dataInputStream.read(msg, 0, dataInputStream.available());
-							 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest));
+						 Thread.sleep(1000);
+						 switch (readtest)
+						 {
+							 case 1:
+								 LogUtil.e("read int 1\n");
+								 if (dataInputStream.available() > 0)
+								 {
+									 LogUtil.e("dataInputStream.available(");
+									 byte[] msg = new byte[dataInputStream.available()];
+									 dataInputStream.read(msg, 0, dataInputStream.available());
+									 String rx = new String(msg);
+									 LogUtil.e(rx);
+									 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest) + ": " + rx);
+								 } else
+									 LogUtil.e("not dataInputStream.available");
+								 break;
+							 case 2:
+								 LogUtil.e("read int 2\n");
+								 if (dataInputStream.available() > 0) {
+									 LogUtil.e("dataInputStream.available(");
+									 byte[] msg = new byte[dataInputStream.available()];
+									 dataInputStream.read(msg, 0, dataInputStream.available());
+									 String rx = new String(msg);
+									 LogUtil.e(rx);
+									 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest) + ": " + rx);
+								 }
+								 else
+									 LogUtil.e("not dataInputStream.available");
+								 break;
+							 default:
+								 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": oops" );
+								 break;
 						 }
-						 else if(readtest == 2){
-							 byte[] msg = new byte[dataInputStream.available()];
-							 dataInputStream.read(msg, 0, dataInputStream.available());
-							 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest));
-							 }
-							// String msgStr = new String(msg);
-//						 if(readtest!=0){
-//							 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest));
-//						 }
-
-					 } catch (Exception e) {}
-
-
-					// sendHandler(MainActivity.MSG_TOAST, context."received something");
-					 /*
-					 byte[] msg = new byte[dataInputStream.available()];
-					 dataInputStream.read(msg, 0, dataInputStream.available());
-
-					 String msgStr = new String(msg);
-					 String firstCharStr = String.valueOf(msgStr.charAt(0));
-					 //char c = msgStr.charAt(0);
-					 char c = firstCharStr.charAt(0);
-
-					 switch(c){
-						 case '[':
-							 sendHandler(MainActivity.JSON_BLUETOOTH, msgStr);
-							 break;
-						 default :
-							 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr);
-							 break;
 					 }
-
-//					 if(msgStr.startsWith("["))
-//						 sendHandler2(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr);
-
-					// sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": " + msgStr );*/
-					 /***********************************************************************************/
-			//	 }
-			 }
+			 		catch (Exception e) {}
+			 }//while
 		 }catch (IOException e) {
 			 LogUtil.e(e.getMessage());
 			 
@@ -139,9 +131,6 @@ public class BluetoothComunication extends Thread {
 	//Sends this Message to the Handler specified by {@link #getTarget}.
 	//	* Throws a null pointer exception if this field has not been set.
 
-
-
-           
 	 public void stopComunication(){ 
 		try {
 			run = false;
