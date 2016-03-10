@@ -169,7 +169,7 @@ public class MainActivity extends GenericActivity{
 						break;
 					case 3:
 						toastUtil.showToast((String) (msg.obj));
-						historic.add("testing JSON response");
+						//historic.add((String) (msg.obj));
 
 						Intent dbIntent = new Intent (MainActivity.this,
 							Activity2.class);
@@ -196,7 +196,8 @@ public class MainActivity extends GenericActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		switch (requestCode) {
+		switch (requestCode)
+		{
 			case BT_ACTIVATE:
 				if (RESULT_OK != resultCode) {
 					toastUtil.showToast(getString(R.string.activate_bluetooth_to_continue));
@@ -204,9 +205,11 @@ public class MainActivity extends GenericActivity{
 				}
 				break;
 			case DB_RETURN:
-				//Bundle myResultBundle = data.getExtras();
-				//String myResult = myResultBundle.getString("result");
+				Bundle myResultBundle = data.getExtras();
+				String myResult = myResultBundle.getString("result");
 				//toastUtil.showToast(myResult);
+				if(chatBusinessLogic.sendMessage(myResult)) {
+				}
 				break;
 
 //			case BT_VISIBLE:
