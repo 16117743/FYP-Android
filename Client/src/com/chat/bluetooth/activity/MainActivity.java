@@ -2,7 +2,6 @@
 package com.chat.bluetooth.activity;
 
 import android.bluetooth.BluetoothAdapter;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -93,7 +92,7 @@ public class MainActivity extends GenericActivity{
 				String message = editTextMessage.getText().toString(); 
 				
 				if(message.trim().length() > 0){
-					if(chatBusinessLogic.sendMessage(message)){
+					if(chatBusinessLogic.sendMessage(message,2)){
 						editTextMessage.setText(""); 
 						
 						historic.add("Me: " + message);
@@ -120,15 +119,19 @@ public class MainActivity extends GenericActivity{
 			@Override
 			public void onClick(View v) {
 
+//				Intent dbIntent = new Intent (MainActivity.this,
+//						Activity2.class);
 				Intent dbIntent = new Intent (MainActivity.this,
-						Activity2.class);
+					ViewFlipperMainActivity.class);
 
 				Bundle myDataBundle = new Bundle();
 
-				//String jsonArrayString = "[{\"song\":\"song1\",\"artist\":\"artist0\",\"votes\":0},{\"song\":\"song2\",\"artist\":\"artist1\",\"votes\":1},{\"song\":\"song3\",\"artist\":\"artist2\",\"votes\":2},{\"song\":\"song4\",\"artist\":\"artist3\",\"votes\":3},{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
+				String jsonArrayString = "[{\"song\":\"song1\",\"artist\":\"artist0\",\"votes\":0},{\"song\":\"song2\",\"artist\":\"artist1\",\"votes\":1},{\"song\":\"song3\", " +
+				"\"artist\":\"artist2\",\"votes\":2},{\"song\":\"song4\",\"artist\":\"artist3\",\"votes\":3}," +
+					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
 				//String json = "[{\"Song\":\"Song11\",\"Name\":\"ABC\"},{\"Song\":\"Song22\",\"Name\":\"PQR\"},{\"Song\":\"Song33\",\"Name\":\"XYZ\"}]";
 
-				//myDataBundle.putByteArray("package", jsonArrayString.getBytes());
+				myDataBundle.putByteArray("package", jsonArrayString.getBytes());
 			//	myDataBundle.putString("str", "testing String");
 
 				// attach the container to the intent
@@ -168,9 +171,6 @@ public class MainActivity extends GenericActivity{
        				 	historic.notifyDataSetChanged();
 						break;
 					case 3:
-						toastUtil.showToast((String) (msg.obj));
-						//historic.add((String) (msg.obj));
-
 						Intent dbIntent = new Intent (MainActivity.this,
 							Activity2.class);
 
@@ -178,7 +178,6 @@ public class MainActivity extends GenericActivity{
 						String packStr = new String ((String)(msg.obj));
 
 						myDataBundle.putByteArray("package", (packStr.getBytes()));
-						//	myDataBundle.putString("str", "testing String");
 
 						// attach the container to the intent
 						dbIntent.putExtras(myDataBundle);
@@ -208,7 +207,7 @@ public class MainActivity extends GenericActivity{
 				Bundle myResultBundle = data.getExtras();
 				String myResult = myResultBundle.getString("result");
 				//toastUtil.showToast(myResult);
-				if(chatBusinessLogic.sendMessage(myResult)) {
+				if(chatBusinessLogic.sendMessage(myResult,1)) {
 				}
 				break;
 

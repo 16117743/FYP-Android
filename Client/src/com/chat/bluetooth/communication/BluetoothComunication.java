@@ -50,7 +50,6 @@ public class BluetoothComunication extends Thread {
 			 
 			 while (run)
 			 {
-				// if(dataInputStream.available() > 0){
 					 try
 					 {
 						 int readtest = 0;
@@ -84,6 +83,19 @@ public class BluetoothComunication extends Thread {
 								 else
 									 LogUtil.e("not dataInputStream.available");
 								 break;
+							 case 3:
+								 LogUtil.e("read int 2\n");
+								 if (dataInputStream.available() > 0) {
+									 LogUtil.e("dataInputStream.available(");
+									 byte[] msg = new byte[dataInputStream.available()];
+									 dataInputStream.read(msg, 0, dataInputStream.available());
+									 String rx = new String(msg);
+									 LogUtil.e(rx);
+									 sendHandler(MainActivity.MSG_BLUETOOTH, rx);
+								 }
+								 else
+									 LogUtil.e("not dataInputStream.available");
+								 break;
 							 default:
 								 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": oops" );
 								 break;
@@ -103,9 +115,12 @@ public class BluetoothComunication extends Thread {
 	handler.obtainMessage(what, object).sendToTarget();
 	}
 	
-	public boolean sendMessageByBluetooth(String msg){
+	public boolean sendMessageByBluetooth(String msg,int whatToDo){
 		try {
 			if(dataOutputStream != null){
+				dataOutputStream.writeInt(whatToDo);
+				dataOutputStream.flush();
+
 				dataOutputStream.write(msg.getBytes());
 				dataOutputStream.flush();
 				return true;

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
+
+    <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000099"
+            android:textSize="30dp"
+            android:text="Our Selection"/>
+
+    <ViewFlipper
+            android:id="@+id/view_flipper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dip" >
+
+        <!--  The child Views/Layout to flip -->
+
+        <!--  Layout 1 for 1st Screen -->
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="502dp"
+                android:gravity="center"
+                android:orientation="vertical" android:background="@drawable/left" android:weightSum="1"
+                >
+
+
+            <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/selectionList" android:layout_gravity="center_horizontal" android:clickable="true"
+                    android:fastScrollAlwaysVisible="true" android:fastScrollEnabled="true"
+                    android:scrollingCache="true"/>
+        </LinearLayout>
+
+        <!--  Layout 2 for 2nd Screen -->
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="502dp"
+                android:gravity="center"
+                android:orientation="vertical" android:weightSum="1" android:background="@drawable/right">
+
+            <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/queueList" android:clickable="true" android:fastScrollAlwaysVisible="true"
+                    android:fastScrollEnabled="true" android:scrollingCache="true" android:smoothScrollbar="false"
+                    android:visibility="visible"/>
+        </LinearLayout>
+
+
+    </ViewFlipper>
+
+</LinearLayout>

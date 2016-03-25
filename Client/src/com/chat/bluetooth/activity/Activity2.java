@@ -1,78 +1,50 @@
 package com.chat.bluetooth.activity;
 
 import android.app.Activity;
-import android.content.ContentValues;
+
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
 import com.chat.bluetooth.R;
-import com.chat.bluetooth.util.ToastUtil;
-import com.google.gson.Gson;
-import net.sf.json.util.JSONUtils;
 import org.json.JSONArray;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Activity2 extends Activity implements OnClickListener{
-	EditText txtMsg;
+public class Activity2 extends Activity implements OnClickListener, View.OnTouchListener {
 	Button  btnDone;
-	private Button btnReadSDFile;
-	private Button btnUpdate;
-	private Button btnDelete;
-	private Button btnAdd;
-	private  String mySdPath;
 	private ListView listView2;
 	private ArrayAdapter<String> historic;
 	private Bundle myBundle;
 	private Intent myLocalIntent;
-	SQLiteDatabase db;
-	private ToastUtil toastUtil;
-	//private Gson gson;
 	public com.chat.bluetooth.util.JSONUtils util;
+	public Toast myToast;
+	private float x1,x2;
+	static final int MIN_DISTANCE = 150;
+	float initialX, initialY;
+ 	String TAG = "tag";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main2);
+		//setContentView(R.layout.main2);
+		setContentView(R.layout.view_flipper_main);
+
 		myBundle = savedInstanceState;
-		toastUtil = new ToastUtil(this);
 		init();
-		myBundle =  myLocalIntent.getExtras();
-		util = new com.chat.bluetooth.util.JSONUtils();
-		//gson = new Gson();
+		//myBundle =  myLocalIntent.getExtras();
+//		util = new com.chat.bluetooth.util.JSONUtils();
 		/*****************************************************************************/
-		final String msgFromHost = new String (myBundle.getByteArray("package"));
+		//final String msgFromHost = new String (myBundle.getByteArray("package"));
+		//new parseJSON().execute(msgFromHost);
 
-
-//		if(util.isJSONValid(msgFromHost))
-//			toastUtil.showToast("yep");
-//		else
-//			toastUtil.showToast("nope");
-
-			new parseJSON().execute(msgFromHost);
-//		else
-//			toastUtil.showToast("nope");
 	}
-
-//	public boolean isJSONValid(String JSON_STRING) {
-//		try {
-//			gson.fromJson(JSON_STRING, Object.class);
-//			return true;
-//		} catch(com.google.gson.JsonSyntaxException ex) {
-//			return false;
-//		}
-//	}
 
 	/**** ASYNC TASK *************************/
 	private class parseJSON extends AsyncTask<String, Void, List <String>> {
@@ -109,10 +81,6 @@ public class Activity2 extends Activity implements OnClickListener{
 		protected void onProgressUpdate(Void... values) {}
 	}
 	/**** ASYNC TASK *************************/
-
-
-
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -124,158 +92,26 @@ public class Activity2 extends Activity implements OnClickListener{
 		return super.onOptionsItemSelected(item);
 	}
 
-	/*********************************************************************************************/
-	/*********************************************************************************************/
-	/*********************************************************************************************/
-	// database methods
-
-	private void useCursor1() {
-		try {
-			String[] columns = { "ID", "song", "artist", "songdata" };
-			Cursor c = db.query("tableDB", columns, null, null, null, null,
-					"ID");
-
-			int idCol = c.getColumnIndex("ID");
-			int nameCol = c.getColumnIndex("song");
-			int phoneCol = c.getColumnIndex("artist");
-
-			c.moveToPosition(-1);
-			while (c.moveToNext()) {
-				columns[0] = Integer.toString((c.getInt(idCol)));
-				columns[1] = c.getString(nameCol);
-				columns[2] = c.getString(phoneCol);
-
-				historic.add("ID:" + columns[0] + " - " + columns[1] + " by " + columns[2] );
-				historic.notifyDataSetChanged();
-				listView2.requestFocus();
-			}
-		} catch (Exception e) {
-			finish();
-		}
-	}// useCursor1
-	/*******************************************************************************/
-	private void insertSomeDbData() {
-		db.beginTransaction();
-		try {
-			// create table
-			db.execSQL("create table tableDB ("
-					+ " ID integer PRIMARY KEY autoincrement, "
-					+ " song  text, " + " artist text , " + " songdata text );  ");
-		} catch (Exception e1) {
-			finish();
-		} finally {
-			db.endTransaction();
-		}
-		db.beginTransaction();
-		try {
-			for(int i=0; i <5; i++) {
-				db.execSQL("insert into tableDB(song, artist) "
-						+ " values ('"+ "song" + Integer.toString(i)  + "', '" +"artist" + Integer.toString(i)+"' );");
-			}
-			// commit your changes
-			db.setTransactionSuccessful();
-		} catch (SQLiteException e2) {
-
-		} finally {
-			db.endTransaction();
-		}
-	}// insertSomeData
-
-	private void showTable(String tableName) {
-		try {
-			String sql = "select * from " + tableName ;
-			Cursor c = db.rawQuery(sql, null);
-		} catch (Exception e) {
-		}
-	}// useCursor1
-
-	private void openDatabase() {
-		try {
-			String myDbPath = mySdPath  + "/myDB1.db";
-			db = SQLiteDatabase.openDatabase(myDbPath, null,
-					SQLiteDatabase.CREATE_IF_NECESSARY);
-
-		} catch (SQLiteException e) {
-			txtMsg.append("\nError openDatabase: " + e.getMessage());
-			finish();
-		}
-	}// createDatabase
-
-	private void dropTable() {
-		try {
-			db.execSQL("DROP TABLE IF EXISTS tableDB;");
-
-		} catch (Exception e) {
-
-			finish();
-		}
-	}
-
-	public void useAddMethod(String fn,String ln ) {
-		//SQLiteDatabase db;
-
-		String mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-
-		String myDbPath = mySdPath  + "/myDB1.db";
-
-		db = SQLiteDatabase.openDatabase(myDbPath, null,
-				SQLiteDatabase.CREATE_IF_NECESSARY);
-
-		db.beginTransaction();
-		try {
-			db.execSQL("insert into tableDB(song, artist) "
-					+ " values ('"+ fn + "', '"+ln+"' );");
-			// commit your changes
-			db.setTransactionSuccessful();
-
-		} catch (SQLiteException e2) {
-
-		} finally {
-			db.endTransaction();
-		}
-	}// insertSomeData
-
-	private void useUpdateMethod() {
-		try {
-			// using the 'update' method to change name of selected friend
-			String[] whereArgs = { "2" };
-
-			ContentValues updValues = new ContentValues();
-			updValues.put("name", "UPDATE");
-
-			int recAffected = db.update("tableDB", updValues,
-					"recID = ? ", whereArgs);
-
-			showTable("tblAmigo");
-
-		} catch (Exception e) {
-
-		}
-	}
-
 	@Override
 	public void onClick(View v) {
-		// close current screen - terminate Activity1
+		Intent myLocalIntent = getIntent();
+		Bundle thisBundle = new Bundle();
+		myBundle =  myLocalIntent.getExtras();
+		thisBundle.putString("result", "end");
+		myLocalIntent.putExtras(thisBundle);
+		setResult(Activity.RESULT_OK, myLocalIntent);
 		finish();
 	}
 
 	public void init(){
 		btnDone = (Button) findViewById(R.id.btnDone);
-		btnUpdate = (Button) findViewById(R.id.btnUpdate);
-		btnDelete = (Button) findViewById(R.id.btnDelete);
-		btnAdd = (Button) findViewById(R.id.btnAdd);
 		btnDone.setOnClickListener(this);
-		mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+
 		myLocalIntent = getIntent();
-		/**************************************************/
-		listView2 = (ListView)findViewById(R.id.listView2);
+
+		listView2 = (ListView)findViewById(R.id.listViewHistoric2);
 		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		listView2.setAdapter(historic);
-		/************************************************************/
-		openDatabase(); // open (create if needed) database
-		dropTable(); // if needed drop table tblAmigos
-		insertSomeDbData();
-		/**********************************************//**********************************************/
 
 		listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -293,33 +129,71 @@ public class Activity2 extends Activity implements OnClickListener{
 				finish();
 			}
 		});/**********************************************//**********************************************/
-
-		btnReadSDFile = (Button) findViewById(R.id.buttonsd);
-		btnReadSDFile.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				useCursor1();
-			}// onClick
-		});
-
-		btnUpdate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				useUpdateMethod();
-			}// onClick
-		});
-
-		btnDelete.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			}// onClick
-		});
-
-		btnAdd.setOnClickListener(new OnClickListener() {/***************************************************/
-		@Override
-		public void onClick(View v) {
-			useAddMethod("song1", "song2");
-		}// onClick
-		});
 	}//init
+public boolean onTouch(View v, MotionEvent event) {
+	int action = event.getActionMasked();
+
+	switch (action) {
+
+		case MotionEvent.ACTION_DOWN:
+			initialX = event.getX();
+			initialY = event.getY();
+
+			Log.d(TAG, "Action was DOWN");
+			break;
+
+		case MotionEvent.ACTION_MOVE:
+			Log.d(TAG, "Action was MOVE");
+			break;
+
+		case MotionEvent.ACTION_UP:
+			float finalX = event.getX();
+			float finalY = event.getY();
+
+			Log.d(TAG, "Action was UP");
+
+			if (initialX < finalX) {
+				Log.d(TAG, "Left to Right swipe performed");
+			}
+
+			if (initialX > finalX) {
+				Log.d(TAG, "Right to Left swipe performed");
+			}
+
+			if (initialY < finalY) {
+				Log.d(TAG, "Up to Down swipe performed");
+			}
+
+			if (initialY > finalY) {
+				Log.d(TAG, "Down to Up swipe performed");
+			}
+
+			break;
+
+		case MotionEvent.ACTION_CANCEL:
+			Log.d(TAG,"Action was CANCEL");
+			break;
+
+		case MotionEvent.ACTION_OUTSIDE:
+			Log.d(TAG, "Movement occurred outside bounds of current screen element");
+			break;
+	}
+
+	return super.onTouchEvent(event);
 }
+}
+/**View.setOnTouchListener(new OnSwipeTouchListener(Activity2.this) {
+ public void onSwipeTop() {
+ Toast.makeText(Activity2.this, "top", Toast.LENGTH_SHORT).show();
+ }
+ public void onSwipeRight() {
+ Toast.makeText(Activity2.this, "right", Toast.LENGTH_SHORT).show();
+ }
+ public void onSwipeLeft() {
+ Toast.makeText(Activity2.this, "left", Toast.LENGTH_SHORT).show();
+ }
+ public void onSwipeBottom() {
+ Toast.makeText(Activity2.this, "bottom", Toast.LENGTH_SHORT).show();
+ }
+
+ });*/

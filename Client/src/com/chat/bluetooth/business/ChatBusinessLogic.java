@@ -58,11 +58,6 @@ public class ChatBusinessLogic implements OnConnectionBluetoothListener,
 		bluetoothClientTask.execute(bluetoothDevice);
 	}
 	
-	public void startServer(){
-		BluetoothServiceTask bluetoothServiceTask = new BluetoothServiceTask(context, this);
-		bluetoothServiceTask.execute(bluetoothManager.getBluetoothAdapter());
-	}
-	
 	public void starCommunication(BluetoothSocket bluetoothSocket){
 		bluetoothComunication = new BluetoothComunication(context, handler);
 		bluetoothComunication.setBluetoothSocket(bluetoothSocket);
@@ -75,9 +70,9 @@ public class ChatBusinessLogic implements OnConnectionBluetoothListener,
 		}
 	}
 	
-	public boolean sendMessage(String message){
+	public boolean sendMessage(String message,int whatToDo){
 		if(bluetoothComunication != null){
-			return bluetoothComunication.sendMessageByBluetooth(message);
+			return bluetoothComunication.sendMessageByBluetooth(message, whatToDo);
 		}else{
 			return false;
 		}

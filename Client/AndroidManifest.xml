@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-                android:name="com.chat.bluetooth.activity.Activity2"
+                android:name="com.chat.bluetooth.activity.ViewFlipperMainActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
     </application>

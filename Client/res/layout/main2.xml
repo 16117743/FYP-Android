@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffeeeeee">
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical" android:weightSum="1">
+
+    <AdapterViewFlipper
+            android:layout_width="match_parent"
+            android:layout_height="174dp"
+            android:id="@+id/adapterViewFlipper" android:background="@drawable/background"/>
+    <ListView
+            android:id="@+id/listViewHistoric2"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" >
+    </ListView>
 
     <TextView
             android:layout_width="match_parent"
@@ -18,33 +23,6 @@
             android:textColor="#ffffffff"
             android:textSize="30sp" android:id="@+id/Activity2TxtID"/>
 
-    <ListView
-            android:layout_width="409dp"
-            android:layout_height="413dp"
-            android:id="@+id/listView2" android:layout_gravity="center_horizontal" android:scrollingCache="true"
-            android:longClickable="false" android:fastScrollEnabled="true" android:clickable="true"
-            android:smoothScrollbar="true" android:background="@drawable/background"/>
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="read from dataBase"
-            android:id="@+id/buttonsd"/>
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:id="@+id/btnAdd"/>
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="create"
-            android:id="@+id/btnDelete"/>
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update"
-            android:id="@+id/btnUpdate"/>
     <Button
             android:id="@+id/btnDone"
             android:layout_width="match_parent"
@@ -52,4 +30,3 @@
             android:text="Done - Callback" />
 
 </LinearLayout>
-</ScrollView>
