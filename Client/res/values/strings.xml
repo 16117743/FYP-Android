@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Chat Bluetooth</string>
+    <string name="app_name">Song Request App</string>
     <string name="server">Server</string>
     <string name="client">Client</string>
     <string name="send">Send</string>
     
-    <string name="waiting">Waiting</string>
+    <string name="waiting">Your gonna have to wait...</string>
+    <string name="waiting2">This does not look hopeful...</string>
+    <string name="waiting3">Your never getting this time back...</string>
+    <string name="waiting4">Just give up...</string>
 	<string name="msg_searching_devices">Searching for potential Music Hosts</string>
     <string name="msg_waiting_connection">Waiting for connection...</string>
-	<string name="msg_connecting_bluetooth">Connecting to the selected device...</string>
+	<string name="msg_connecting_bluetooth">Connecting to the selected Music Host...</string>
 	
 	<string name="clean_historic">Clean historic</string>
 	<string name="no_connection">No connection</string>
@@ -22,6 +25,7 @@
     <string name="no_support_bluetooth">Your device does not support bluetooth</string>
     <string name="activate_bluetooth_to_continue">You must activate bluetooth to continue</string>
 	<string name="device_must_visible">To start the server, your device must be visible</string>
-    <string name="no_device_found">No device found</string>
-	
+    <string name="no_device_found">What a waste of time...</string>
+    <string name="helloworld">helloworld</string>
+
 </resources>

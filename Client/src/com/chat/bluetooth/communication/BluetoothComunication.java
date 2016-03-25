@@ -67,6 +67,7 @@ public class BluetoothComunication extends Thread {
 									 String rx = new String(msg);
 									 LogUtil.e(rx);
 									 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest) + ": " + rx);
+									 stopComunication();
 								 } else
 									 LogUtil.e("not dataInputStream.available");
 								 break;

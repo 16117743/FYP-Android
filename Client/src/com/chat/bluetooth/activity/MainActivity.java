@@ -128,7 +128,13 @@ public class MainActivity extends GenericActivity{
 
 				String jsonArrayString = "[{\"song\":\"song1\",\"artist\":\"artist0\",\"votes\":0},{\"song\":\"song2\",\"artist\":\"artist1\",\"votes\":1},{\"song\":\"song3\", " +
 				"\"artist\":\"artist2\",\"votes\":2},{\"song\":\"song4\",\"artist\":\"artist3\",\"votes\":3}," +
-					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
+					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
+					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
+					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
+					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
+					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
+					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
+					"{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
 				//String json = "[{\"Song\":\"Song11\",\"Name\":\"ABC\"},{\"Song\":\"Song22\",\"Name\":\"PQR\"},{\"Song\":\"Song33\",\"Name\":\"XYZ\"}]";
 
 				myDataBundle.putByteArray("package", jsonArrayString.getBytes());
@@ -172,7 +178,7 @@ public class MainActivity extends GenericActivity{
 						break;
 					case 3:
 						Intent dbIntent = new Intent (MainActivity.this,
-							Activity2.class);
+							ViewFlipperMainActivity.class);
 
 						Bundle myDataBundle = new Bundle();
 						String packStr = new String ((String)(msg.obj));
@@ -206,7 +212,9 @@ public class MainActivity extends GenericActivity{
 			case DB_RETURN:
 				Bundle myResultBundle = data.getExtras();
 				String myResult = myResultBundle.getString("result");
-				//toastUtil.showToast(myResult);
+				String myResult2 = myResultBundle.getString("song");
+				toastUtil.showToast(myResult);
+				toastUtil.showToast(myResult2 + " " + myResult);
 				if(chatBusinessLogic.sendMessage(myResult,1)) {
 				}
 				break;
