@@ -27,7 +27,18 @@ public class MainActivity extends GenericActivity{
 	public static int MSG_TOAST = 1;
 	public static int MSG_BLUETOOTH = 2;
 	public static int JSON_BLUETOOTH = 3;
-	public static int BT_TIMER_VISIBLE = 30; 
+	public static int BT_TIMER_VISIBLE = 30;
+
+	/*****CONSTANTS ****************************/
+	public static int SONG_SELECT = 1;
+	public static int SONG_SELECTED = 2;
+	public static int DJ_COMMENT = 3;
+	public static int SKIP_SONG  = 4;
+	public static int ECHO_SHARED_PREF_SONGS = 5;
+	public static int ECHO_BLOB_SONGS = 6;
+	public static int REMOTE_SELECT = 7;
+	public static int WANT_END = 8;
+	/********************************************/
 	
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
@@ -265,14 +276,16 @@ public class MainActivity extends GenericActivity{
         public void handleMessage(android.os.Message msg) {
             synchronized (msg) {
                 switch (msg.what) {
-                	case 1:
-                		toastUtil.showToast((String)(msg.obj));
+                	case 1://SONG_SELECT
+                		toastUtil.showToast("1 here");
                 		break;
-                	case 2:
+                	case 2://SONG_SELECTED
+						toastUtil.showToast("2 here");
                 		historic.add((String)(msg.obj));
        				 	historic.notifyDataSetChanged();
 						break;
-					case 3:
+					case 3://DJ_COMMENT
+						toastUtil.showToast("3 here");
 						Intent dbIntent = new Intent (MainActivity.this,
 							ViewFlipperMainActivity.class);
 
@@ -288,6 +301,25 @@ public class MainActivity extends GenericActivity{
 
        				 	listVewHistoric.requestFocus();
        				 	break;
+					case 4://SKIP_SONG
+						toastUtil.showToast("4 here");
+						//
+						break;
+					case 5://ECHO_SHARED_PREF
+						toastUtil.showToast("5 here");
+
+						break;
+					case 6://SONG_SELECTED
+						toastUtil.showToast("6 here");
+
+						break;
+					case 7://SONG_SELECTED
+						toastUtil.showToast("7 here");
+
+						break;
+					case 8://SONG_SELECTED
+						toastUtil.showToast("8 here");
+						break;
                 }
             }
         };

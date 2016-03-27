@@ -24,12 +24,21 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 	private BluetoothSocket bluetoothSocket;
 	private DataInputStream dataInputStream;
 	private DataOutputStream dataOutputStream;
+
+	/*****CONSTANTS ****************************/
+	final int SONG_SELECT = 1;
+	final int SONG_SELECTED = 2;
+	final int DJ_COMMENT = 3;
+	final int SKIP_SONG  = 4;
+	final int ECHO_SHARED_PREF_SONGS = 5;
+	final int ECHO_BLOB_SONGS = 6;
+	final int REMOTE_SELECT = 7;
+	final int WANT_END = 8;
+	/********************************************/
 	
 	public BluetoothComunication(Context context, Handler handler){
 		this.context = context;
 		this.handler = handler;
-	//	sendHandler(MainActivity.MSG_BLUETOOTH, ": testing" );
-		
 		run = true;
 	}
 	
@@ -57,7 +66,7 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 						 Thread.sleep(1000);
 						 switch (readtest)
 						 {
-							 case 1:
+							 case SONG_SELECT:
 								 LogUtil.e("read int 1\n");
 								 if (dataInputStream.available() > 0)
 								 {
@@ -71,7 +80,7 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 								 } else
 									 LogUtil.e("not dataInputStream.available");
 								 break;
-							 case 2:
+							 case SONG_SELECTED:
 								 LogUtil.e("read int 2\n");
 								 if (dataInputStream.available() > 0) {
 									 LogUtil.e("dataInputStream.available(");
@@ -84,7 +93,7 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 								 else
 									 LogUtil.e("not dataInputStream.available");
 								 break;
-							 case 3:
+							 case DJ_COMMENT:
 								 LogUtil.e("read int 2\n");
 								 if (dataInputStream.available() > 0) {
 									 LogUtil.e("dataInputStream.available(");
@@ -96,6 +105,17 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 								 }
 								 else
 									 LogUtil.e("not dataInputStream.available");
+								 break;
+
+							 case ECHO_SHARED_PREF_SONGS:
+								 LogUtil.e("read int 2\n");
+							 case ECHO_BLOB_SONGS:
+								 LogUtil.e("read int 2\n");
+							 case REMOTE_SELECT:
+								 LogUtil.e("read int 2\n");
+							 case WANT_END:
+								 LogUtil.e("read int 2\n");
+								 
 								 break;
 							 default:
 								 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": oops" );
