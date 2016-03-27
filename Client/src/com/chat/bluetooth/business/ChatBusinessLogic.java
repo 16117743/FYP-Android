@@ -15,7 +15,6 @@ import com.chat.bluetooth.business.IBusinessLogic.OnSearchBluetoothListener;
 import com.chat.bluetooth.communication.BluetoothComunication;
 import com.chat.bluetooth.manager.BluetoothManager;
 import com.chat.bluetooth.task.BluetoothClientTask;
-import com.chat.bluetooth.task.BluetoothServiceTask;
 
 public class ChatBusinessLogic implements OnConnectionBluetoothListener, 
 										  OnBluetoothDeviceSelectedListener,

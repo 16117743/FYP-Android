@@ -16,3 +16,4 @@ Client/lint.xml
 Client/project.properties
 Client/.idea/workspace.xml
 Client/bin/classes/Bluetooth.apk
+Client/src/com/chat/bluetooth/ignore/Ignore.java

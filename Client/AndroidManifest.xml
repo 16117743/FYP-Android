@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:icon="@drawable/music"
@@ -28,6 +29,11 @@
 
         <activity
                 android:name="com.chat.bluetooth.activity.ViewFlipperMainActivity"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <activity
+                android:name="com.chat.bluetooth.activity.ToDoActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
     </application>

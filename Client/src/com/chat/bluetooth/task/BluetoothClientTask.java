@@ -32,12 +32,13 @@ public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, Blueto
 	protected void onPreExecute() {
 		super.onPreExecute();
 		progressDialog = ProgressDialog.show(context, 
-											 context.getText(R.string.waiting), 
+											 "testing client",
 											 context.getText(R.string.msg_connecting_bluetooth));
 	}
-	
+	// context.getText(R.string.waiting)
 	@Override
 	protected BluetoothSocket doInBackground(BluetoothDevice... devices) {
+
 		return bluetoothClient.conectedBluetooth(devices[0]);
 	}
 	

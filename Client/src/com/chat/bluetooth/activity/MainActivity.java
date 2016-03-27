@@ -1,21 +1,26 @@
 //
 package com.chat.bluetooth.activity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.*;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.ChatBusinessLogic;
 import com.chat.bluetooth.util.ToastUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends GenericActivity{
 	
@@ -27,9 +32,20 @@ public class MainActivity extends GenericActivity{
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
 	private final int DB_RETURN = 101;
-
+	/******************************************/
 	private Button buttonDB;
 	private Button buttonClient;
+	private Button buttonDelete;
+	private Button buttonload;
+
+	final int MY_PREFS_PRIV_MODE = Activity.MODE_PRIVATE;
+	final String MY_PREFS_FILE = "MusicPreferences";
+	private String mySdPath;
+	// create a reference to the shared preferences object
+	SharedPreferences mySharedPreferences;
+	// obtain an editor to add data to my SharedPreferences object
+	SharedPreferences.Editor myEditor;
+
 	private ImageButton buttonSend;
 	private EditText editTextMessage;
 	private ListView listVewHistoric;
@@ -37,6 +53,8 @@ public class MainActivity extends GenericActivity{
 	
 	private ToastUtil toastUtil;
 	private ChatBusinessLogic chatBusinessLogic;
+	private ProgressDialog progressDialog;
+    Context context;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,8 +66,52 @@ public class MainActivity extends GenericActivity{
 		
 		initializaBluetooth();
 		registerFilters();
+		context = this;
+		sharedPreferences();
 	}
-	
+
+	public void sharedPreferences(){
+		mySdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+		// create a reference to the SharedPreferences file
+		mySharedPreferences = getSharedPreferences(MY_PREFS_FILE, MY_PREFS_PRIV_MODE);
+		// obtain an editor to add data to (my)SharedPreferences object
+		myEditor = mySharedPreferences.edit();
+
+		String name = mySharedPreferences.getString("User", "");
+		if(!name.equalsIgnoreCase("Tom"))
+		{
+			myEditor.putString("User", "Tom");
+			toastUtil.showToast("saved");
+		}
+
+		myEditor.putBoolean("Flag", false);
+
+		myEditor.commit();
+
+		//String favColor = settings.getString("favorite_color", "default black");
+		//int favNumber = settings.getInt("favorite_number", 0);
+
+		//Toast.makeText(this, favColor + " " + favNumber, 1).show();
+	}
+
+	public void readSharedPreferences(){
+		mySharedPreferences = getSharedPreferences(MY_PREFS_FILE,
+			Activity.MODE_PRIVATE );
+
+
+		String name = mySharedPreferences.getString("User", "");
+		if(!name.equalsIgnoreCase(""))
+		{
+			name = name;
+		}
+		// retrieving data from SharedPreferences container
+		//String favColor = mySharedPreferences.getString("User", "default black");
+		//mySharedPreferences.getStringSet("UserPreferences", "UserDetails");
+		//int favNumber = mySharedPreferences.getInt("favorite_number", 0);
+		toastUtil.showToast(name);
+	}
+
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -104,6 +166,43 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
+		buttonload = (Button)findViewById(R.id.load_button);
+		buttonload.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				sharedPreferences();
+				Intent dbIntent = new Intent (MainActivity.this,
+					ToDoActivity.class);
+
+				Bundle myDataBundle = new Bundle();
+
+				// attach the container to the intent
+				dbIntent.putExtras(myDataBundle);
+
+				startActivityForResult(dbIntent, 101);
+			}
+		});
+
+		buttonDelete = (Button)findViewById(R.id.delete_button);
+		buttonDelete.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				readSharedPreferences();
+			//	toastUtil.showToast("delete");
+			}
+		});
+
+		buttonClient = (Button)findViewById(R.id.buttonClient);
+		buttonClient.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				chatBusinessLogic.startFoundDevices();
+			}
+		});
+
 		buttonClient = (Button)findViewById(R.id.buttonClient);
 		buttonClient.setOnClickListener(new View.OnClickListener() {
 			
@@ -118,9 +217,6 @@ public class MainActivity extends GenericActivity{
 
 			@Override
 			public void onClick(View v) {
-
-//				Intent dbIntent = new Intent (MainActivity.this,
-//						Activity2.class);
 				Intent dbIntent = new Intent (MainActivity.this,
 					ViewFlipperMainActivity.class);
 
@@ -239,4 +335,40 @@ public class MainActivity extends GenericActivity{
 		chatBusinessLogic.stopCommucanition();
 	}
 
+
+private class updateGUI extends AsyncTask<String, Integer, List<String>> {
+
+	@Override
+	protected List<String> doInBackground(String... params) {
+		List<String> returnList = new ArrayList<>();
+
+		try {
+			for(int i =0; i<10;i++) {
+				Thread.sleep(1000);
+
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		return returnList;
+	}
+
+	@Override
+	protected void onPostExecute(List<String> result) {
+
+	}
+
+	@Override
+	protected void onPreExecute() {
+	}
+
+	@Override
+	protected void onProgressUpdate(Integer... values) {
+		String cnt = Integer.toString(values[0]);
+	//	progressDialog = ProgressDialog.show(context,
+			//"test broadcast" + cnt,
+		//	context.getText(R.string.msg_searching_devices));
+	}
+}
 }

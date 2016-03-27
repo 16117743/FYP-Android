@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:background="#ffff0007" android:weightSum="1">
 
     <ListView
         android:id="@+id/listVewHistoric"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1" >
+        android:layout_width="wrap_content"
+        android:layout_height="92dp"
+            >
     </ListView>
 
     <LinearLayout
@@ -52,5 +52,30 @@
             android:layout_height="wrap_content"
             android:text="DB"
             android:id="@+id/db"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:text="Request a song"
+            android:id="@+id/request_button" android:layout_gravity="center_horizontal"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Shout out to DJ"
+            android:id="@+id/dj_button" android:layout_gravity="right" android:layout_weight="0.14"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Echo"
+            android:id="@+id/echo_button" android:layout_gravity="right" android:layout_weight="0.18"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:id="@+id/done_button" android:layout_gravity="center_horizontal"/>
+    <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="123dp"
+            android:layout_height="35dp"
+            android:text="load"
+            android:id="@+id/load_button"/>
+    <Button
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:id="@+id/delete_button" android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

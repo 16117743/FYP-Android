@@ -28,4 +28,10 @@
     <string name="no_device_found">What a waste of time...</string>
     <string name="helloworld">helloworld</string>
 
+    <string name="add_textbox_hint">Add a ToDo item</string>
+    <string name="add_button_text">Add</string>
+    <string name="mobile_services">Mobile Services </string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="checkbox_text">Item Text</string>
+
 </resources>
