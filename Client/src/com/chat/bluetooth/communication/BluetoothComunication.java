@@ -14,7 +14,7 @@ import com.chat.bluetooth.activity.MainActivity;
 import com.chat.bluetooth.util.LogUtil;
 
 
-public class BluetoothComunication extends Thread {
+public class BluetoothComunication extends Thread implements MusicHostInterface {
 	 
 	private boolean run;
 	
@@ -111,10 +111,6 @@ public class BluetoothComunication extends Thread {
 			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.lost_connection));
 		 }
 	}
-
-	public void sendHandler2(int what, Object object){
-	handler.obtainMessage(what, object).sendToTarget();
-	}
 	
 	public boolean sendMessageByBluetooth(String msg,int whatToDo){
 		try {
@@ -166,5 +162,86 @@ public class BluetoothComunication extends Thread {
 			LogUtil.e(e.getMessage());
 		}
 	 }
-	 
- }
+
+	/***********************************************************************************/
+	/***********************************************************************************/
+	@Override
+	public void send1() {
+
+	}
+
+	@Override
+	public int recv1() {
+		return 0;
+	}
+
+	@Override
+	public void send2() {
+
+	}
+
+	@Override
+	public int recv2() {
+		return 0;
+	}
+
+	@Override
+	public void send3() {
+
+	}
+
+	@Override
+	public int recv3() {
+		return 0;
+	}
+
+	@Override
+	public void send4() {
+
+	}
+
+	@Override
+	public int recv4() {
+		return 0;
+	}
+
+	@Override
+	public void send5() {
+
+	}
+
+	@Override
+	public int recv5() {
+		return 0;
+	}
+
+	@Override
+	public void send6() {
+
+	}
+
+	@Override
+	public int recv6() {
+		return 0;
+	}
+
+	@Override
+	public void send7() {
+
+	}
+
+	@Override
+	public int recv7() {
+		return 0;
+	}
+
+	@Override
+	public void send8() {
+
+	}
+
+	@Override
+	public int recv8() {
+		return 0;
+	}
+}

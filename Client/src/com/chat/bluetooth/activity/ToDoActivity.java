@@ -89,17 +89,17 @@ public void onCreate(Bundle savedInstanceState) {
 
 	// Create an adapter to bind the items with the view
 	usersAdapter = new usersAdapter(this, R.layout.row_list_to_do);
-	ListView listViewToDo = (ListView) findViewById(R.id.listViewToDo);
-	listViewToDo.setAdapter(usersAdapter);
+	ListView userList = (ListView) findViewById(R.id.listViewToDo);
+	userList.setAdapter(usersAdapter);
 
 	// Load the items from the Mobile Service
-	refreshItemsFromTable();
+	//refreshItemsFromTable();
 	refresh = (Button)findViewById(R.id.refresh);
 	refresh.setOnClickListener(new View.OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-// refreshItemsFromTable();
+			 refreshItemsFromTable();
 			toastUtil.showToast("test");
 		}
 	});
@@ -129,13 +129,13 @@ public boolean onOptionsItemSelected(MenuItem item) {
 /**
  * Mark an item as completed
  *
- * @param item
+ * @param users
  *            The item to mark
  */
-public void checkItem(final users item) {
+public void checkItem(final users users) {
 
 	// Set the item as completed and update it in the table
-	item.setComplete(true);
+	users.setComplete(true);
 
 //		TODO Uncomment the the following code when using a mobile service
 	    new AsyncTask<Void, Void, Void>() {
@@ -143,11 +143,11 @@ public void checkItem(final users item) {
 	        @Override
 	        protected Void doInBackground(Void... params) {
 	            try {
-	                userTable.update(item).get();
+	                userTable.update(users).get();
 	                runOnUiThread(new Runnable() {
 	                    public void run() {
-	                        if (item.isComplete()) {
-	                            usersAdapter.remove(item);
+	                        if (users.isComplete()) {
+	                            usersAdapter.remove(users);
 	                        }
 	                        refreshItemsFromTable();
 	                    }
@@ -174,13 +174,13 @@ public void checkItem(final users item) {
  * @param view
  *            The view that originated the call
  */
-public void addItem(View view) {
+public void addItem(View view) {   /***))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))ADD HERE*************/
 
 	// Create a new item
-	final users item = new users();
+	final users users = new users();
 
-	item.setText(mTextNewToDo.getText().toString());
-	item.setComplete(false);
+	users.setText(mTextNewToDo.getText().toString());
+	users.setComplete(false);
 
 //		TODO Uncomment the the following code when using a mobile service
 		// Insert the new item
@@ -189,11 +189,12 @@ public void addItem(View view) {
 	        @Override
 	        protected Void doInBackground(Void... params) {
 	            try {
-	                userTable.insert(item).get();
-	                if (!item.isComplete()) {
+	                userTable.insert(users).get();
+	                if (!users.isComplete()) {
 	                    runOnUiThread(new Runnable() {
 	                        public void run() {
-	                            usersAdapter.add(item);
+								toastUtil.showToast(users.toString());
+	                           // usersAdapter.add(users);
 	                        }
 	                    });
 	                }
@@ -222,18 +223,28 @@ private void refreshItemsFromTable() {
 	    new AsyncTask<Void, Void, Void>() {
 
 	        @Override
-	        protected Void doInBackground(Void... params) {
+	        protected Void doInBackground(Void... params) { /*******!!!!!!!!!!!!!!!!!!READING HERE !!!!!!!!!!!!!!!!!!!!***/
 	            try {
-	                final MobileServiceList<users> result = userTable.where().field("complete").eq(false).execute().get();
+
+	                //final MobileServiceList<users> result = userTable.where().field("complete").eq(false).execute().get();
+					final MobileServiceList<users> result = userTable.select("text").execute().get();
+					//final MobileServiceList<users> result = userTable.where().field("complete").eq(true).execute().get();
+
 	                runOnUiThread(new Runnable() {
 
 	                    @Override
 	                    public void run() {
 	                        usersAdapter.clear();
 
-	                        for (users item : result) {
-	                            usersAdapter.add(item);
-	                        }
+	                        for (users users : result) {
+	                            usersAdapter.add(users);
+								toastUtil.showToast(users.toString());
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
 	                    }
 	                });
 	            } catch (Exception exception) {

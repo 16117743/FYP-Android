@@ -55,8 +55,8 @@
 
     <ListView
         android:id="@+id/listViewToDo"
-        android:layout_width="wrap_content"
-        android:layout_height="145dp"
+        android:layout_width="409dp"
+        android:layout_height="227dp"
         tools:listitem="@layout/row_list_to_do" 
         android:padding="6dip" >
 

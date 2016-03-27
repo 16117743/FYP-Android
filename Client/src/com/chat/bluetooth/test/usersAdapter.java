@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.activity.ToDoActivity;
 
@@ -53,10 +54,18 @@ public View getView(int position, View convertView, ViewGroup parent) {
     checkBox.setChecked(false);
     checkBox.setEnabled(true);
 
+    final TextView textView = (TextView) row.findViewById(R.id.user);
+    final TextView textView2 = (TextView) row.findViewById(R.id.password);
+
+
+
     checkBox.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public void onClick(View arg0) {
+           // textView.setText("test1");
+          //  textView2.setText("test2");
+
             if (checkBox.isChecked()) {
                 checkBox.setEnabled(false);
                 if (mContext instanceof ToDoActivity) {
@@ -66,6 +75,8 @@ public View getView(int position, View convertView, ViewGroup parent) {
             }
         }
     });
+
+
 
     return row;
 }

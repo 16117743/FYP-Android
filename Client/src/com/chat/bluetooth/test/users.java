@@ -11,6 +11,14 @@ public class users {
     @com.google.gson.annotations.SerializedName("text")
     private String mText;
 
+
+
+/**
+     * Item text
+     */
+    @com.google.gson.annotations.SerializedName("password")
+    private String password;
+
     /**
      * Item Id
      */
@@ -43,9 +51,18 @@ public class users {
      * @param id
      *            The item id
      */
-    public users(String text, String id) {
+    public users(String text, String id, String password) {
         this.setText(text);
         this.setId(id);
+        this.setPassword(password);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
