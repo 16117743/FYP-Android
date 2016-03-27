@@ -165,83 +165,146 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 
 	/***********************************************************************************/
 	/***********************************************************************************/
+
+	/**
+	 * Send "I want to select a song" to server
+	 */
 	@Override
 	public void send1() {
 
 	}
 
+	/**
+	 * Received the song selection from server
+	 */
 	@Override
-	public int recv1() {
-		return 0;
-	}
+	public void recv1() {
 
+	}
+	/**************************************************/
+
+	/**
+	 * Send my selected song to server
+	 */
 	@Override
 	public void send2() {
 
 	}
 
+	/**
+	 * received song selection ok from server
+	 */
 	@Override
-	public int recv2() {
-		return 0;
-	}
+	public void recv2() {
 
+	}
+	/**************************************************/
+
+	/**************************************************/
+	/**
+	 * Send My comment to the DJ
+	 */
 	@Override
 	public void send3() {
 
 	}
 
+	/**
+	 * Received DJ comment history
+	 */
 	@Override
-	public int recv3() {
-		return 0;
-	}
+	public void recv3() {
 
+	}
+	/**************************************************/
+
+	/**************************************************/
+	/**
+	 * I want to skip a song
+	 */
 	@Override
 	public void send4() {
 
 	}
 
+	/**
+	 * Received song queue from server after skipping
+	 */
 	@Override
-	public int recv4() {
-		return 0;
-	}
+	public void recv4() {
 
+	}
+	/**************************************************/
+
+	/**************************************************/
+	/**
+	 * Send songs from my local shared preferences
+	 */
 	@Override
 	public void send5() {
 
 	}
 
+	/**
+	 * Received a list of songs that matched the host
+	 */
 	@Override
-	public int recv5() {
-		return 0;
-	}
+	public void recv5() {
 
+	}
+	/**************************************************/
+
+	/**************************************************/
+	/**
+	 * send a song from the blob service
+	 */
 	@Override
 	public void send6() {
 
 	}
 
+	/**
+	 * Received blob song ok
+	 */
 	@Override
-	public int recv6() {
-		return 0;
-	}
+	public void recv6() {
 
+	}
+	/**************************************************/
+
+	/**************************************************/
+	/**
+	 * I want to select another song after this one
+	 */
 	@Override
 	public void send7() {
 
 	}
 
+	/**
+	 * Received go ahead for another selection from server
+	 */
 	@Override
-	public int recv7() {
-		return 0;
-	}
+	public void recv7() {
 
+	}
+	/**************************************************/
+
+	/**************************************************/
+	/**
+	 * Send I'm finished with remote access
+	 */
 	@Override
 	public void send8() {
 
 	}
 
+	/**
+	 * Received remote disconnected ok
+	 */
 	@Override
-	public int recv8() {
-		return 0;
+	public void recv8() {
+
 	}
+	/**************************************************/
 }
