@@ -24,7 +24,7 @@ import java.util.List;
 
 public class MainActivity extends GenericActivity{
 	
-	public static int MSG_TOAST = 1;
+	public static int MSG_TOAST = 0;
 	public static int MSG_BLUETOOTH = 2;
 	public static int JSON_BLUETOOTH = 3;
 	public static int BT_TIMER_VISIBLE = 30;
@@ -35,9 +35,8 @@ public class MainActivity extends GenericActivity{
 	public static int DJ_COMMENT = 3;
 	public static int SKIP_SONG  = 4;
 	public static int ECHO_SHARED_PREF_SONGS = 5;
-	public static int ECHO_BLOB_SONGS = 6;
-	public static int REMOTE_SELECT = 7;
-	public static int WANT_END = 8;
+	public static int REMOTE_SELECT = 6;
+	public static int WANT_END = 7;
 	/********************************************/
 	
 	private final int BT_ACTIVATE = 0;
@@ -48,6 +47,14 @@ public class MainActivity extends GenericActivity{
 	private Button buttonClient;
 	private Button buttonDelete;
 	private Button buttonload;
+	/***************************************/
+	private Button buttonSongRequest;
+	private Button buttonDJComment;
+	private Button buttonSkip;
+	private Button buttonEchoPref;
+	private Button buttonRemote;
+	private Button buttonDone;
+	/***************************************/
 
 	final int MY_PREFS_PRIV_MODE = Activity.MODE_PRIVATE;
 	final String MY_PREFS_FILE = "MusicPreferences";
@@ -165,7 +172,7 @@ public class MainActivity extends GenericActivity{
 				String message = editTextMessage.getText().toString(); 
 				
 				if(message.trim().length() > 0){
-					if(chatBusinessLogic.sendMessage(message,2)){
+					if(chatBusinessLogic.sendMessage(message,1)){
 						editTextMessage.setText(""); 
 						
 						historic.add("Me: " + message);
@@ -174,6 +181,15 @@ public class MainActivity extends GenericActivity{
 				}else{
 					toastUtil.showToast(getString(R.string.enter_message));
 				}
+			}
+		});
+
+		buttonClient = (Button)findViewById(R.id.buttonClient);
+		buttonClient.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				chatBusinessLogic.startFoundDevices();
 			}
 		});
 
@@ -205,24 +221,6 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
-		buttonClient = (Button)findViewById(R.id.buttonClient);
-		buttonClient.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				chatBusinessLogic.startFoundDevices();
-			}
-		});
-
-		buttonClient = (Button)findViewById(R.id.buttonClient);
-		buttonClient.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				chatBusinessLogic.startFoundDevices();
-			}
-		});
-
 		buttonDB = (Button)findViewById(R.id.db);
 		buttonDB.setOnClickListener(new View.OnClickListener() {
 
@@ -245,12 +243,95 @@ public class MainActivity extends GenericActivity{
 				//String json = "[{\"Song\":\"Song11\",\"Name\":\"ABC\"},{\"Song\":\"Song22\",\"Name\":\"PQR\"},{\"Song\":\"Song33\",\"Name\":\"XYZ\"}]";
 
 				myDataBundle.putByteArray("package", jsonArrayString.getBytes());
-			//	myDataBundle.putString("str", "testing String");
-
-				// attach the container to the intent
 				dbIntent.putExtras(myDataBundle);
-
 				startActivityForResult(dbIntent, 101);
+			}
+		});
+
+		buttonSongRequest = (Button)findViewById(R.id.request_button);
+		buttonSongRequest.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if (chatBusinessLogic.sendMessage("a", SONG_SELECT)) {
+					editTextMessage.setText("");
+
+					historic.add("Me: " + "sent request");
+					historic.notifyDataSetChanged();
+				} else {
+					toastUtil.showToast(getString(R.string.enter_message));
+				}
+			}
+		});
+
+		buttonDJComment = (Button)findViewById(R.id.dj_button);
+		buttonDJComment.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if (chatBusinessLogic.sendMessage("a",DJ_COMMENT)) {
+
+				} else {
+					toastUtil.showToast("");
+				}
+			}
+		});
+
+		buttonSkip = (Button)findViewById(R.id.skip_button);
+		buttonSkip.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if (chatBusinessLogic.sendMessage("",SKIP_SONG)) {
+
+				} else {
+					toastUtil.showToast("");
+				}
+			}
+		});
+
+		buttonEchoPref = (Button)findViewById(R.id.echo_button);
+		buttonEchoPref.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if (chatBusinessLogic.sendMessage("", ECHO_SHARED_PREF_SONGS)) {
+
+				} else {
+					toastUtil.showToast("");
+				}
+			}
+		});
+
+		buttonRemote = (Button)findViewById(R.id.remote_button);
+		buttonRemote.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if (chatBusinessLogic.sendMessage("", REMOTE_SELECT)) {
+
+				} else {
+					toastUtil.showToast("");
+				}
+			}
+		});
+
+		buttonDone = (Button)findViewById(R.id.done_button);
+		buttonDone.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if (chatBusinessLogic.sendMessage("", REMOTE_SELECT)) {
+
+				} else {
+					toastUtil.showToast("");
+				}
 			}
 		});
 	}
@@ -276,30 +357,45 @@ public class MainActivity extends GenericActivity{
         public void handleMessage(android.os.Message msg) {
             synchronized (msg) {
                 switch (msg.what) {
+					case 0://SONG_SELECT
+						String theOptions = new String ((String)(msg.obj));
+						toastUtil.showToast(theOptions);
+						new updateGUIOptions().execute(theOptions);
+						break;
                 	case 1://SONG_SELECT
-                		toastUtil.showToast("1 here");
+                		//toastUtil.showToast("1 here");
+						Intent dbIntent = new Intent (MainActivity.this,
+							ViewFlipperMainActivity.class);
+						Bundle myDataBundle = new Bundle();
+						String packStr = new String ((String)(msg.obj));
+						//toastUtil.showToast(packStr);
+						myDataBundle.putByteArray("package", (packStr.getBytes()));
+						dbIntent.putExtras(myDataBundle);
+						startActivityForResult(dbIntent, 101);
+						listVewHistoric.requestFocus();
                 		break;
                 	case 2://SONG_SELECTED
-						toastUtil.showToast("2 here");
+						toastUtil.showToast((String)(msg.obj));
                 		historic.add((String)(msg.obj));
        				 	historic.notifyDataSetChanged();
+						chatBusinessLogic.stopCommucanition();
 						break;
 					case 3://DJ_COMMENT
 						toastUtil.showToast("3 here");
-						Intent dbIntent = new Intent (MainActivity.this,
-							ViewFlipperMainActivity.class);
-
-						Bundle myDataBundle = new Bundle();
-						String packStr = new String ((String)(msg.obj));
-
-						myDataBundle.putByteArray("package", (packStr.getBytes()));
-
-						// attach the container to the intent
-						dbIntent.putExtras(myDataBundle);
-
-						startActivityForResult(dbIntent, 101);
-
-       				 	listVewHistoric.requestFocus();
+//						Intent dbIntent = new Intent (MainActivity.this,
+//							ViewFlipperMainActivity.class);
+//
+//						Bundle myDataBundle = new Bundle();
+//						String packStr = new String ((String)(msg.obj));
+//
+//						myDataBundle.putByteArray("package", (packStr.getBytes()));
+//
+//						// attach the container to the intent
+//						dbIntent.putExtras(myDataBundle);
+//
+//						startActivityForResult(dbIntent, 101);
+//
+//       				 	listVewHistoric.requestFocus();
        				 	break;
 					case 4://SKIP_SONG
 						toastUtil.showToast("4 here");
@@ -340,10 +436,10 @@ public class MainActivity extends GenericActivity{
 			case DB_RETURN:
 				Bundle myResultBundle = data.getExtras();
 				String myResult = myResultBundle.getString("result");
-				String myResult2 = myResultBundle.getString("song");
+				//String myResult2 = myResultBundle.getString("song");
 				toastUtil.showToast(myResult);
-				toastUtil.showToast(myResult2 + " " + myResult);
-				if(chatBusinessLogic.sendMessage(myResult,1)) {
+				//toastUtil.showToast(myResult2 + " " + myResult);
+				if(chatBusinessLogic.sendMessage(myResult,SONG_SELECTED)) {
 				}
 				break;
 
@@ -368,27 +464,50 @@ public class MainActivity extends GenericActivity{
 	}
 
 
-private class updateGUI extends AsyncTask<String, Integer, List<String>> {
+private class updateGUIOptions extends AsyncTask<String, Integer, boolean[]> {
 
 	@Override
-	protected List<String> doInBackground(String... params) {
-		List<String> returnList = new ArrayList<>();
-
-		try {
-			for(int i =0; i<10;i++) {
-				Thread.sleep(1000);
-
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	protected boolean[] doInBackground(String... params) {
+		String packStr0 = new String(params[0]);
+		packStr0 = packStr0.replace("[", "");
+		packStr0 = packStr0.replace("]", "");
+		packStr0 = packStr0.replaceAll(",", "");
+		String[] parts = packStr0.split(" ");
+		boolean[] array = new boolean[parts.length];
+		for (int i = 0; i < parts.length; i++) {
+			array[i] = Boolean.parseBoolean(parts[i]);
 		}
 
-		return returnList;
+		return array;
 	}
 
 	@Override
-	protected void onPostExecute(List<String> result) {
+	protected void onPostExecute(boolean[] array) {
 
+		if(array[0]==true)
+			buttonSongRequest.setVisibility(View.VISIBLE);
+		else
+			buttonSongRequest.setVisibility(View.INVISIBLE);
+
+		if(array[1]==true)
+			buttonDJComment.setVisibility(View.VISIBLE);
+		else
+			buttonDJComment.setVisibility(View.INVISIBLE);
+
+		if(array[2]==true)
+			buttonSkip.setVisibility(View.VISIBLE);
+		else
+			buttonSkip.setVisibility(View.INVISIBLE);
+
+		if(array[3]==true)
+			buttonEchoPref.setVisibility(View.VISIBLE);
+		else
+			buttonEchoPref.setVisibility(View.INVISIBLE);
+
+		if(array[4]==true)
+			buttonRemote.setVisibility(View.VISIBLE);
+		else
+			buttonRemote.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -397,10 +516,7 @@ private class updateGUI extends AsyncTask<String, Integer, List<String>> {
 
 	@Override
 	protected void onProgressUpdate(Integer... values) {
-		String cnt = Integer.toString(values[0]);
-	//	progressDialog = ProgressDialog.show(context,
-			//"test broadcast" + cnt,
-		//	context.getText(R.string.msg_searching_devices));
+
 	}
 }
 }

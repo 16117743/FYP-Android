@@ -201,7 +201,7 @@ public class ViewFlipperMainActivity extends Activity
     @Override
     protected void onPostExecute(List<String> result) {
         for(int i=0; i<result.size(); i++) {
-        selectionHistoric.add("      " + result.get(i));
+        selectionHistoric.add(result.get(i));
         //queueHistoric.add("      " + result.get(i));
         }
         selectionHistoric.notifyDataSetChanged();

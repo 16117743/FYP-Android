@@ -55,67 +55,61 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 			 dataInputStream = new DataInputStream(bluetoothSocket.getInputStream());
 			 dataOutputStream = new DataOutputStream(bluetoothSocket.getOutputStream());
 			
-			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.connected_sucessfully));
-			 
+			// sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.connected_sucessfully));
+			 sendMessageByBluetooth("msg0",0);
 			 while (run)
 			 {
 					 try
 					 {
-						 int readtest = 0;
-						 readtest = dataInputStream.readInt();
+						 int switcher = dataInputStream.readInt();
 						 Thread.sleep(1000);
-						 switch (readtest)
+						 switch (switcher)
 						 {
+							 case 0:
+								 LogUtil.e("read int 1\n");
+								 String rx0 = processInput();
+								 sendHandler(0, rx0);
+								 break;
 							 case SONG_SELECT:
 								 LogUtil.e("read int 1\n");
-								 if (dataInputStream.available() > 0)
-								 {
-									 LogUtil.e("dataInputStream.available(");
-									 byte[] msg = new byte[dataInputStream.available()];
-									 dataInputStream.read(msg, 0, dataInputStream.available());
-									 String rx = new String(msg);
-									 LogUtil.e(rx);
-									 sendHandler(MainActivity.MSG_BLUETOOTH, Integer.toString(readtest) + ": " + rx);
-									 stopComunication();
-								 } else
-									 LogUtil.e("not dataInputStream.available");
+								 String rx1 = processInput();
+								 sendHandler(MainActivity.SONG_SELECT, rx1);
 								 break;
 							 case SONG_SELECTED:
 								 LogUtil.e("read int 2\n");
-								 if (dataInputStream.available() > 0) {
-									 LogUtil.e("dataInputStream.available(");
-									 byte[] msg = new byte[dataInputStream.available()];
-									 dataInputStream.read(msg, 0, dataInputStream.available());
-									 String rx = new String(msg);
-									 LogUtil.e(rx);
-									 sendHandler(3, rx);
-								 }
-								 else
-									 LogUtil.e("not dataInputStream.available");
+								 String rx2 = processInput();
+								 sendHandler(MainActivity.SONG_SELECTED, rx2);
+								// sendHandler(MainActivity.DJ_COMMENT, rx2);
 								 break;
 							 case DJ_COMMENT:
-								 LogUtil.e("read int 2\n");
-								 if (dataInputStream.available() > 0) {
-									 LogUtil.e("dataInputStream.available(");
-									 byte[] msg = new byte[dataInputStream.available()];
-									 dataInputStream.read(msg, 0, dataInputStream.available());
-									 String rx = new String(msg);
-									 LogUtil.e(rx);
-									 sendHandler(MainActivity.MSG_BLUETOOTH, rx);
-								 }
-								 else
-									 LogUtil.e("not dataInputStream.available");
+								 LogUtil.e("read int 3\n");
+								 String rx3 = processInput();
+								 sendHandler(MainActivity.DJ_COMMENT, rx3);
 								 break;
-
+							 case SKIP_SONG:
+								 LogUtil.e("read int 4\n");
+								 String rx4 = processInput();
+								 sendHandler(MainActivity.SKIP_SONG, rx4);
+								 break;
 							 case ECHO_SHARED_PREF_SONGS:
-								 LogUtil.e("read int 2\n");
+								 LogUtil.e("read int 4\n");
+								 String rx5 = processInput();
+								 sendHandler(MainActivity.ECHO_SHARED_PREF_SONGS, rx5);
+								 break;
 							 case ECHO_BLOB_SONGS:
 								 LogUtil.e("read int 2\n");
+								 String rx6 = processInput();
+								 sendHandler(MainActivity.ECHO_SHARED_PREF_SONGS, rx6);
+								 break;
 							 case REMOTE_SELECT:
 								 LogUtil.e("read int 2\n");
+								 String rx7 = processInput();
+								 sendHandler(MainActivity.REMOTE_SELECT, rx7);
+								 break;
 							 case WANT_END:
 								 LogUtil.e("read int 2\n");
-								 
+								 String rx8 = processInput();
+								 sendHandler(MainActivity.WANT_END, rx8);
 								 break;
 							 default:
 								 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": oops" );
@@ -130,6 +124,25 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 			 stopComunication();
 			 sendHandler(MainActivity.MSG_TOAST, context.getString(R.string.lost_connection));
 		 }
+	}
+
+	public String processInput(){
+		try {
+			if (dataInputStream.available() > 0)
+            {
+                LogUtil.e("dataInputStream.available(");
+                byte[] msg = new byte[dataInputStream.available()];
+                dataInputStream.read(msg, 0, dataInputStream.available());
+                String rx = new String(msg);
+                return rx;
+            } else {
+                LogUtil.e("not dataInputStream.available");
+                return null;
+            }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public boolean sendMessageByBluetooth(String msg,int whatToDo){
