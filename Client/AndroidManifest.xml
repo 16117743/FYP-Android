@@ -36,6 +36,10 @@
                 android:name="com.chat.bluetooth.activity.ToDoActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
+        <activity
+                android:name="com.chat.bluetooth.activity.DJActivity"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>

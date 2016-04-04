@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
+
+    <ViewFlipper
+            android:id="@+id/view_flipper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dip" >
+
+        <!--  The child Views/Layout to flip -->
+
+        <!--  Layout 1 for 1st Screen -->
+
+        <!--  Layout 2 for 2nd Screen -->
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="502dp"
+                android:gravity="center"
+                android:orientation="vertical" android:weightSum="1" android:background="@drawable/right">
+
+            <ExpandableListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="398dp"
+                    android:id="@+id/queueList" android:layout_gravity="center_horizontal"
+                    android:clickable="true" android:divider="#ff000000" android:drawSelectorOnTop="false"
+                    android:fastScrollAlwaysVisible="true" android:fastScrollEnabled="true" android:focusable="true"
+                    android:focusableInTouchMode="true" android:longClickable="true"
+                    android:visibility="visible"/>
+        </LinearLayout>
+
+
+    </ViewFlipper>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="502dp"
+            android:gravity="center"
+            android:orientation="vertical" android:background="@drawable/left" android:weightSum="1"
+            >
+
+
+        <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="398dp"
+                android:id="@+id/DJCommentList" android:clickable="true"
+                android:fastScrollAlwaysVisible="true" android:fastScrollEnabled="true"
+                android:scrollingCache="true" android:layout_gravity="bottom"/>
+    </LinearLayout>
+
+</LinearLayout>

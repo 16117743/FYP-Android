@@ -27,7 +27,11 @@ public class ChatBusinessLogic implements OnConnectionBluetoothListener,
 	private BluetoothComunication bluetoothComunication;
 	private AlertDialogDevicesFound alertDialogDevicesFound;
 	private EventsBluetoothReceiver eventsBluetoothReceiver;
-	
+
+	/**
+	 *  @param context the activity that created this object
+	 *  @param handler the embedded handler of the activity that created this object
+	 * */
 	public ChatBusinessLogic(Context context, Handler handler){
 		this.context = context;
 		this.handler = handler;
@@ -51,7 +55,12 @@ public class ChatBusinessLogic implements OnConnectionBluetoothListener,
 		eventsBluetoothReceiver.showProgress();
 		bluetoothManager.getBluetoothAdapter().startDiscovery();
 	}
-	
+
+
+	/**
+	 *  creates a task for connecting to Music Host once the user hits connect
+	 *  @param bluetoothDevice overiding implemented method by sending the device to custom startClient task
+	 * */
 	public void startClient(BluetoothDevice bluetoothDevice){
 		BluetoothClientTask bluetoothClientTask = new BluetoothClientTask(context, this);
 		bluetoothClientTask.execute(bluetoothDevice);
@@ -81,16 +90,27 @@ public class ChatBusinessLogic implements OnConnectionBluetoothListener,
 		return bluetoothManager;
 	}
 
+	/**
+	 *  @param bluetoothDevice overiding implemented method by sending the device to custom startClient method
+	 * */
 	@Override
 	public void onBluetoothDeviceSelected(BluetoothDevice bluetoothDevice) {
 		startClient(bluetoothDevice);
 	}
-	
+
+	/**
+	 * 	Once the client connects, this method starts a communication thread.
+	 *  @param bluetoothSocket pass the connected socket communication thread
+	 * */
 	@Override
 	public void onConnectionBluetooth(BluetoothSocket bluetoothSocket) {
 		starCommunication(bluetoothSocket);
 	}
 
+	/**
+	 *
+	 *  @param devicesFound list of devices found from using Androids Bluetooth API
+	 * */
 	@Override
 	public void onSearchBluetooth(List<BluetoothDevice> devicesFound) {
 		alertDialogDevicesFound.settingsAlertDialog(devicesFound);

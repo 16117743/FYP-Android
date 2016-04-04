@@ -5,31 +5,41 @@ package com.chat.bluetooth.util;
  */
 public class SongBean {
 
-    public String song;
-    public String artist;
-    public int votes;
+public String song;
+public String artist;
+public int votes;
+public String DJComment;
 
-    public String getSong() {
-        return song;
-    }
+public String getDJComment() {
+    return DJComment;
+}
 
-    public void setSong(String song) {
-        this.song = song;
-    }
+public void setDJComment(String DJComment) {
+    this.DJComment = DJComment;
+}
 
-    public String getArtist() {
-        return artist;
-    }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
+public String getSong() {
+    return song;
+}
 
-    public int getVotes() {
-        return votes;
-    }
+public void setSong(String song) {
+    this.song = song;
+}
 
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
+public String getArtist() {
+    return artist;
+}
+
+public void setArtist(String artist) {
+    this.artist = artist;
+}
+
+public int getVotes() {
+    return votes;
+}
+
+public void setVotes(int votes) {
+    this.votes = votes;
+}
 }

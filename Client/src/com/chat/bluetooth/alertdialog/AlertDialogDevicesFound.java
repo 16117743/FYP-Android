@@ -21,21 +21,26 @@ public class AlertDialogDevicesFound extends AlertDialogGeneric implements OnCli
 		this.onBluetoothDeviceSelectedListener = onBluetoothDeviceSelectedListener;
 	}
 
+	/**
+	 * called from ChatBusinessLogic Object
+	 * @param devicesFound the devices found
+	 */
 	public void settingsAlertDialog(List<BluetoothDevice> devicesFound) {
-		
-		this.devicesFound = devicesFound;
-		
-		String[] devices = new String[devicesFound.size()]; 
 
-		for (int i = 0; i < devicesFound.size(); i++){
-			devices[i] = devicesFound.get(i).getName();
-		}
-		
-		alert.setTitle(context.getString(R.string.devices_found));
-		alert.setItems(devices, this);
-		
-		showAlertDialog();
+	this.devicesFound = devicesFound;
+
+	String[] devices = new String[devicesFound.size()];
+
+	for (int i = 0; i < devicesFound.size(); i++){
+		//devicesFound.get(i).
+		devices[i] = devicesFound.get(i).getName();
 	}
+
+	alert.setTitle("Music Host found!");
+	alert.setItems(devices, this);
+
+	showAlertDialog();
+}
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {

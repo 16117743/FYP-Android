@@ -28,7 +28,6 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 
 		toastUtil = new ToastUtil(context);
 		devicesFound = new ArrayList<BluetoothDevice>();
-		toastUtil.showToast("started");
 	}
 
 	public void registerFilters() {
@@ -44,7 +43,7 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 		devicesFound.clear();
 
 		progressDialog = ProgressDialog.show(context,
-			"test broadcast",
+			"Please be patient...",
 			context.getText(R.string.msg_searching_devices));
 	}
 
@@ -57,6 +56,11 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		if (BluetoothDevice.ACTION_FOUND.equals(intent.getAction())) {
+			/**
+			 * EXTRA_DEVICE Used as a Parcelable extra field in every intent
+			 * broadcast by BluetoothDevice class. It contains the BluetoothDevice} that
+			 * the intent applies to.
+			 */
 			BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 			devicesFound.add(device);
 		} else {
@@ -67,7 +71,7 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 				if (devicesFound.size() > 0) {
 					onSearchBluetoothListener.onSearchBluetooth(devicesFound);
 				} else {
-					toastUtil.showToast("testing done");
+					toastUtil.showToast("done");
 				}//context.getString(R.string.no_device_found)
 			}
 		}

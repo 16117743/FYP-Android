@@ -41,7 +41,9 @@ public class MainActivity extends GenericActivity{
 	
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
-	private final int DB_RETURN = 101;
+	private final int SONG_SELECTED_RETURN = 101;
+	private final int DJ_RETURN = 102;
+	private final int SKIP_RETURN = 103;
 	/******************************************/
 	private Button buttonDB;
 	private Button buttonClient;
@@ -228,23 +230,6 @@ public class MainActivity extends GenericActivity{
 			public void onClick(View v) {
 				Intent dbIntent = new Intent (MainActivity.this,
 					ViewFlipperMainActivity.class);
-
-				Bundle myDataBundle = new Bundle();
-
-				String jsonArrayString = "[{\"song\":\"song1\",\"artist\":\"artist0\",\"votes\":0},{\"song\":\"song2\",\"artist\":\"artist1\",\"votes\":1},{\"song\":\"song3\", " +
-				"\"artist\":\"artist2\",\"votes\":2},{\"song\":\"song4\",\"artist\":\"artist3\",\"votes\":3}," +
-					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
-					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
-					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
-					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
-					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
-					"{\"song\":\"song5\",\"artist\":\"artist4\",\"votes\":4},"+
-					"{\"song\":\"song6\",\"artist\":\"artist5\",\"votes\":5}]";
-				//String json = "[{\"Song\":\"Song11\",\"Name\":\"ABC\"},{\"Song\":\"Song22\",\"Name\":\"PQR\"},{\"Song\":\"Song33\",\"Name\":\"XYZ\"}]";
-
-				myDataBundle.putByteArray("package", jsonArrayString.getBytes());
-				dbIntent.putExtras(myDataBundle);
-				startActivityForResult(dbIntent, 101);
 			}
 		});
 
@@ -270,11 +255,17 @@ public class MainActivity extends GenericActivity{
 
 			@Override
 			public void onClick(View v) {
-
-				if (chatBusinessLogic.sendMessage("a",DJ_COMMENT)) {
-
-				} else {
-					toastUtil.showToast("");
+				String name = mySharedPreferences.getString("User", "");
+				String DJComment = editTextMessage.getText().toString();
+				if(DJComment.trim().length() > 0) {
+					if (chatBusinessLogic.sendMessage(name + ": " +DJComment, DJ_COMMENT)) {
+						historic.add("Me: " + DJComment);
+						historic.notifyDataSetChanged();
+					} else {
+						toastUtil.showToast("oops! something went wrong");
+					}
+				}else{
+					toastUtil.showToast(getString(R.string.enter_message));
 				}
 			}
 		});
@@ -285,11 +276,12 @@ public class MainActivity extends GenericActivity{
 			@Override
 			public void onClick(View v) {
 
-				if (chatBusinessLogic.sendMessage("",SKIP_SONG)) {
+					if (chatBusinessLogic.sendMessage("skip", SKIP_SONG)) {
 
-				} else {
-					toastUtil.showToast("");
-				}
+					} else {
+						toastUtil.showToast("oops! something went wrong");
+					}
+
 			}
 		});
 
@@ -327,11 +319,15 @@ public class MainActivity extends GenericActivity{
 			@Override
 			public void onClick(View v) {
 
-				if (chatBusinessLogic.sendMessage("", REMOTE_SELECT)) {
+				Intent dbIntent = new Intent (MainActivity.this,
+					DJActivity.class);
 
-				} else {
-					toastUtil.showToast("");
-				}
+				Bundle myDataBundle = new Bundle();
+
+				// attach the container to the intent
+				dbIntent.putExtras(myDataBundle);
+
+				startActivityForResult(dbIntent, 101);
 			}
 		});
 	}
@@ -381,25 +377,34 @@ public class MainActivity extends GenericActivity{
 						chatBusinessLogic.stopCommucanition();
 						break;
 					case 3://DJ_COMMENT
-						toastUtil.showToast("3 here");
-//						Intent dbIntent = new Intent (MainActivity.this,
-//							ViewFlipperMainActivity.class);
-//
-//						Bundle myDataBundle = new Bundle();
-//						String packStr = new String ((String)(msg.obj));
-//
-//						myDataBundle.putByteArray("package", (packStr.getBytes()));
-//
-//						// attach the container to the intent
-//						dbIntent.putExtras(myDataBundle);
-//
-//						startActivityForResult(dbIntent, 101);
-//
-//       				 	listVewHistoric.requestFocus();
+						toastUtil.showToast("3 here ");
+						Intent djIntent = new Intent (MainActivity.this,
+							DJActivity.class);
+
+						Bundle myDJBundle = new Bundle();
+
+						String DJString = new String ((String)(msg.obj));
+
+						myDJBundle.putByteArray("package", (DJString.getBytes()));
+
+						djIntent.putExtras(myDJBundle);
+
+						startActivityForResult(djIntent, 101);
        				 	break;
 					case 4://SKIP_SONG
-						toastUtil.showToast("4 here");
-						//
+						toastUtil.showToast("4 here ");
+						Intent skipIntent = new Intent (MainActivity.this,
+							DJActivity.class);
+
+						Bundle mySkipBundle = new Bundle();
+
+						String skipString = new String ((String)(msg.obj));
+
+						mySkipBundle.putByteArray("package", (skipString.getBytes()));
+
+						skipIntent.putExtras(mySkipBundle);
+
+						startActivityForResult(skipIntent, 101);
 						break;
 					case 5://ECHO_SHARED_PREF
 						toastUtil.showToast("5 here");
@@ -433,25 +438,27 @@ public class MainActivity extends GenericActivity{
 					finish(); 
 				}
 				break;
-			case DB_RETURN:
-				Bundle myResultBundle = data.getExtras();
-				String myResult = myResultBundle.getString("result");
-				//String myResult2 = myResultBundle.getString("song");
-				toastUtil.showToast(myResult);
-				//toastUtil.showToast(myResult2 + " " + myResult);
-				if(chatBusinessLogic.sendMessage(myResult,SONG_SELECTED)) {
+			case SONG_SELECTED_RETURN:
+				if (Activity.RESULT_CANCELED == resultCode){
+				//	finish();
+				}
+				if (RESULT_OK == resultCode) {
+					Bundle myResultBundle = data.getExtras();
+					String myResult = myResultBundle.getString("result");
+					toastUtil.showToast("song: " + myResult + "sent to music host");
+					if(chatBusinessLogic.sendMessage(myResult,SONG_SELECTED)) {
+					}
+					//finish();
+				}
+
+				break;
+			case DJ_RETURN:
+				if (resultCode == RESULT_OK) {
+					toastUtil.showToast("there you go");
+				} else {
+					toastUtil.showToast(getString(R.string.device_must_visible));
 				}
 				break;
-
-//			case BT_VISIBLE:
-//				if (resultCode == BT_TIMER_VISIBLE) {
-//
-//					chatBusinessLogic.stopCommucanition();
-//					chatBusinessLogic.startServer();
-//				} else {
-//					toastUtil.showToast(getString(R.string.device_must_visible));
-//				}
-//				break;
 		}
 	}
 	

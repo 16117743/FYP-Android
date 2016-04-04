@@ -32,7 +32,7 @@ public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, Blueto
 	protected void onPreExecute() {
 		super.onPreExecute();
 		progressDialog = ProgressDialog.show(context, 
-											 "testing client",
+											 "Success",
 											 context.getText(R.string.msg_connecting_bluetooth));
 	}
 	// context.getText(R.string.waiting)
@@ -45,10 +45,11 @@ public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, Blueto
 	@Override
 	protected void onPostExecute(BluetoothSocket bluetoothSocket) {
 		super.onPostExecute(bluetoothSocket);
-		
+		bluetoothSocket.getRemoteDevice().getUuids().toString();
 		closeDialog();
 		
 		if(bluetoothSocket != null){
+			toastUtil.showToast(bluetoothSocket.getRemoteDevice().getUuids().toString());
 			onBluetoothListener.onConnectionBluetooth(bluetoothSocket);
 		}else{
 			toastUtil.showToast(context.getString(R.string.connection_failed));

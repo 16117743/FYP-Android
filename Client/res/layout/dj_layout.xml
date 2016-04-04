@@ -16,7 +16,21 @@
 
         <!--  Layout 2 for 2nd Screen -->
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="502dp"
+                android:gravity="center"
+                android:orientation="vertical" android:background="@drawable/left" android:weightSum="1"
+                >
 
+
+            <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="398dp"
+                    android:id="@+id/selectionList" android:clickable="true"
+                    android:fastScrollAlwaysVisible="true" android:fastScrollEnabled="true"
+                    android:scrollingCache="true" android:layout_gravity="bottom"/>
+        </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="502dp"
@@ -27,28 +41,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="398dp"
                     android:id="@+id/queueList" android:layout_gravity="center_horizontal"
-                    android:clickable="true" android:divider="#ff000000" android:drawSelectorOnTop="false"
+                    android:clickable="false" android:drawSelectorOnTop="false"
                     android:fastScrollAlwaysVisible="true" android:fastScrollEnabled="true" android:focusable="true"
                     android:focusableInTouchMode="true" android:longClickable="true"
                     android:visibility="visible"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/textView1"/>
         </LinearLayout>
-
-
     </ViewFlipper>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="502dp"
-            android:gravity="center"
-            android:orientation="vertical" android:background="@drawable/left" android:weightSum="1"
-            >
-
-
-        <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="398dp"
-                android:id="@+id/selectionList" android:clickable="true"
-                android:fastScrollAlwaysVisible="true" android:fastScrollEnabled="true"
-                android:scrollingCache="true" android:layout_gravity="bottom"/>
-    </LinearLayout>
 
 </LinearLayout>

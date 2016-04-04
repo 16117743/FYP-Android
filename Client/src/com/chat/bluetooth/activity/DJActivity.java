@@ -1,25 +1,28 @@
 package com.chat.bluetooth.activity;
 
-import android.app.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import com.chat.bluetooth.R;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
 import com.chat.bluetooth.util.MyExpandableAdapter;
 import com.chat.bluetooth.util.SongBean;
 import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Activity2 extends Activity {
+
+public class DJActivity extends Activity {
+
 private ViewFlipper viewFlipper;
 public float lastX;
 
@@ -38,7 +41,7 @@ private ExpandableListView expandableList;
 protected void onCreate(Bundle savedInstanceState)
 {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.view_flipper_djcomments);
+	setContentView(R.layout.dj_layout);
 	viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
 	init();
 
@@ -66,7 +69,7 @@ protected void onCreate(Bundle savedInstanceState)
 									int groupPosition, int childPosition, long id) {
 			//Toast.makeText(this, ""+ childItems.get(childPosition),  Toast.LENGTH_SHORT).show();
 			Toast.makeText(getApplicationContext(), parentItems.get(groupPosition), Toast.LENGTH_SHORT).show();
-			Toast.makeText(getApplicationContext(), (String) childItems.get(childPosition), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), (String)childItems.get(childPosition), Toast.LENGTH_SHORT).show();
 			// parentItems.get(childPosition));
 			// Toast.makeText(this, .child.get(childPosition),
 			//      Toast.LENGTH_SHORT).show();
@@ -133,70 +136,27 @@ public void init(){
 	selectionHistoric = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 	selectionList.setAdapter(selectionHistoric);
 
-	selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-		public void onItemClick(AdapterView<?> parent, View view,
-								int position, long id) {
-			Intent myLocalIntent = getIntent();
-			Bundle thisBundle = new Bundle();
-			//myBundle = myLocalIntent.getExtras();
-
-			selectionHistoric.getItem(position);
-			thisBundle.putString("result", selectionHistoric.getItem(position));
-
-			myLocalIntent.putExtras(thisBundle);
-			setResult(Activity.RESULT_OK, myLocalIntent);
-
-			finish();
-		}
-	});/**********************************************//**********************************************/
+//	selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//		public void onItemClick(AdapterView<?> parent, View view,
+//								int position, long id) {
+//			Intent myLocalIntent = getIntent();
+//			Bundle thisBundle = new Bundle();
+//			//myBundle = myLocalIntent.getExtras();
+//
+//			selectionHistoric.getItem(position);
+//			thisBundle.putString("result", selectionHistoric.getItem(position));
+//
+//			myLocalIntent.putExtras(thisBundle);
+//			setResult(Activity.RESULT_OK, myLocalIntent);
+//
+//			finish();
+//		}
+//	});/**********************************************//**********************************************/
 
 	Bundle myBundle =  myLocalIntent.getExtras();
 	/*****************************************************************************/
 	final String msgFromHost = new String (myBundle.getByteArray("package"));
-	//new parseJSON().execute(msgFromHost);
-
-	String packStr0 = new String(msgFromHost);
-	String[] parts = packStr0.split("&");
-
-	List <SongBean> returnList = new ArrayList<>();
-	try {
-		JSONArray array = new JSONArray(parts[0]);
-		Log.d("msg", "got this far");
-		SongBean songBean;
-		for (int i = 0; i < array.length(); i++) {
-			songBean = new SongBean();
-			songBean.setDJComment(array.getJSONObject(i).getString("DJComment"));
-			returnList.add(songBean);
-		}
-		JSONArray array2 = new JSONArray(parts[1]);
-		Log.d("msg", "got this far 2");
-		SongBean songBean2;
-		for (int i = 0; i < array2.length(); i++) {
-			songBean2 = new SongBean();
-			songBean2.setSong(array2.getJSONObject(i).getString("song"));
-			songBean2.setArtist(array2.getJSONObject(i).getString("artist"));
-			songBean2.setVotes(Integer.parseInt(array2.getJSONObject(i).getString("votes")));
-			returnList.add(songBean2);
-		}
-
-		ArrayList<String> child = new ArrayList<String>();
-		for(int i=0; i<returnList.size(); i++) {
-			if(returnList.get(i).getVotes()==0)
-				selectionHistoric.add(returnList.get(i).getArtist());
-			else{
-				parentItems.add(returnList.get(i).getSong());
-				child.add("Artist: " +returnList.get(i).getArtist());
-				child.add("skip votes:" + Integer.toString(returnList.get(i).getVotes()));
-				childItems.add(child);
-				child = new ArrayList<String>();
-			}
-		}
-		selectionHistoric.notifyDataSetChanged();
-		selectionList.requestFocus();
-	}
-	catch (Exception e) {
-		e.printStackTrace();
-	}
+	new parseJSON().execute(msgFromHost);
 }
 
 /**** ASYNC TASK *************************/
@@ -209,24 +169,24 @@ private class parseJSON extends AsyncTask<String, Void, List<SongBean>> {
 
 		List <SongBean> returnList = new ArrayList<>();
 		try {
-			JSONArray array = new JSONArray(parts[0]);
-			Log.d("msg", "got this far");
-			SongBean songBean;
-			for (int i = 0; i < array.length(); i++) {
-				songBean = new SongBean();
-				songBean.setSong(array.getJSONObject(i).getString("song"));
-				returnList.add(songBean);
-			}
-			JSONArray array2 = new JSONArray(parts[1]);
-			Log.d("msg", "got this far 2");
-			SongBean songBean2;
-			for (int i = 0; i < array2.length(); i++) {
-				songBean2 = new SongBean();
-				songBean2.setSong(array2.getJSONObject(i).getString("song"));
-				songBean2.setArtist(array2.getJSONObject(i).getString("artist"));
-				songBean2.setVotes(Integer.parseInt(array2.getJSONObject(i).getString("votes")));
-				returnList.add(songBean2);
-			}
+				JSONArray array = new JSONArray(parts[0]);
+				Log.d("msg", "got this far");
+				SongBean songBean;
+				for (int i = 0; i < array.length(); i++) {
+					songBean = new SongBean();
+					songBean.setDJComment(array.getJSONObject(i).getString("DJComment"));
+					returnList.add(songBean);
+				}
+				JSONArray array2 = new JSONArray(parts[1]);
+				Log.d("msg", "got this far 2");
+				SongBean songBean2;
+				for (int i = 0; i < array2.length(); i++) {
+					songBean2 = new SongBean();
+					songBean2.setSong(array2.getJSONObject(i).getString("song"));
+					songBean2.setArtist(array2.getJSONObject(i).getString("artist"));
+					songBean2.setVotes(Integer.parseInt(array2.getJSONObject(i).getString("votes")));
+					returnList.add(songBean2);
+				}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -240,7 +200,7 @@ private class parseJSON extends AsyncTask<String, Void, List<SongBean>> {
 		ArrayList<String> child = new ArrayList<String>();
 		for(int i=0; i<result.size(); i++) {
 			if(result.get(i).getVotes()==0)
-				selectionHistoric.add(result.get(i).getSong());
+				selectionHistoric.add(result.get(i).getDJComment());
 			else{
 				parentItems.add(result.get(i).getSong());
 				child.add("Artist: " +result.get(i).getArtist());
@@ -299,18 +259,3 @@ public void setChildData() {
 	childItems.add(child);
 }
 }
-/**View.setOnTouchListener(new OnSwipeTouchListener(Activity2.this) {
- public void onSwipeTop() {
- Toast.makeText(Activity2.this, "top", Toast.LENGTH_SHORT).show();
- }
- public void onSwipeRight() {
- Toast.makeText(Activity2.this, "right", Toast.LENGTH_SHORT).show();
- }
- public void onSwipeLeft() {
- Toast.makeText(Activity2.this, "left", Toast.LENGTH_SHORT).show();
- }
- public void onSwipeBottom() {
- Toast.makeText(Activity2.this, "bottom", Toast.LENGTH_SHORT).show();
- }
-
- });*/

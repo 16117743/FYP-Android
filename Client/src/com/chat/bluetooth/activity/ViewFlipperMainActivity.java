@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.*;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.util.MyExpandableAdapter;
+import com.chat.bluetooth.util.SongBean;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
@@ -50,8 +51,6 @@ public class ViewFlipperMainActivity extends Activity
         expandableList.setGroupIndicator(null);
         expandableList.setClickable(true);
 
-        setGroupParents();
-        setChildData();
         MyExpandableAdapter adapter = new MyExpandableAdapter(this, parentItems, childItems);
 
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
@@ -134,75 +133,78 @@ public class ViewFlipperMainActivity extends Activity
         selectionHistoric = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         selectionList.setAdapter(selectionHistoric);
 
-        selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent myLocalIntent = getIntent();
-                Bundle thisBundle = new Bundle();
-                //myBundle = myLocalIntent.getExtras();
-
-                selectionHistoric.getItem(position);
-                thisBundle.putString("result", selectionHistoric.getItem(position));
-
-                myLocalIntent.putExtras(thisBundle);
-                setResult(Activity.RESULT_OK, myLocalIntent);
-
-                finish();
-            }
-        });/**********************************************//**********************************************/
-
-       /* queueList = (ListView)findViewById(R.id.queueList);
-        queueHistoric = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        queueList.setAdapter(queueHistoric);
-
-        queueList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent myLocalIntent = getIntent();
-                Bundle thisBundle = new Bundle();
-                //myBundle = myLocalIntent.getExtras();
-
-               // queueHistoric.getItem(position);
-               // thisBundle.putString("result", queueHistoric.getItem(position));
-
-                myLocalIntent.putExtras(thisBundle);
-                setResult(Activity.RESULT_OK, myLocalIntent);
-
-                finish();
-            }
-        });/**********************************************//**********************************************/
+//        selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//                Intent myLocalIntent = getIntent();
+//                Bundle thisBundle = new Bundle();
+//                //myBundle = myLocalIntent.getExtras();
+//
+//                selectionHistoric.getItem(position);
+//                thisBundle.putString("result", selectionHistoric.getItem(position));
+//
+//                myLocalIntent.putExtras(thisBundle);
+//                setResult(Activity.RESULT_OK, myLocalIntent);
+//
+//                finish();
+//            }
+//        });/**********************************************//**********************************************/
 
         Bundle myBundle =  myLocalIntent.getExtras();
-//		util = new com.chat.bluetooth.util.JSONUtils();
         /*****************************************************************************/
         final String msgFromHost = new String (myBundle.getByteArray("package"));
         new parseJSON().execute(msgFromHost);
     }
 
     /**** ASYNC TASK *************************/
-    private class parseJSON extends AsyncTask<String, Void, List<String>> {
+    private class parseJSON extends AsyncTask<String, Void, List<SongBean>> {
 
     @Override
-    protected List <String> doInBackground(String... params) {
-        List <String> returnList = new ArrayList<>();
+    protected List <SongBean> doInBackground(String... params) {
+        String packStr0 = new String(params[0]);
+        String[] parts = packStr0.split("&");
+
+        List <SongBean> returnList = new ArrayList<>();
         try {
-            JSONArray array = new JSONArray(params[0]);
+            JSONArray array = new JSONArray(parts[0]);
             Log.d("msg", "got this far");
-            for(int i=0; i<array.length(); i++){
-                returnList.add(array.getJSONObject(i).getString("song"));
+            SongBean songBean;
+            for (int i = 0; i < array.length(); i++) {
+                songBean = new SongBean();
+                songBean.setSong(array.getJSONObject(i).getString("song"));
+                returnList.add(songBean);
             }
-        } catch (Exception e) {
+            JSONArray array2 = new JSONArray(parts[1]);
+            Log.d("msg", "got this far 2");
+            SongBean songBean2;
+            for (int i = 0; i < array2.length(); i++) {
+                songBean2 = new SongBean();
+                songBean2.setSong(array2.getJSONObject(i).getString("song"));
+                songBean2.setArtist(array2.getJSONObject(i).getString("artist"));
+                songBean2.setVotes(Integer.parseInt(array2.getJSONObject(i).getString("votes")));
+                returnList.add(songBean2);
+            }
+        }
+        catch (Exception e) {
             e.printStackTrace();
-    }
+        }
 
     return returnList;
     }
 
     @Override
-    protected void onPostExecute(List<String> result) {
+    protected void onPostExecute(List<SongBean> result) {
+        ArrayList<String> child = new ArrayList<String>();
         for(int i=0; i<result.size(); i++) {
-        selectionHistoric.add(result.get(i));
-        //queueHistoric.add("      " + result.get(i));
+            if(result.get(i).getVotes()==0)
+                selectionHistoric.add(result.get(i).getSong());
+            else{
+                parentItems.add(result.get(i).getSong());
+                child.add("Artist: " +result.get(i).getArtist());
+                child.add("skip votes:" + Integer.toString(result.get(i).getVotes()));
+                childItems.add(child);
+                child = new ArrayList<String>();
+            }
         }
         selectionHistoric.notifyDataSetChanged();
         selectionList.requestFocus();
