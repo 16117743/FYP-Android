@@ -133,22 +133,22 @@ public class ViewFlipperMainActivity extends Activity
         selectionHistoric = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         selectionList.setAdapter(selectionHistoric);
 
-//        selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                Intent myLocalIntent = getIntent();
-//                Bundle thisBundle = new Bundle();
-//                //myBundle = myLocalIntent.getExtras();
-//
-//                selectionHistoric.getItem(position);
-//                thisBundle.putString("result", selectionHistoric.getItem(position));
-//
-//                myLocalIntent.putExtras(thisBundle);
-//                setResult(Activity.RESULT_OK, myLocalIntent);
-//
-//                finish();
-//            }
-//        });/**********************************************//**********************************************/
+        selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent myLocalIntent = getIntent();
+                Bundle thisBundle = new Bundle();
+                //myBundle = myLocalIntent.getExtras();
+
+                selectionHistoric.getItem(position);
+                thisBundle.putString("result", selectionHistoric.getItem(position));
+
+                myLocalIntent.putExtras(thisBundle);
+                setResult(Activity.RESULT_OK, myLocalIntent);
+
+                finish();
+            }
+        });/**********************************************//**********************************************/
 
         Bundle myBundle =  myLocalIntent.getExtras();
         /*****************************************************************************/

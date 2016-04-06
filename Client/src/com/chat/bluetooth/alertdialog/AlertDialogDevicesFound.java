@@ -14,6 +14,7 @@ public class AlertDialogDevicesFound extends AlertDialogGeneric implements OnCli
 
 	private List<BluetoothDevice> devicesFound;
 	private OnBluetoothDeviceSelectedListener onBluetoothDeviceSelectedListener;
+	private BluetoothDevice musicHostFound;
 	
 	public AlertDialogDevicesFound(Context context, OnBluetoothDeviceSelectedListener onBluetoothDeviceSelectedListener) {
 		super(context);
@@ -29,22 +30,26 @@ public class AlertDialogDevicesFound extends AlertDialogGeneric implements OnCli
 
 	this.devicesFound = devicesFound;
 
-	String[] devices = new String[devicesFound.size()];
+	String[] MusicHostString =new String[1];
 
 	for (int i = 0; i < devicesFound.size(); i++){
-		//devicesFound.get(i).
-		devices[i] = devicesFound.get(i).getName();
+		if("U".equals(devicesFound.get(i).getName())) {
+			MusicHostString[0] = "Tom's Pub";
+			musicHostFound = devicesFound.get(i);
+		}
 	}
 
+
+
 	alert.setTitle("Music Host found!");
-	alert.setItems(devices, this);
+	alert.setItems(MusicHostString, this);
 
 	showAlertDialog();
 }
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
-		onBluetoothDeviceSelectedListener.onBluetoothDeviceSelected(devicesFound.get(which));
+		onBluetoothDeviceSelectedListener.onBluetoothDeviceSelected(musicHostFound);
 	}
 	
 }

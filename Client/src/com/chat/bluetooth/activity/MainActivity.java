@@ -161,24 +161,24 @@ public class MainActivity extends GenericActivity{
 	@Override
 	public void settingsView() {
 		editTextMessage = (EditText)findViewById(R.id.editTextMessage);
-		
+
 		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-		listVewHistoric = (ListView)findViewById(R.id.listVewHistoric);
-		listVewHistoric.setAdapter(historic);
-		
+		//listVewHistoric = (ListView)findViewById(R.id.listVewHistoric);
+		//listVewHistoric.setAdapter(historic);
+
 		buttonSend = (ImageButton)findViewById(R.id.buttonSend);
 		buttonSend.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				String message = editTextMessage.getText().toString(); 
-				
+				String message = editTextMessage.getText().toString();
+
 				if(message.trim().length() > 0){
 					if(chatBusinessLogic.sendMessage(message,1)){
-						editTextMessage.setText(""); 
-						
+						editTextMessage.setText("");
+
 						historic.add("Me: " + message);
-						historic.notifyDataSetChanged();			
+						historic.notifyDataSetChanged();
 					}
 				}else{
 					toastUtil.showToast(getString(R.string.enter_message));
@@ -368,7 +368,7 @@ public class MainActivity extends GenericActivity{
 						myDataBundle.putByteArray("package", (packStr.getBytes()));
 						dbIntent.putExtras(myDataBundle);
 						startActivityForResult(dbIntent, 101);
-						listVewHistoric.requestFocus();
+						//listVewHistoric.requestFocus();
                 		break;
                 	case 2://SONG_SELECTED
 						toastUtil.showToast((String)(msg.obj));
@@ -440,7 +440,9 @@ public class MainActivity extends GenericActivity{
 				break;
 			case SONG_SELECTED_RETURN:
 				if (Activity.RESULT_CANCELED == resultCode){
-				//	finish();
+					buttonSongRequest.setVisibility(View.INVISIBLE);
+					buttonDJComment.setVisibility(View.INVISIBLE);
+					buttonSkip.setVisibility(View.INVISIBLE);
 				}
 				if (RESULT_OK == resultCode) {
 					Bundle myResultBundle = data.getExtras();
@@ -448,9 +450,10 @@ public class MainActivity extends GenericActivity{
 					toastUtil.showToast("song: " + myResult + "sent to music host");
 					if(chatBusinessLogic.sendMessage(myResult,SONG_SELECTED)) {
 					}
-					//finish();
+					buttonSongRequest.setVisibility(View.INVISIBLE);
+					buttonDJComment.setVisibility(View.INVISIBLE);
+					buttonSkip.setVisibility(View.INVISIBLE);
 				}
-
 				break;
 			case DJ_RETURN:
 				if (resultCode == RESULT_OK) {
@@ -458,6 +461,9 @@ public class MainActivity extends GenericActivity{
 				} else {
 					toastUtil.showToast(getString(R.string.device_must_visible));
 				}
+				buttonSongRequest.setVisibility(View.INVISIBLE);
+				buttonDJComment.setVisibility(View.INVISIBLE);
+				buttonSkip.setVisibility(View.INVISIBLE);
 				break;
 		}
 	}
@@ -505,16 +511,6 @@ private class updateGUIOptions extends AsyncTask<String, Integer, boolean[]> {
 			buttonSkip.setVisibility(View.VISIBLE);
 		else
 			buttonSkip.setVisibility(View.INVISIBLE);
-
-		if(array[3]==true)
-			buttonEchoPref.setVisibility(View.VISIBLE);
-		else
-			buttonEchoPref.setVisibility(View.INVISIBLE);
-
-		if(array[4]==true)
-			buttonRemote.setVisibility(View.VISIBLE);
-		else
-			buttonRemote.setVisibility(View.INVISIBLE);
 	}
 
 	@Override

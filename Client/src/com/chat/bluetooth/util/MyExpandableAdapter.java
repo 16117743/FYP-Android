@@ -57,16 +57,16 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 			
 			@Override
 			public void onClick(View view) {
-				if(childPosition == 1) {
-					Intent myLocalIntent = mActivity.getIntent();
-					Bundle myBundle = new Bundle();
-					myBundle.putString("result", child.get(childPosition));
-					myBundle.putString("song", parentItems.get(groupPosition));
-					myLocalIntent.putExtras(myBundle);
-					mActivity.setResult(Activity.RESULT_OK, myLocalIntent);
-					//setResult(Activity.RESULT_OK, myLocalIntent);
-					mActivity.finish();
-				}
+//				if(childPosition == 1) {
+//					Intent myLocalIntent = mActivity.getIntent();
+//					Bundle myBundle = new Bundle();
+//					myBundle.putString("result", child.get(childPosition));
+//					myBundle.putString("song", parentItems.get(groupPosition));
+//					myLocalIntent.putExtras(myBundle);
+//					mActivity.setResult(Activity.RESULT_OK, myLocalIntent);
+//					//setResult(Activity.RESULT_OK, myLocalIntent);
+//					mActivity.finish();
+//				}
 			}
 		});
 		
