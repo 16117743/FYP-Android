@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="502dp"
                 android:gravity="center"
-                android:orientation="vertical" android:weightSum="1" android:background="@drawable/right">
+                android:orientation="vertical" android:weightSum="1" android:background="@drawable/rightqueue">
 
             <ExpandableListView
                     android:layout_width="wrap_content"

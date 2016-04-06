@@ -136,23 +136,6 @@ public void init(){
 	selectionHistoric = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 	selectionList.setAdapter(selectionHistoric);
 
-//	selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//		public void onItemClick(AdapterView<?> parent, View view,
-//								int position, long id) {
-//			Intent myLocalIntent = getIntent();
-//			Bundle thisBundle = new Bundle();
-//			//myBundle = myLocalIntent.getExtras();
-//
-//			selectionHistoric.getItem(position);
-//			thisBundle.putString("result", selectionHistoric.getItem(position));
-//
-//			myLocalIntent.putExtras(thisBundle);
-//			setResult(Activity.RESULT_OK, myLocalIntent);
-//
-//			finish();
-//		}
-//	});/**********************************************//**********************************************/
-
 	Bundle myBundle =  myLocalIntent.getExtras();
 	/*****************************************************************************/
 	final String msgFromHost = new String (myBundle.getByteArray("package"));
@@ -211,8 +194,7 @@ private class parseJSON extends AsyncTask<String, Void, List<SongBean>> {
 		}
 		selectionHistoric.notifyDataSetChanged();
 		selectionList.requestFocus();
-		// queueHistoric.notifyDataSetChanged();
-		// queueList.requestFocus();
+
 	}
 
 	@Override
@@ -223,39 +205,4 @@ private class parseJSON extends AsyncTask<String, Void, List<SongBean>> {
 }
 /**** ASYNC TASK *************************/
 
-public void setGroupParents() {
-	parentItems.add("song 1");
-	parentItems.add("song 2");
-	parentItems.add("song 3");
-	parentItems.add("song 4");
-}
-
-public void setChildData() {
-
-	// Android
-	ArrayList<String> child = new ArrayList<String>();
-	child.add("Artist - artist 1");
-	child.add("votes - 2");
-	childItems.add(child);
-
-
-	// Core Java
-	child = new ArrayList<String>();
-	child.add("Artist - artist 2");
-	child.add("votes - 4");
-	childItems.add(child);
-
-	// Desktop Java
-	child = new ArrayList<String>();
-	child.add("Artist - artist 3");
-	child.add("votes - 1");
-	childItems.add(child);
-
-
-	// Enterprise Java
-	child = new ArrayList<String>();
-	child.add("Artist - artist 4");
-	child.add("votes - 0");
-	childItems.add(child);
-}
 }
