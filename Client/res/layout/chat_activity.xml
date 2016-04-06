@@ -4,13 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" android:background="#ffff0007" android:weightSum="1">
 
-    <ListView
-        android:id="@+id/listVewHistoric"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-            >
-    </ListView>
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -18,18 +11,11 @@
 
         <EditText
             android:id="@+id/editTextMessage"
-            android:layout_width="fill_parent"
-            android:layout_height="47dip"
-            android:layout_weight="0.15"
+            android:layout_width="333dp"
+            android:layout_height="78dp"
             android:inputType="textLongMessage" >
         </EditText>
 
-        <ImageButton
-            android:id="@+id/buttonSend"
-            android:layout_width="53dp"
-            android:layout_height="47dip"
-            android:src="@android:drawable/ic_menu_send" >
-        </ImageButton>
     </LinearLayout>
 
     <LinearLayout
@@ -40,54 +26,24 @@
 
         <Button
             android:id="@+id/buttonClient"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
             android:text="Search for Music Host" >
         </Button>
     </LinearLayout>
     <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DB"
-            android:id="@+id/db"/>
-    <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Request a song"
-            android:id="@+id/request_button" android:layout_gravity="center_horizontal" android:visibility="invisible"/>
+            android:id="@+id/request_button" android:layout_gravity="center_horizontal" android:visibility="invisible"
+            android:layout_weight="0.37"/>
     <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Shout out to DJ"
-            android:id="@+id/dj_button" android:layout_gravity="right" android:layout_weight="0.14"
+            android:id="@+id/dj_button" android:layout_gravity="right" android:layout_weight="0.40"
             android:visibility="invisible"/>
     <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="79dp"
             android:text="skip"
-            android:id="@+id/skip_button" android:visibility="invisible"/>
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Echo"
-            android:id="@+id/echo_button" android:layout_gravity="right" android:layout_weight="0.18"
-            android:visibility="invisible"/>
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:text="Remote Control"
-            android:id="@+id/remote_button" android:layout_gravity="center_horizontal" android:visibility="invisible"/>
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Done"
-            android:id="@+id/done_button" android:layout_gravity="center_horizontal"/>
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="123dp"
-            android:layout_height="35dp"
-            android:text="load"
-            android:id="@+id/load_button"/>
-    <Button
-            android:layout_width="99dp"
-            android:layout_height="37dp"
-            android:text="delete"
-            android:id="@+id/delete_button" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/skip_button" android:visibility="invisible" android:layout_weight="0.18"/>
 
 </LinearLayout>

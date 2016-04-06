@@ -143,8 +143,8 @@ public class MainActivity extends GenericActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.clean:
-                historic.clear();
-                historic.notifyDataSetChanged();
+               // historic.clear();
+               // historic.notifyDataSetChanged();
                 break;
         }
         
@@ -162,29 +162,29 @@ public class MainActivity extends GenericActivity{
 	public void settingsView() {
 		editTextMessage = (EditText)findViewById(R.id.editTextMessage);
 
-		historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+		//historic = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		//listVewHistoric = (ListView)findViewById(R.id.listVewHistoric);
 		//listVewHistoric.setAdapter(historic);
 
-		buttonSend = (ImageButton)findViewById(R.id.buttonSend);
-		buttonSend.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				String message = editTextMessage.getText().toString();
-
-				if(message.trim().length() > 0){
-					if(chatBusinessLogic.sendMessage(message,1)){
-						editTextMessage.setText("");
-
-						historic.add("Me: " + message);
-						historic.notifyDataSetChanged();
-					}
-				}else{
-					toastUtil.showToast(getString(R.string.enter_message));
-				}
-			}
-		});
+//		buttonSend = (ImageButton)findViewById(R.id.buttonSend);
+//		buttonSend.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				String message = editTextMessage.getText().toString();
+//
+//				if(message.trim().length() > 0){
+//					if(chatBusinessLogic.sendMessage(message,1)){
+//						editTextMessage.setText("");
+//
+//						historic.add("Me: " + message);
+//						historic.notifyDataSetChanged();
+//					}
+//				}else{
+//					toastUtil.showToast(getString(R.string.enter_message));
+//				}
+//			}
+//		});
 
 		buttonClient = (Button)findViewById(R.id.buttonClient);
 		buttonClient.setOnClickListener(new View.OnClickListener() {
@@ -195,43 +195,43 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
-		buttonload = (Button)findViewById(R.id.load_button);
-		buttonload.setOnClickListener(new View.OnClickListener() {
+//		buttonload = (Button)findViewById(R.id.load_button);
+//		buttonload.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				sharedPreferences();
+//				Intent dbIntent = new Intent (MainActivity.this,
+//					ToDoActivity.class);
+//
+//				Bundle myDataBundle = new Bundle();
+//
+//				// attach the container to the intent
+//				dbIntent.putExtras(myDataBundle);
+//
+//				startActivityForResult(dbIntent, 101);
+//			}
+//		});
 
-			@Override
-			public void onClick(View v) {
-				sharedPreferences();
-				Intent dbIntent = new Intent (MainActivity.this,
-					ToDoActivity.class);
-
-				Bundle myDataBundle = new Bundle();
-
-				// attach the container to the intent
-				dbIntent.putExtras(myDataBundle);
-
-				startActivityForResult(dbIntent, 101);
-			}
-		});
-
-		buttonDelete = (Button)findViewById(R.id.delete_button);
-		buttonDelete.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				readSharedPreferences();
-			//	toastUtil.showToast("delete");
-			}
-		});
-
-		buttonDB = (Button)findViewById(R.id.db);
-		buttonDB.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent dbIntent = new Intent (MainActivity.this,
-					ViewFlipperMainActivity.class);
-			}
-		});
+//		buttonDelete = (Button)findViewById(R.id.delete_button);
+//		buttonDelete.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				readSharedPreferences();
+//			//	toastUtil.showToast("delete");
+//			}
+//		});
+//
+//		buttonDB = (Button)findViewById(R.id.db);
+//		buttonDB.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent dbIntent = new Intent (MainActivity.this,
+//					ViewFlipperMainActivity.class);
+//			}
+//		});
 
 		buttonSongRequest = (Button)findViewById(R.id.request_button);
 		buttonSongRequest.setOnClickListener(new View.OnClickListener() {
@@ -242,8 +242,8 @@ public class MainActivity extends GenericActivity{
 				if (chatBusinessLogic.sendMessage("a", SONG_SELECT)) {
 					editTextMessage.setText("");
 
-					historic.add("Me: " + "sent request");
-					historic.notifyDataSetChanged();
+					//historic.add("Me: " + "sent request");
+					//historic.notifyDataSetChanged();
 				} else {
 					toastUtil.showToast(getString(R.string.enter_message));
 				}
@@ -259,8 +259,8 @@ public class MainActivity extends GenericActivity{
 				String DJComment = editTextMessage.getText().toString();
 				if(DJComment.trim().length() > 0) {
 					if (chatBusinessLogic.sendMessage(name + ": " +DJComment, DJ_COMMENT)) {
-						historic.add("Me: " + DJComment);
-						historic.notifyDataSetChanged();
+						//historic.add("Me: " + DJComment);
+						//historic.notifyDataSetChanged();
 					} else {
 						toastUtil.showToast("oops! something went wrong");
 					}
@@ -285,51 +285,51 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
-		buttonEchoPref = (Button)findViewById(R.id.echo_button);
-		buttonEchoPref.setOnClickListener(new View.OnClickListener() {
+//		buttonEchoPref = (Button)findViewById(R.id.echo_button);
+//		buttonEchoPref.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//				if (chatBusinessLogic.sendMessage("", ECHO_SHARED_PREF_SONGS)) {
+//
+//				} else {
+//					toastUtil.showToast("");
+//				}
+//			}
+//		});
 
-			@Override
-			public void onClick(View v) {
+//		buttonRemote = (Button)findViewById(R.id.remote_button);
+//		buttonRemote.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//				if (chatBusinessLogic.sendMessage("", REMOTE_SELECT)) {
+//
+//				} else {
+//					toastUtil.showToast("");
+//				}
+//			}
+//		});
 
-				if (chatBusinessLogic.sendMessage("", ECHO_SHARED_PREF_SONGS)) {
-
-				} else {
-					toastUtil.showToast("");
-				}
-			}
-		});
-
-		buttonRemote = (Button)findViewById(R.id.remote_button);
-		buttonRemote.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				if (chatBusinessLogic.sendMessage("", REMOTE_SELECT)) {
-
-				} else {
-					toastUtil.showToast("");
-				}
-			}
-		});
-
-		buttonDone = (Button)findViewById(R.id.done_button);
-		buttonDone.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				Intent dbIntent = new Intent (MainActivity.this,
-					DJActivity.class);
-
-				Bundle myDataBundle = new Bundle();
-
-				// attach the container to the intent
-				dbIntent.putExtras(myDataBundle);
-
-				startActivityForResult(dbIntent, 101);
-			}
-		});
+//		buttonDone = (Button)findViewById(R.id.done_button);
+//		buttonDone.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//				Intent dbIntent = new Intent (MainActivity.this,
+//					DJActivity.class);
+//
+//				Bundle myDataBundle = new Bundle();
+//
+//				// attach the container to the intent
+//				dbIntent.putExtras(myDataBundle);
+//
+//				startActivityForResult(dbIntent, 101);
+//			}
+//		});
 	}
 	
 	public void initializaBluetooth() {
@@ -372,8 +372,8 @@ public class MainActivity extends GenericActivity{
                 		break;
                 	case 2://SONG_SELECTED
 						toastUtil.showToast((String)(msg.obj));
-                		historic.add((String)(msg.obj));
-       				 	historic.notifyDataSetChanged();
+                		//historic.add((String)(msg.obj));
+       				 	//historic.notifyDataSetChanged();
 						chatBusinessLogic.stopCommucanition();
 						break;
 					case 3://DJ_COMMENT
@@ -406,21 +406,6 @@ public class MainActivity extends GenericActivity{
 
 						startActivityForResult(skipIntent, 101);
 						break;
-					case 5://ECHO_SHARED_PREF
-						toastUtil.showToast("5 here");
-
-						break;
-					case 6://SONG_SELECTED
-						toastUtil.showToast("6 here");
-
-						break;
-					case 7://SONG_SELECTED
-						toastUtil.showToast("7 here");
-
-						break;
-					case 8://SONG_SELECTED
-						toastUtil.showToast("8 here");
-						break;
                 }
             }
         };
@@ -447,7 +432,7 @@ public class MainActivity extends GenericActivity{
 				if (RESULT_OK == resultCode) {
 					Bundle myResultBundle = data.getExtras();
 					String myResult = myResultBundle.getString("result");
-					toastUtil.showToast("song: " + myResult + "sent to music host");
+					toastUtil.showToast("song: " + myResult + " sent to music host");
 					if(chatBusinessLogic.sendMessage(myResult,SONG_SELECTED)) {
 					}
 					buttonSongRequest.setVisibility(View.INVISIBLE);
