@@ -156,7 +156,7 @@ public class MainActivity extends GenericActivity{
 			@Override
 			public void onClick(View v) {
 
-				if (chatBusinessLogic.sendMessage("", SONG_SELECT)) {
+				if (chatBusinessLogic.sendMessage("aaa", SONG_SELECT)) {
 					editTextMessage.setText("");
 				} else {
 				}
