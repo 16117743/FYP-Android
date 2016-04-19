@@ -25,8 +25,7 @@ public class ViewFlipperMainActivity extends Activity
 
     private ListView selectionList;
     private ArrayAdapter<String> selectionHistoric;
-    private ExpandableListView queueList;
-    //private ExpandableListAdapter<> queueHistoric;
+
     private ArrayList<String> parentItems = new ArrayList<String>();
     private ArrayList<Object> childItems = new ArrayList<Object>();
 
