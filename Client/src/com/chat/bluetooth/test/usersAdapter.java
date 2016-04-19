@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import com.chat.bluetooth.R;
-import com.chat.bluetooth.activity.ToDoActivity;
 
 /**
  * Adapter to bind a ToDoItem List to a view
@@ -57,22 +56,10 @@ public View getView(int position, View convertView, ViewGroup parent) {
     final TextView textView = (TextView) row.findViewById(R.id.user);
     final TextView textView2 = (TextView) row.findViewById(R.id.password);
 
-
-
     checkBox.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public void onClick(View arg0) {
-           // textView.setText("test1");
-          //  textView2.setText("test2");
-
-            if (checkBox.isChecked()) {
-                checkBox.setEnabled(false);
-                if (mContext instanceof ToDoActivity) {
-                    ToDoActivity activity = (ToDoActivity) mContext;
-                    activity.checkItem(currentItem);
-                }
-            }
         }
     });
 

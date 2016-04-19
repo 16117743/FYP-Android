@@ -11,8 +11,8 @@
 
         <EditText
             android:id="@+id/editTextMessage"
-            android:layout_width="333dp"
-            android:layout_height="78dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:inputType="textLongMessage" >
         </EditText>
 
@@ -27,8 +27,8 @@
         <Button
             android:id="@+id/buttonClient"
             android:layout_width="match_parent"
-            android:layout_height="108dp"
-            android:text="Search for Music Host" >
+            android:layout_height="98dp"
+            android:text="Search for Music Host (Bluetooth)" >
         </Button>
     </LinearLayout>
     <Button
@@ -36,14 +36,19 @@
             android:layout_height="wrap_content"
             android:text="Request a song"
             android:id="@+id/request_button" android:layout_gravity="center_horizontal" android:visibility="invisible"
-            android:layout_weight="0.37"/>
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Shout out to DJ"
-            android:id="@+id/dj_button" android:layout_gravity="right" android:layout_weight="0.40"
+            android:layout_weight="0.93"/>
+    <Button android:layout_width="match_parent" android:layout_height="89dp" android:text="Shout out to DJ"
+            android:id="@+id/dj_button" android:layout_gravity="right"
             android:visibility="invisible"/>
     <Button
             android:layout_width="match_parent"
-            android:layout_height="79dp"
+            android:layout_height="82dp"
             android:text="skip"
-            android:id="@+id/skip_button" android:visibility="invisible" android:layout_weight="0.18"/>
+            android:id="@+id/skip_button" android:visibility="invisible" android:layout_weight="0.05"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:text="Search for Music Host (GPS)"
+            android:id="@+id/button_services" android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

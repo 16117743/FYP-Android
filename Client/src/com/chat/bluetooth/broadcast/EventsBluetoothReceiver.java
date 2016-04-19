@@ -9,8 +9,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import com.chat.bluetooth.business.IBusinessLogic;
 import com.chat.bluetooth.R;
-import com.chat.bluetooth.business.IBusinessLogic.OnSearchBluetoothListener;
 import com.chat.bluetooth.util.ToastUtil;
 
 public class EventsBluetoothReceiver extends BroadcastReceiver {
@@ -20,9 +20,9 @@ public class EventsBluetoothReceiver extends BroadcastReceiver {
 
 	private ToastUtil toastUtil;
 	private List<BluetoothDevice> devicesFound;
-	private OnSearchBluetoothListener onSearchBluetoothListener;
+	private IBusinessLogic.OnSearchBluetoothListener onSearchBluetoothListener;
 
-	public EventsBluetoothReceiver(Context context, OnSearchBluetoothListener onSearchBluetoothListener) {
+	public EventsBluetoothReceiver(Context context, IBusinessLogic.OnSearchBluetoothListener onSearchBluetoothListener) {
 		this.context = context;
 		this.onSearchBluetoothListener = onSearchBluetoothListener;
 

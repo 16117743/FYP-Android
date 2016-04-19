@@ -1,8 +1,6 @@
-//
 package com.chat.bluetooth.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -23,37 +21,19 @@ public class MainActivity extends GenericActivity{
 	
 	public static int MSG_TOAST = 0;
 	public static int MSG_BLUETOOTH = 2;
-	public static int JSON_BLUETOOTH = 3;
-	public static int BT_TIMER_VISIBLE = 30;
-
-	/*****CONSTANTS ****************************/
+	public static int OPTIONS = 0;
 	public static int SONG_SELECT = 1;
 	public static int SONG_SELECTED = 2;
 	public static int DJ_COMMENT = 3;
 	public static int SKIP_SONG  = 4;
-	public static int ECHO_SHARED_PREF_SONGS = 5;
-	public static int REMOTE_SELECT = 6;
-	public static int WANT_END = 7;
-	/********************************************/
-	
 	private final int BT_ACTIVATE = 0;
 	private final int BT_VISIBLE = 1;
 	private final int ACTIVITY_RETURN = 101;
-	private final int DJ_RETURN = 102;
-	private final int SKIP_RETURN = 103;
-	/******************************************/
-	private Button buttonDB;
 	private Button buttonClient;
-	private Button buttonDelete;
-	private Button buttonload;
-	/***************************************/
 	private Button buttonSongRequest;
 	private Button buttonDJComment;
 	private Button buttonSkip;
-	private Button buttonEchoPref;
-	private Button buttonRemote;
-	private Button buttonDone;
-	/***************************************/
+	private Button buttonServices;
 
 	final int MY_PREFS_PRIV_MODE = Activity.MODE_PRIVATE;
 	final String MY_PREFS_FILE = "MusicPreferences";
@@ -62,15 +42,9 @@ public class MainActivity extends GenericActivity{
 	SharedPreferences mySharedPreferences;
 	// obtain an editor to add data to my SharedPreferences object
 	SharedPreferences.Editor myEditor;
-
-	private ImageButton buttonSend;
 	private EditText editTextMessage;
-	private ListView listVewHistoric;
-	private ArrayAdapter<String> historic;
-	
 	private ToastUtil toastUtil;
 	private ChatBusinessLogic chatBusinessLogic;
-	private ProgressDialog progressDialog;
     Context context;
 
 	@Override
@@ -158,23 +132,23 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
-//		buttonload = (Button)findViewById(R.id.load_button);
-//		buttonload.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				sharedPreferences();
-//				Intent dbIntent = new Intent (MainActivity.this,
-//					ToDoActivity.class);
-//
-//				Bundle myDataBundle = new Bundle();
-//
-//				// attach the container to the intent
-//				dbIntent.putExtras(myDataBundle);
-//
-//				startActivityForResult(dbIntent, 101);
-//			}
-//		});
+		buttonServices = (Button)findViewById(R.id.button_services);
+		buttonServices.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				sharedPreferences();
+				Intent dbIntent = new Intent (MainActivity.this,
+					ToDoActivity.class);
+
+				Bundle myDataBundle = new Bundle();
+
+				// attach the container to the intent
+				dbIntent.putExtras(myDataBundle);
+
+				startActivityForResult(dbIntent, 101);
+			}
+		});
 
 		buttonSongRequest = (Button)findViewById(R.id.request_button);
 		buttonSongRequest.setOnClickListener(new View.OnClickListener() {
@@ -182,10 +156,9 @@ public class MainActivity extends GenericActivity{
 			@Override
 			public void onClick(View v) {
 
-				if (chatBusinessLogic.sendMessage("a", SONG_SELECT)) {
+				if (chatBusinessLogic.sendMessage("", SONG_SELECT)) {
 					editTextMessage.setText("");
 				} else {
-					toastUtil.showToast(getString(R.string.enter_message));
 				}
 			}
 		});
@@ -239,31 +212,37 @@ public class MainActivity extends GenericActivity{
 	public void registerFilters(){
 		chatBusinessLogic.registerFilter();
 	}
-	/*****************************************************************************************************/
-	//handles messages received from music host
+
+	/***
+	 * handles messages received from music host
+	 */
 	private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             synchronized (msg) {
                 switch (msg.what) {
-					case 0://SONG_SELECT
+					//OPTIONS
+					case 0:
 						String theOptions = new String ((String)(msg.obj));
 						new updateGUIOptions().execute(theOptions);
 						break;
-                	case 1://SONG_SELECT
+					//SONG_SELECT
+                	case 1:
 						Intent dbIntent = new Intent (MainActivity.this,
-							ViewFlipperMainActivity.class);
+							SongRequestActivity.class);
 						Bundle myDataBundle = new Bundle();
 						String packStr = new String ((String)(msg.obj));
 						myDataBundle.putByteArray("package", (packStr.getBytes()));
 						dbIntent.putExtras(myDataBundle);
 						startActivityForResult(dbIntent, 101);
                 		break;
-                	case 2://SONG_SELECTED
+					//SONG_SELECTED
+                	case 2:
 						//Song select OK message from server
 						toastUtil.showToast((String)(msg.obj));
 						chatBusinessLogic.stopCommucanition();
 						break;
-					case 3://DJ_COMMENT
+					//DJ_COMMENT
+					case 3:
 						Intent djIntent = new Intent (MainActivity.this,
 							DJActivity.class);
 
@@ -291,8 +270,13 @@ public class MainActivity extends GenericActivity{
             }
         };
     };
-	/*****************************************************************************************************/
 
+	/***
+	 * After activites have finished
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
@@ -333,49 +317,49 @@ public class MainActivity extends GenericActivity{
 	}
 
 
-private class updateGUIOptions extends AsyncTask<String, Integer, boolean[]> {
+	private class updateGUIOptions extends AsyncTask<String, Integer, boolean[]>
+	{
+		@Override
+		protected boolean[] doInBackground(String... params) {
+			String packStr0 = new String(params[0]);
+			packStr0 = packStr0.replace("[", "");
+			packStr0 = packStr0.replace("]", "");
+			packStr0 = packStr0.replaceAll(",", "");
+			String[] parts = packStr0.split(" ");
+			boolean[] array = new boolean[parts.length];
+			for (int i = 0; i < parts.length; i++) {
+				array[i] = Boolean.parseBoolean(parts[i]);
+			}
 
-	@Override
-	protected boolean[] doInBackground(String... params) {
-		String packStr0 = new String(params[0]);
-		packStr0 = packStr0.replace("[", "");
-		packStr0 = packStr0.replace("]", "");
-		packStr0 = packStr0.replaceAll(",", "");
-		String[] parts = packStr0.split(" ");
-		boolean[] array = new boolean[parts.length];
-		for (int i = 0; i < parts.length; i++) {
-			array[i] = Boolean.parseBoolean(parts[i]);
+			return array;
 		}
 
-		return array;
+		@Override
+		protected void onPostExecute(boolean[] array) {
+
+			if(array[0]==true)
+				buttonSongRequest.setVisibility(View.VISIBLE);
+			else
+				buttonSongRequest.setVisibility(View.INVISIBLE);
+
+			if(array[1]==true)
+				buttonDJComment.setVisibility(View.VISIBLE);
+			else
+				buttonDJComment.setVisibility(View.INVISIBLE);
+
+			if(array[2]==true)
+				buttonSkip.setVisibility(View.VISIBLE);
+			else
+				buttonSkip.setVisibility(View.INVISIBLE);
+		}
+
+		@Override
+		protected void onPreExecute() {
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+
+		}
 	}
-
-	@Override
-	protected void onPostExecute(boolean[] array) {
-
-		if(array[0]==true)
-			buttonSongRequest.setVisibility(View.VISIBLE);
-		else
-			buttonSongRequest.setVisibility(View.INVISIBLE);
-
-		if(array[1]==true)
-			buttonDJComment.setVisibility(View.VISIBLE);
-		else
-			buttonDJComment.setVisibility(View.INVISIBLE);
-
-		if(array[2]==true)
-			buttonSkip.setVisibility(View.VISIBLE);
-		else
-			buttonSkip.setVisibility(View.INVISIBLE);
-	}
-
-	@Override
-	protected void onPreExecute() {
-	}
-
-	@Override
-	protected void onProgressUpdate(Integer... values) {
-
-	}
-}
 }

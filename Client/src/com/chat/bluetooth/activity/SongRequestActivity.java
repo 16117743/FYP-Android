@@ -5,20 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
+import com.chat.bluetooth.util.ComBean;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.util.MyExpandableAdapter;
-import com.chat.bluetooth.util.SongBean;
 import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewFlipperMainActivity extends Activity
+
+/**
+ * Author: Thomas Flynn
+ * 19-03-16
+ */
+public class SongRequestActivity extends Activity
 {
     private ViewFlipper viewFlipper;
     public float lastX;
@@ -26,12 +29,10 @@ public class ViewFlipperMainActivity extends Activity
     private ListView selectionList;
     private ArrayAdapter<String> selectionHistoric;
 
-    private ArrayList<String> parentItems = new ArrayList<String>();
-    private ArrayList<Object> childItems = new ArrayList<Object>();
+    private ArrayList<String> queueSongItems = new ArrayList<String>();
+    private ArrayList<Object> queueChildItems = new ArrayList<Object>();
 
-    private ArrayList<String> songQTitles = new ArrayList<String>();
-    private ArrayList<Object> songQItems = new ArrayList<Object>();
-    private ExpandableListView expandableList;
+    private ExpandableListView queueExpandableList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,36 +42,24 @@ public class ViewFlipperMainActivity extends Activity
          viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
          init();
 
+        queueExpandableList = (ExpandableListView) findViewById(R.id.queueList);
+        queueExpandableList.setDividerHeight(2);
+        queueExpandableList.setGroupIndicator(null);
+        queueExpandableList.setClickable(true);
 
-      //  ExpandableListView expandableList = getExpandableListView();
-        expandableList = (ExpandableListView) findViewById(R.id.queueList);
-
-
-        expandableList.setDividerHeight(2);
-        expandableList.setGroupIndicator(null);
-        expandableList.setClickable(true);
-
-        MyExpandableAdapter adapter = new MyExpandableAdapter(this, parentItems, childItems);
+        MyExpandableAdapter adapter = new MyExpandableAdapter(this, queueSongItems, queueChildItems);
 
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
-        expandableList.setAdapter(adapter);
-        /**adapter = new BookmarkAdapter(this ,book_mark_group ,book_mark_child);
-         adapter.changedata(this, book_mark_group, book_mark_child);
-         bookmark_list.setAdapter(adapter);*/
-        //parentItems.setOnChildClickListener(this);
-        expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        queueExpandableList.setAdapter(adapter);
+
+        queueExpandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                //Toast.makeText(this, ""+ childItems.get(childPosition),  Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), parentItems.get(groupPosition), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), (String)childItems.get(childPosition), Toast.LENGTH_SHORT).show();
-               // parentItems.get(childPosition));
-               // Toast.makeText(this, .child.get(childPosition),
-              //      Toast.LENGTH_SHORT).show();
-                // Toast.makeText(context, ""+CatList.get(childPosition).getId(), 1).show();
-                // TODO Auto-generated method stub
+
+                Toast.makeText(getApplicationContext(), queueSongItems.get(groupPosition), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), (String) queueChildItems.get(childPosition), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -137,7 +126,6 @@ public class ViewFlipperMainActivity extends Activity
                                     int position, long id) {
                 Intent myLocalIntent = getIntent();
                 Bundle thisBundle = new Bundle();
-                //myBundle = myLocalIntent.getExtras();
 
                 selectionHistoric.getItem(position);
                 thisBundle.putString("result", selectionHistoric.getItem(position));
@@ -147,41 +135,44 @@ public class ViewFlipperMainActivity extends Activity
 
                 finish();
             }
-        });/**********************************************//**********************************************/
+        });
 
         Bundle myBundle =  myLocalIntent.getExtras();
-        /*****************************************************************************/
+
         final String msgFromHost = new String (myBundle.getByteArray("package"));
         new parseJSON().execute(msgFromHost);
+
     }
 
-    /**** ASYNC TASK *************************/
-    private class parseJSON extends AsyncTask<String, Void, List<SongBean>> {
+
+    /** ASYNC TASK */
+    private class parseJSON extends AsyncTask<String, Void, List<ComBean>> {
 
     @Override
-    protected List <SongBean> doInBackground(String... params) {
+    protected List <ComBean> doInBackground(String... params) {
         String packStr0 = new String(params[0]);
+        //'&' character separates selection from queue list
         String[] parts = packStr0.split("&");
 
-        List <SongBean> returnList = new ArrayList<>();
+        List <ComBean> returnList = new ArrayList<>();
         try {
             JSONArray array = new JSONArray(parts[0]);
-            Log.d("msg", "got this far");
-            SongBean songBean;
+
+            ComBean comBean;
             for (int i = 0; i < array.length(); i++) {
-                songBean = new SongBean();
-                songBean.setSong(array.getJSONObject(i).getString("song"));
-                returnList.add(songBean);
+                comBean = new ComBean();
+                comBean.setSong(array.getJSONObject(i).getString("song"));
+                returnList.add(comBean);
             }
             JSONArray array2 = new JSONArray(parts[1]);
-            Log.d("msg", "got this far 2");
-            SongBean songBean2;
+
+            ComBean comBean2;
             for (int i = 0; i < array2.length(); i++) {
-                songBean2 = new SongBean();
-                songBean2.setSong(array2.getJSONObject(i).getString("song"));
-                songBean2.setArtist(array2.getJSONObject(i).getString("artist"));
-                songBean2.setVotes(Integer.parseInt(array2.getJSONObject(i).getString("votes")));
-                returnList.add(songBean2);
+                comBean2 = new ComBean();
+                comBean2.setSong(array2.getJSONObject(i).getString("song"));
+                comBean2.setArtist(array2.getJSONObject(i).getString("artist"));
+                comBean2.setVotes(Integer.parseInt(array2.getJSONObject(i).getString("votes")));
+                returnList.add(comBean2);
             }
         }
         catch (Exception e) {
@@ -192,23 +183,21 @@ public class ViewFlipperMainActivity extends Activity
     }
 
     @Override
-    protected void onPostExecute(List<SongBean> result) {
+    protected void onPostExecute(List<ComBean> result) {
         ArrayList<String> child = new ArrayList<String>();
         for(int i=0; i<result.size(); i++) {
             if(result.get(i).getVotes()==0)
                 selectionHistoric.add(result.get(i).getSong());
             else{
-                parentItems.add(result.get(i).getSong());
+                queueSongItems.add(result.get(i).getSong());
                 child.add("Artist: " +result.get(i).getArtist());
-                child.add("skip votes:" + Integer.toString(result.get(i).getVotes()));
-                childItems.add(child);
+                child.add("Veto's required:" + Integer.toString(result.get(i).getVotes()));
+                queueChildItems.add(child);
                 child = new ArrayList<String>();
             }
         }
         selectionHistoric.notifyDataSetChanged();
         selectionList.requestFocus();
-       // queueHistoric.notifyDataSetChanged();
-       // queueList.requestFocus();
         }
 
     @Override
@@ -216,43 +205,6 @@ public class ViewFlipperMainActivity extends Activity
 
     @Override
     protected void onProgressUpdate(Void... values) {}
-        }
-    /**** ASYNC TASK *************************/
 
-    public void setGroupParents() {
-        parentItems.add("song 1");
-        parentItems.add("song 2");
-        parentItems.add("song 3");
-        parentItems.add("song 4");
-    }
-
-public void setChildData() {
-
-    // Android
-    ArrayList<String> child = new ArrayList<String>();
-    child.add("Artist - artist 1");
-    child.add("votes - 2");
-    childItems.add(child);
-
-
-    // Core Java
-    child = new ArrayList<String>();
-    child.add("Artist - artist 2");
-    child.add("votes - 4");
-    childItems.add(child);
-
-    // Desktop Java
-    child = new ArrayList<String>();
-    child.add("Artist - artist 3");
-    child.add("votes - 1");
-    childItems.add(child);
-
-
-    // Enterprise Java
-    child = new ArrayList<String>();
-    child.add("Artist - artist 4");
-    child.add("votes - 0");
-    childItems.add(child);
-}
-
+    }//end async task
 }

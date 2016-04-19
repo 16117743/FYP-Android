@@ -4,18 +4,12 @@ package com.chat.bluetooth.util;
  * Created by user on 16/11/2015.
  */
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
-import android.util.Log;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 

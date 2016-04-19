@@ -8,10 +8,9 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Handler;
 
-import android.util.Log;
+import com.chat.bluetooth.util.LogUtil;
 import com.chat.bluetooth.R;
 import com.chat.bluetooth.activity.MainActivity;
-import com.chat.bluetooth.util.LogUtil;
 
 
 public class BluetoothComunication extends Thread implements MusicHostInterface {
@@ -91,28 +90,7 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 								 String rx4 = processInput();
 								 sendHandler(MainActivity.SKIP_SONG, rx4);
 								 break;
-							 case ECHO_SHARED_PREF_SONGS:
-								 LogUtil.e("read int 4\n");
-								 String rx5 = processInput();
-								 sendHandler(MainActivity.ECHO_SHARED_PREF_SONGS, rx5);
-								 break;
-							 case ECHO_BLOB_SONGS:
-								 LogUtil.e("read int 2\n");
-								 String rx6 = processInput();
-								 sendHandler(MainActivity.ECHO_SHARED_PREF_SONGS, rx6);
-								 break;
-							 case REMOTE_SELECT:
-								 LogUtil.e("read int 2\n");
-								 String rx7 = processInput();
-								 sendHandler(MainActivity.REMOTE_SELECT, rx7);
-								 break;
-							 case WANT_END:
-								 LogUtil.e("read int 2\n");
-								 String rx8 = processInput();
-								 sendHandler(MainActivity.WANT_END, rx8);
-								 break;
 							 default:
-								 sendHandler(MainActivity.MSG_BLUETOOTH, nameBluetooth + ": oops" );
 								 break;
 						 }
 					 }

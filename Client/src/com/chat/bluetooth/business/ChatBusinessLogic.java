@@ -8,17 +8,14 @@ import android.content.Context;
 import android.os.Handler;
 
 import com.chat.bluetooth.alertdialog.AlertDialogDevicesFound;
-import com.chat.bluetooth.broadcast.EventsBluetoothReceiver;
-import com.chat.bluetooth.business.IBusinessLogic.OnBluetoothDeviceSelectedListener;
-import com.chat.bluetooth.business.IBusinessLogic.OnConnectionBluetoothListener;
-import com.chat.bluetooth.business.IBusinessLogic.OnSearchBluetoothListener;
 import com.chat.bluetooth.communication.BluetoothComunication;
 import com.chat.bluetooth.manager.BluetoothManager;
+import com.chat.bluetooth.broadcast.EventsBluetoothReceiver;
 import com.chat.bluetooth.task.BluetoothClientTask;
 
-public class ChatBusinessLogic implements OnConnectionBluetoothListener, 
-										  OnBluetoothDeviceSelectedListener,
-										  OnSearchBluetoothListener{
+public class ChatBusinessLogic implements IBusinessLogic.OnConnectionBluetoothListener,
+	IBusinessLogic.OnBluetoothDeviceSelectedListener,
+	IBusinessLogic.OnSearchBluetoothListener {
 	
 	private Context context;
 	private Handler handler;

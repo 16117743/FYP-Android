@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 
-import com.chat.bluetooth.R;
 import com.chat.bluetooth.business.IBusinessLogic.OnBluetoothDeviceSelectedListener;
 
 public class AlertDialogDevicesFound extends AlertDialogGeneric implements OnClickListener{

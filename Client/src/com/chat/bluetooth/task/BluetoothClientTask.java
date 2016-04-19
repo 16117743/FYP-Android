@@ -5,11 +5,10 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.AsyncTask;
-
-import com.chat.bluetooth.R;
-import com.chat.bluetooth.business.IBusinessLogic.OnConnectionBluetoothListener;
+import com.chat.bluetooth.business.IBusinessLogic;
 import com.chat.bluetooth.communication.BluetoothClient;
 import com.chat.bluetooth.util.ToastUtil;
+import com.chat.bluetooth.R;
 
 public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, BluetoothSocket>{
 
@@ -18,9 +17,9 @@ public class BluetoothClientTask extends AsyncTask<BluetoothDevice, Void, Blueto
 	
 	private ToastUtil toastUtil;
 	private BluetoothClient bluetoothClient;
-	private OnConnectionBluetoothListener onBluetoothListener;
+	private IBusinessLogic.OnConnectionBluetoothListener onBluetoothListener;
 	
-	public BluetoothClientTask(Context context, OnConnectionBluetoothListener onBluetoothListener){
+	public BluetoothClientTask(Context context, IBusinessLogic.OnConnectionBluetoothListener onBluetoothListener){
 		this.context = context;
 		this.onBluetoothListener = onBluetoothListener;
 		

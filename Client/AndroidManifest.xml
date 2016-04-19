@@ -28,16 +28,16 @@
         </activity>
 
         <activity
-                android:name="com.chat.bluetooth.activity.ViewFlipperMainActivity"
+                android:name=".activity.SongRequestActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
 
         <activity
-                android:name="com.chat.bluetooth.activity.ToDoActivity"
+                android:name=".activity.ToDoActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
         <activity
-                android:name="com.chat.bluetooth.activity.DJActivity"
+                android:name=".activity.DJActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
     </application>
