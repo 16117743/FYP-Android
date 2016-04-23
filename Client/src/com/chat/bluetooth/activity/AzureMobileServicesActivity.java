@@ -29,7 +29,7 @@ import java.net.MalformedURLException;
 /**
  * Gets a list of GPS coordinates from azure mobile services.
  */
-public class ToDoActivity extends Activity {
+public class AzureMobileServicesActivity extends Activity {
 
 	//create references to the mobile service client and table
 	private MobileServiceClient mClient;

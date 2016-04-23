@@ -3,7 +3,7 @@ package com.chat.bluetooth.communication;
 /**
  * Created by user on 27/03/2016.
  */
-public interface MusicHostInterface {
+public interface MusicHostCommunication {
 
 
     void send1();
