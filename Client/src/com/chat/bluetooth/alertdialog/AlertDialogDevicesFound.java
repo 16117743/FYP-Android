@@ -38,8 +38,6 @@ public class AlertDialogDevicesFound extends AlertDialogGeneric implements OnCli
 		}
 	}
 
-
-
 	alert.setTitle("Music Host found!");
 	alert.setItems(MusicHostString, this);
 

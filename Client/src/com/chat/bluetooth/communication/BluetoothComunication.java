@@ -13,7 +13,7 @@ import com.chat.bluetooth.R;
 import com.chat.bluetooth.activity.MainActivity;
 
 
-public class BluetoothComunication extends Thread implements MusicHostInterface {
+public class BluetoothComunication extends Thread implements MusicHostCommunication {
 	 
 	private boolean run;
 	
@@ -29,10 +29,6 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 	final int SONG_SELECTED = 2;
 	final int DJ_COMMENT = 3;
 	final int SKIP_SONG  = 4;
-	final int ECHO_SHARED_PREF_SONGS = 5;
-	final int ECHO_BLOB_SONGS = 6;
-	final int REMOTE_SELECT = 7;
-	final int WANT_END = 8;
 	/********************************************/
 	
 	public BluetoothComunication(Context context, Handler handler){
@@ -50,7 +46,7 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 		 super.run();
 		
 		 try {
-			 String nameBluetooth = bluetoothSocket.getRemoteDevice().getName();
+			 //String nameBluetooth = bluetoothSocket.getRemoteDevice().getName();
 			 dataInputStream = new DataInputStream(bluetoothSocket.getInputStream());
 			 dataOutputStream = new DataOutputStream(bluetoothSocket.getOutputStream());
 			
@@ -78,7 +74,6 @@ public class BluetoothComunication extends Thread implements MusicHostInterface 
 								 LogUtil.e("read int 2\n");
 								 String rx2 = processInput();
 								 sendHandler(MainActivity.SONG_SELECTED, rx2);
-								// sendHandler(MainActivity.DJ_COMMENT, rx2);
 								 break;
 							 case DJ_COMMENT:
 								 LogUtil.e("read int 3\n");
