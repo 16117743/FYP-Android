@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-                android:name=".activity.ToDoActivity"
+                android:name=".activity.AzureMobileServicesActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
         <activity

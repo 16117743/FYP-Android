@@ -27,7 +27,7 @@ public class SongRequestActivity extends Activity
     public float lastX;
 
     private ListView selectionList;
-    private ArrayAdapter<String> selectionHistoric;
+    private ArrayAdapter<String> selectionAdaptor;
 
     private ArrayList<String> queueSongItems = new ArrayList<String>();
     private ArrayList<Object> queueChildItems = new ArrayList<Object>();
@@ -118,8 +118,8 @@ public class SongRequestActivity extends Activity
       Intent myLocalIntent = getIntent();
 
         selectionList = (ListView) findViewById(R.id.selectionList);
-        selectionHistoric = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        selectionList.setAdapter(selectionHistoric);
+        selectionAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        selectionList.setAdapter(selectionAdaptor);
 
         selectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -127,8 +127,8 @@ public class SongRequestActivity extends Activity
                 Intent myLocalIntent = getIntent();
                 Bundle thisBundle = new Bundle();
 
-                selectionHistoric.getItem(position);
-                thisBundle.putString("result", selectionHistoric.getItem(position));
+                selectionAdaptor.getItem(position);
+                thisBundle.putString("result", selectionAdaptor.getItem(position));
 
                 myLocalIntent.putExtras(thisBundle);
                 setResult(Activity.RESULT_OK, myLocalIntent);
@@ -187,7 +187,7 @@ public class SongRequestActivity extends Activity
         ArrayList<String> child = new ArrayList<String>();
         for(int i=0; i<result.size(); i++) {
             if(result.get(i).getVotes()==0)
-                selectionHistoric.add(result.get(i).getSong());
+                selectionAdaptor.add(result.get(i).getSong());
             else{
                 queueSongItems.add(result.get(i).getSong());
                 child.add("Artist: " +result.get(i).getArtist());
@@ -196,7 +196,7 @@ public class SongRequestActivity extends Activity
                 child = new ArrayList<String>();
             }
         }
-        selectionHistoric.notifyDataSetChanged();
+        selectionAdaptor.notifyDataSetChanged();
         selectionList.requestFocus();
         }
 

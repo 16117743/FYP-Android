@@ -139,7 +139,7 @@ public class MainActivity extends GenericActivity{
 			public void onClick(View v) {
 				sharedPreferences();
 				Intent dbIntent = new Intent (MainActivity.this,
-					ToDoActivity.class);
+					AzureMobileServicesActivity.class);
 
 				Bundle myDataBundle = new Bundle();
 
@@ -150,6 +150,9 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
+		/**
+		 * Song Request Button sends SONG_SELECT int to music host
+		 */
 		buttonSongRequest = (Button)findViewById(R.id.request_button);
 		buttonSongRequest.setOnClickListener(new View.OnClickListener() {
 
@@ -163,6 +166,9 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
+		/**
+		 * DJ Comment Button sends DJ_COMMENT int to music host
+		 */
 		buttonDJComment = (Button)findViewById(R.id.dj_button);
 		buttonDJComment.setOnClickListener(new View.OnClickListener() {
 
@@ -182,6 +188,9 @@ public class MainActivity extends GenericActivity{
 			}
 		});
 
+		/**
+		 * Skip Button sends SKIP_SONG int to music host
+		 */
 		buttonSkip = (Button)findViewById(R.id.skip_button);
 		buttonSkip.setOnClickListener(new View.OnClickListener() {
 

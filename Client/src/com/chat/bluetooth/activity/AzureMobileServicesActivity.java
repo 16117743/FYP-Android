@@ -29,13 +29,13 @@ import java.net.MalformedURLException;
 /**
  * Gets a list of GPS coordinates from azure mobile services.
  */
-public class ToDoActivity extends Activity {
+public class AzureMobileServicesActivity extends Activity {
 
 	//create references to the mobile service client and table
 	private MobileServiceClient mClient;
-	private MobileServiceTable<users> userTable;
+	private MobileServiceTable<users> gpsTable;
 
-	private com.chat.bluetooth.test.usersAdapter usersAdapter;
+	private com.chat.bluetooth.test.usersAdapter gpsAdaptor;
 	private ProgressBar mProgressBar;
 	private Button refresh;
 	private ToastUtil toastUtil;
@@ -53,7 +53,7 @@ public class ToDoActivity extends Activity {
 		// Initialize the progress bar
 		mProgressBar.setVisibility(ProgressBar.GONE);
 		toastUtil = new ToastUtil(this);
-	//		TODO Uncomment the the following code to create the mobile services client
+
 			try {
 				// Create the Mobile Service Client instance, using the provided
 				// Mobile Service URL and key
@@ -64,16 +64,16 @@ public class ToDoActivity extends Activity {
 					this).withFilter(new ProgressFilter());
 
 				//	 Get the Mobile Service Table instance to use
-				userTable = mClient.getTable(users.class); /*******************************************************************************/
+				gpsTable = mClient.getTable(users.class); /*******************************************************************************/
 			} catch (MalformedURLException e) {
 				createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
 				toastUtil.showToast("error url");
 			}
 
 		// Create an adapter to bind the items with the view
-		usersAdapter = new usersAdapter(this, R.layout.row_list_to_do);
-		ListView userList = (ListView) findViewById(R.id.listViewToDo);
-		userList.setAdapter(usersAdapter);
+		gpsAdaptor = new usersAdapter(this, R.layout.row_list_to_do);
+		ListView gpsList = (ListView) findViewById(R.id.listViewToDo);
+		gpsList.setAdapter(gpsAdaptor);
 
 		// Load the items from the Mobile Service
 		//refreshItemsFromTable();
@@ -83,7 +83,6 @@ public class ToDoActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				 refreshItemsFromTable();
-				//toastUtil.showToast("test");
 			}
 		});
 	}
@@ -120,17 +119,16 @@ public class ToDoActivity extends Activity {
 	// Set the item as completed and update it in the table
 	users.setComplete(true);
 
-//		TODO Uncomment the the following code when using a mobile service
 	    new AsyncTask<Void, Void, Void>() {
 
 	        @Override
 	        protected Void doInBackground(Void... params) {
 	            try {
-	                userTable.update(users).get();
+	                gpsTable.update(users).get();
 	                runOnUiThread(new Runnable() {
 	                    public void run() {
 	                        if (users.isComplete()) {
-	                            usersAdapter.remove(users);
+	                            gpsAdaptor.remove(users);
 	                        }
 	                        refreshItemsFromTable();
 	                    }
@@ -154,16 +152,15 @@ public class ToDoActivity extends Activity {
 	        protected Void doInBackground(Void... params) {
 	            try {
 
-					final MobileServiceList<users> result = userTable.select("text").execute().get();
+					final MobileServiceList<users> result = gpsTable.select("text").execute().get();
 
 	                runOnUiThread(new Runnable() {
 	                    @Override
 	                    public void run() {
-	                        usersAdapter.clear();
+	                        gpsAdaptor.clear();
 
-	                        for (users users : result) {
-	                            usersAdapter.add(users);
-								toastUtil.showToast(users.toString());
+	                        for (users gps : result) {
+	                            gpsAdaptor.add(gps);
 								try {
 									Thread.sleep(500);
 								} catch (InterruptedException e) {
